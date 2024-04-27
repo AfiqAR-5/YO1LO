@@ -1,5 +1,5 @@
 import pygame
-
+from menu import MainMenu
 
 
 class Game():
@@ -7,12 +7,13 @@ class Game():
         pygame.init()
         self.running, self.playing = True, False
         self.UP_KEY, self.DOWN_KEY, self.START_KEY, self.BACK_KEY = False, False, False, False
-        self.DISPLAY_W, self.DISPLAY_H = 1280, 720
+        self.DISPLAY_W, self.DISPLAY_H = 640, 480
         self.display = pygame.Surface((self.DISPLAY_W,self.DISPLAY_H))
         self.window = pygame.display.set_mode(((self.DISPLAY_W,self.DISPLAY_H)))
         self.font_name = 'Blox2.ttf'
+        self.font_name = pygame.font.get_default_font()
         self.BLACK, self.WHITE = (0,0,0), (255,255,255)
-        
+        self.curr_menu = MainMenu(self)
     def game_loop(self):
         while self.playing:
             self.check_events()
@@ -28,6 +29,7 @@ class Game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running, self.playing = False, False
+                self.curr_menu.run_display = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     self.START_KEY = True
