@@ -12,7 +12,7 @@ class Menu():
         self.game.draw_text('*', 15, self.cursor_rect.x, self.cursor_rect.y)
 
     def blit_screen(self):
-        self.game.window.blit(self.display,(0,0))
+        self.game.window.blit(self.game.display, (0,0))
         pygame.display.update()
         self.game.reset_keys()
 
@@ -21,8 +21,8 @@ class MainMenu(Menu):
         Menu.__init__(self,game)
         self.state = "Start"
         self.startx, self.starty = self.mid_w, self.mid_h + 30
-        self.optionx, self.optiony = self.mid_w, self.mid_h + 30
-        self.creditx, self.credity = self.mid_w, self.mid_h + 30
+        self.optionx, self.optiony = self.mid_w, self.mid_h + 50
+        self.creditx, self.credity = self.mid_w, self.mid_h + 70
         self.cursor_rect.midtop = (self.startx + self.offset, self.starty)
 
     def display_menu(self):
@@ -35,8 +35,11 @@ class MainMenu(Menu):
             self.game.draw_text("Start Game", 20, self.startx, self.starty)
             self.game.draw_text("Options", 20, self.optionx,self.optiony)
             self.game.draw_text("Credits", 20, self.creditx,self.credity)
-            self.game.draw_cursor()
+            self.draw_cursor()
             self.blit_screen()
+
+    def new_method(self):
+        self.game.draw_cursor()
 
     def move_cursor(self):
         if self.game.DOWN_KEY:
