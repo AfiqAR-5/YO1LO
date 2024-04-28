@@ -1,5 +1,5 @@
 import pygame
-
+from test import Button
 class Menu():
     def __init__(self, game):
         self.game = game
@@ -9,7 +9,7 @@ class Menu():
         self.offset = -100
 
     def draw_cursor(self):
-        self.game.draw_text('*', 25, self.cursor_rect.x, self.cursor_rect.y)
+        self.game.draw_text('>', 25, self.cursor_rect.x, self.cursor_rect.y)
 
     def blit_screen(self):
         self.game.window.blit(self.game.display, (0,0))
@@ -31,7 +31,7 @@ class MainMenu(Menu):
             self.game.check_events()
             self.check_input()
             self.game.display.fill(self.game.BLACK)
-            self.game.draw_text('YO1LO', 20, self.game.DISPLAY_W /2, self.game.DISPLAY_H/2 - 20)
+            self.game.draw_text('YO1LO', 30, self.game.DISPLAY_W /2, self.game.DISPLAY_H/2 - 20)
             self.game.draw_text("Start Game", 20, self.startx, self.starty)
             self.game.draw_text("Options", 20, self.optionx,self.optiony)
             self.game.draw_text("Credits", 20, self.creditx,self.credity)
