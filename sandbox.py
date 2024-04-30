@@ -10,7 +10,7 @@ class Game():
         self.DISPLAY_W, self.DISPLAY_H = 640, 480
         self.display = pygame.Surface((self.DISPLAY_W,self.DISPLAY_H))
         self.window = pygame.display.set_mode(((self.DISPLAY_W,self.DISPLAY_H)))
-        self.font_name = 'Blox2.ttf'
+        self.font_name = 'ARCADECLASSIC.TTF'
         self.BLACK, self.WHITE = (0,0,0), (255,255,255)
         self.curr_menu = MainMenu(self)
 
