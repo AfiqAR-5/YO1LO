@@ -6,7 +6,7 @@ pygame.init()
 pygame.display.set_caption('Menu')
 
 class Button:
-    def __init__(self, image, pos, text_input, font, base_color, hovering_color):
+    def __init__(self, image, pos, text_input, font, base_color, hovering_color, title, title_rect, choosecharacterbg):
         pygame.init()
         self.screen = config.SCREEN
         choosecharacterbg = pygame.image.load('choosecharbg.jpg')
@@ -152,10 +152,8 @@ class Button:
 
             MENU_TEXT = Button.get_font(100).render("YO1LO", True,"#b68f40")
             MENU_RECT = MENU_TEXT.get_rect(center=(400, 100))   
-            PLAY_BUTTON = Button(image=pygame.image.load("Play Rect.png"), pos=(400, 250), 
-                                    text_input="PLAY", font=Button.get_font(75), base_color="#d7fcd4", hovering_color="White")
-            QUIT_BUTTON=Button(image=pygame.image.load("Quit Rect.png"), pos=(400,400),
-                                    text_input="QUIT", font=Button.get_font(75),base_color="#d7fcd4", hovering_color="White")
+            PLAY_BUTTON = Button(image=pygame.image.load("Play Rect.png"), pos=(400, 250), text_input="PLAY", font=Button.get_font(75), base_color="#d7fcd4", hovering_color="White")
+            QUIT_BUTTON=Button(image=pygame.image.load("Quit Rect.png"), pos=(400,400), text_input="QUIT", font=Button.get_font(75),base_color="#d7fcd4", hovering_color="White")
             
             config.SCREEN.blit(MENU_TEXT, MENU_RECT) 
 
