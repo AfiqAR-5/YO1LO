@@ -9,9 +9,7 @@ class Button:
     def __init__(self, image, pos, text_input, font, base_color, hovering_color):
         pygame.init()
         self.screen = config.SCREEN
-        choosecharacterbg = pygame.image.load('choosecharbg.jpg')
         self.font = pygame.font.Font('ARCADECLASSIC.TTF', 32)
-        self.screen.blit(choosecharacterbg, (0,0))
         self.clock = pygame.time.Clock()
         self.char_selection = 3
         self.running = True
@@ -29,11 +27,11 @@ class Button:
         self.rect = self.image.get_rect(center = (self.x_pos, self.y_pos))
         self.text_rect = self.text.get_rect(center = (self.x_pos, self.y_pos))
     
-    def update(self):
+    def update(self, surface):
             config.SCREEN
             if self.image is not None:
-                self.screen.blit(self.image, self.rect)
-            self.screen.blit(self.text, self.text_rect)
+                surface.blit(self.image, self.rect)
+            surface.blit(self.text, self.text_rect)
 
     def checkForInput(self, position):
         if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
@@ -84,7 +82,7 @@ class Button:
 
             mouse_pos = pygame.mouse.get_pos()
             mouse_pressed = pygame.mouse.get_pressed()
-
+    
             if back_button.is_pressed(mouse_pos,mouse_pressed):
                 Button.main_menu()
             elif mc_button.is_pressed(mouse_pos,mouse_pressed):
@@ -123,8 +121,7 @@ class Button:
             button.character_select()
 
 
-            PLAY_BACK = Button(image=None,pos=(400,260)
-                                    ,text_input="BACK", font=Button.get_font(75), base_color="White", hovering_color="Green")
+            PLAY_BACK = Button(image=None,pos=(400,260),text_input="BACK", font=Button.get_font(75), base_color="White", hovering_color="Green")
 
             PLAY_BACK.changeColor(play_mouse_pos) 
             PLAY_BACK.update(config.SCREEN)
@@ -158,7 +155,7 @@ class Button:
 
             for button in [PLAY_BUTTON, QUIT_BUTTON]:
                 button.changeColor(MENU_MOUSE_POS)
-                button.update()
+                button.update(config.SCREEN)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
