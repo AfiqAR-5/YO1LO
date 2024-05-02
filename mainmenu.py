@@ -102,12 +102,12 @@ class Button:
             choosecharacterbg = pygame.image.load('choosecharbg.jpg')
             if back_button.image is not None:
                 self.screen.blit(back_button.image, back_button.rect)
-            self.screen.blit(mc_button, mc_button.rect)
-            self.screen.blit(lover_button, lover_button.rect)
-            self.screen.blit(villain_button, villain_button.rect)
-            self.screen.blit(mc_pic, mc_rect)
-            self.screen.blit(lover_pic, lover_rect)
-            self.screen.blit(villain_pic, villain_rect)
+            # self.screen.blit(mc_button, mc_button.rect)
+            # self.screen.blit(lover_button, lover_button.rect)
+            # self.screen.blit(villain_button, villain_button.rect)
+            # self.screen.blit(mc_pic, mc_rect)
+            # self.screen.blit(lover_pic, lover_rect)
+            # self.screen.blit(villain_pic, villain_rect)
             self.clock.tick(60)
         pygame.display.update()
 
