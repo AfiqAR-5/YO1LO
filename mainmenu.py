@@ -6,15 +6,12 @@ pygame.init()
 pygame.display.set_caption('Menu')
 
 class Button:
-    def __init__(self, image, pos, text_input, font, base_color, hovering_color, title, title_rect, choosecharacterbg):
+    def __init__(self, image, pos, text_input, font, base_color, hovering_color):
         pygame.init()
         self.screen = config.SCREEN
         choosecharacterbg = pygame.image.load('choosecharbg.jpg')
-        title = self.font.render("Choose your story", True, "White")
-        title_rect = title.get_rect(x=100, y=100)
         self.font = pygame.font.Font('ARCADECLASSIC.TTF', 32)
         self.screen.blit(choosecharacterbg, (0,0))
-        self.screen.blit(title, title_rect)
         self.clock = pygame.time.Clock()
         self.char_selection = 3
         self.running = True
@@ -33,6 +30,7 @@ class Button:
         self.text_rect = self.text.get_rect(center = (self.x_pos, self.y_pos))
     
     def update(self):
+            config.SCREEN
             if self.image is not None:
                 self.screen.blit(self.image, self.rect)
             self.screen.blit(self.text, self.text_rect)
@@ -58,10 +56,11 @@ class Button:
 
     def character_select(self):
         char_sel = True
-        self.screen.blit(choosecharacterbg)
-        self.screen.blit(title, title_rect)
+        choosecharacterbg = pygame.image.load('choosecharbg.jpg')
         title = self.font.render("Choose your story", True, "White")
         title_rect = title.get_rect(x=100, y=100)
+        self.screen.blit(choosecharacterbg, (0,0))
+        self.screen.blit(title, title_rect)
 
         mc_pic = pygame.image.load('mc.png')
         mc_rect = mc_pic.get_rect(x=150, y=250)
@@ -121,7 +120,7 @@ class Button:
 
             config.SCREEN.fill('black')
             button = Button(image=None, pos=(400, 260), text_input="BACK", font=Button.get_font(75), base_color="White", hovering_color="Green")
-            button.character_select(self)
+            button.character_select()
 
 
             PLAY_BACK = Button(image=None,pos=(400,260)
@@ -159,7 +158,7 @@ class Button:
 
             for button in [PLAY_BUTTON, QUIT_BUTTON]:
                 button.changeColor(MENU_MOUSE_POS)
-                button.update(config.SCREEN)
+                button.update()
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
