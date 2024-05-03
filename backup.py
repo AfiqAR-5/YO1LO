@@ -4,11 +4,11 @@ from button import Button
 pygame.init()
 
 #Screen
-SCREEN = pygame.display.set_mode((1280, 720), pygame.RESIZABLE)
+SCREEN = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Menu") #window name
 
 #background picture
-BG = pygame.image.load("assets/Background.png")
+BG = pygame.image.load("assets/background.png")
 
 #background music
 bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
@@ -71,16 +71,28 @@ def char_menu():
             bgmusic.play()
 
 
-#button font
+#default font
 def get_font(size): 
-    return pygame.font.Font("assets/font.ttf", size)
+    return pygame.font.Font("assets/getfont.ttf", size)
+
+#button font
+def button_font(size): 
+    return pygame.font.Font("assets/buttonfont.ttf", size)
+
+#title font
+def title_font(size): 
+    return pygame.font.Font("assets/titlefont.ttf", size)
+
 
 #Play button
+
 
 def play():
     while True:
         char_menu()
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
+
+        #from this point, story selection loop
 
         SCREEN.fill("black")
 
@@ -104,20 +116,42 @@ def play():
 
         pygame.display.update()
 
+
 #Credits button
+
 
 def credits():
     while True:
         CREDITS_MOUSE_POS = pygame.mouse.get_pos()
 
-        SCREEN.fill("white")
+        SCREEN.blit(BG, (0,0))
 
-        CREDITS_TEXT = get_font(45).render("This is the CREDITS screen.", True, "Black")
-        CREDITS_RECT = CREDITS_TEXT.get_rect(center=(640, 260))
-        SCREEN.blit(CREDITS_TEXT, CREDITS_RECT)
+        #Credits message.. (I dont know how to do this so i made one by one ;-;)
 
-        CREDITS_BACK = Button(image=None, pos=(640, 460), 
-                            text_input="BACK", font=get_font(75), base_color="Black", hovering_color="Green")
+        CREDITS_WILLIE = ("Lecturer and Teacher              Mr Willie")
+        CREDITS_AFIQ = ("Storyboarding                                Afiq")
+        CREDITS_CANDU = ("Game Mechanics                       Wan Amier")
+        CREDITS_AMIR = ("Data Sorter                         Amir Asyraf")
+
+        CREDITS_TEXT1 = get_font(50).render(CREDITS_WILLIE, True, "White")
+        CREDITS_TEXT2 = get_font(50).render(CREDITS_AFIQ, True, "White")
+        CREDITS_TEXT3 = get_font(50).render(CREDITS_CANDU, True, "White")
+        CREDITS_TEXT4 = get_font(50).render(CREDITS_AMIR, True, "White")
+
+        CREDITS_RECT1 = CREDITS_TEXT1.get_rect(center=(640, 200))
+        CREDITS_RECT2 = CREDITS_TEXT2.get_rect(center=(640, 300))
+        CREDITS_RECT3 = CREDITS_TEXT3.get_rect(center=(640, 400))
+        CREDITS_RECT4 = CREDITS_TEXT4.get_rect(center=(640, 500))
+
+        SCREEN.blit(CREDITS_TEXT1, CREDITS_RECT1)
+        SCREEN.blit(CREDITS_TEXT2, CREDITS_RECT2)
+        SCREEN.blit(CREDITS_TEXT3, CREDITS_RECT3)
+        SCREEN.blit(CREDITS_TEXT4, CREDITS_RECT4)
+
+
+        #Credits back button
+        CREDITS_BACK = Button(image=None, pos=(640, 660), 
+                            text_input="BACK", font=title_font(75), base_color="White", hovering_color="#ba2323")
 
         CREDITS_BACK.changeColor(CREDITS_MOUSE_POS)
         CREDITS_BACK.update(SCREEN)
@@ -133,34 +167,40 @@ def credits():
         pygame.display.update()
 
 
+#Main menu (all buttons located, comes after defining buttons)
 
-#Main menu (all buttons located, come after defining buttons)
 
 def main_menu():
     while True:
-        SCREEN.blit(BG, (0, 0)) #background
+        SCREEN.blit(BG, (0, 0))  #background
 
-        MENU_MOUSE_POS = pygame.mouse.get_pos() #detecting mouse position
+        MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
 
-        MENU_TEXT = get_font(100).render("YO1LO", True, "white")
-        MENU_RECT = MENU_TEXT.get_rect(center=(340, 200))
+        #Title Screen
+        MENU_TEXT = title_font(225).render("YOLO", True, "White")
+        MENU_RECT = MENU_TEXT.get_rect(center=(340, 175))
 
 
         #Button Appearance
         PLAY_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(340, 350), 
-                            text_input="PLAY", font=get_font(55), base_color="#d7fcd4", hovering_color="White")
+                            text_input="PLAY", font=button_font(100), base_color="White", hovering_color="#ba2323") #find better colour
+        
         CREDITS_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(340, 450), 
-                            text_input="CREDITS", font=get_font(55), base_color="#d7fcd4", hovering_color="White")
+                            text_input="CREDITS", font=button_font(100), base_color="White", hovering_color="#ba2323")
+        
         QUIT_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(340, 550), 
-                            text_input="QUIT", font=get_font(55), base_color="#d7fcd4", hovering_color="White")
+                            text_input="QUIT", font=button_font(100), base_color="White", hovering_color="#ba2323")
 
         SCREEN.blit(MENU_TEXT, MENU_RECT)
+
+        #Button change colour function
 
         for button in [PLAY_BUTTON, CREDITS_BUTTON, QUIT_BUTTON]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
         
         #detecting mouse click, and what action to do
+
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT: #if pressing x button on window screen
@@ -175,9 +215,6 @@ def main_menu():
                 if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS): #if pressing the quit button
                     pygame.quit()
                     sys.exit()
-
-            #if event.type == pygame.VIDEORESIZE: #to adjust the screen to full size
-                #pygame.display.set_mode((event.w, event.h), pygame.RESIZABLE)
 
         pygame.display.update()
         bgmusic.play() #to play the music while main menu is running
