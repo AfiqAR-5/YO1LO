@@ -15,13 +15,6 @@ bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
 running = True
 font = pygame.font.Font('ARCADECLASSIC.TTF', 32)
 
-
-
-
-def run():
-    char_menu()
-
-
 def get_font(size): 
     return pygame.font.Font("assets/font.ttf", size)
 
@@ -31,9 +24,8 @@ def char_menu():
 
     display = SCREEN
     mc_pic = pygame.image.load('mc.png')
-    bg = pygame.image.load('choosecharbg.jpg')
-    size1 = pygame.transform.scale(bg, (1000,600))
-    hmm = pygame.display.set_mode((1000,600))
+    bg = pygame.image.load('Background.png')
+    size1 = pygame.transform.scale(bg, (1280,720))
 
     mc_pic = pygame.image.load('mc.png')
     mc_rect = mc_pic.get_rect(x=400,y=95)
@@ -50,7 +42,7 @@ def char_menu():
     SCREEN.blit(title, title_rect)
 
     while running:
-        hmm.blit(size1, bg_rect)
+        display.blit(size1, bg_rect)
         display.blit(mc_pic, mc_rect)
         display.blit(lover_pic, lover_rect)
         display.blit(villain_pic, villain_rect)
@@ -58,13 +50,13 @@ def char_menu():
         CHAR_MOUSE_POS = pygame.mouse.get_pos()
 
         BACK_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(340, 550), 
-                    text_input="QUIT", font=get_font(55), base_color="#d7fcd4", hovering_color="White")
+                    text_input="BACK", font=get_font(55), base_color="#d7fcd4", hovering_color="White")
             
         SCREEN.blit(title, title_rect)
         
         for button in [BACK_BUTTON]:
             button.changeColor(CHAR_MOUSE_POS)
-            button.update(hmm)
+            button.update(display)
 
         for event in pygame.event.get():
 
