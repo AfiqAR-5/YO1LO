@@ -24,7 +24,7 @@ def char_menu():
 
     display = SCREEN
     mc_pic = pygame.image.load('mc.png')
-    bg = pygame.image.load('Background.png')
+    bg = pygame.image.load('assets/Background.png')
     size1 = pygame.transform.scale(bg, (1280,720))
 
     mc_pic = pygame.image.load('mc.png')
