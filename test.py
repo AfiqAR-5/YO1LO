@@ -38,12 +38,14 @@ class Button():
     
 
 
+
+
     def fade1(self, width, height): 
         fade = pygame.Surface((width, height))
         fade.fill((0,0,0))
         for alpha in range(0, 300):
             fade.set_alpha(alpha)
-            self.screen.blit(fade, (0,0))
+            self.SCREEN.blit(fade, (0,0))
             pygame.display.update()
             pygame.time.delay(5)
 

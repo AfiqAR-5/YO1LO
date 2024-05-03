@@ -1,4 +1,4 @@
 import pygame
 
-SCREEN = pygame.display.set_mode((800,600))
+SCREEN = pygame.display.set_mode((1280,720))
 BG = pygame.image.load('sunset.jpg')
