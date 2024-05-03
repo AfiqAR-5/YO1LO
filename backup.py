@@ -165,6 +165,7 @@ def credits():
                     main_menu()
 
         pygame.display.update()
+        #test
 
 
 #Main menu (all buttons located, comes after defining buttons)
