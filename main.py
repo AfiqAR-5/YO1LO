@@ -1,5 +1,6 @@
 import pygame, sys
 from button import Button
+from Chap1 import *
 
 pygame.init()
 
@@ -13,7 +14,7 @@ BG = pygame.image.load("assets/background.png")
 #background music
 bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
 running = True
-font = pygame.font.Font('ARCADECLASSIC.TTF', 32)
+font = pygame.font.Font('assets/ARCADECLASSIC.TTF', 32)
 
 def get_font(size): 
     return pygame.font.Font("assets/font.ttf", size)
@@ -24,37 +25,28 @@ def char_menu():
 
     display = SCREEN
     bg = pygame.image.load('assets/Background.png')
-    size1 = pygame.transform.scale(bg, (1280,720))
+    scaled_bg = pygame.transform.scale(bg, (1280,720))
 
-    # mc_pic = pygame.image.load('mc.png')
-    # mc_rect = mc_pic.get_rect(x=400,y=95)
-
-    # lover_pic = pygame.image.load('lover.png')
-    # lover_rect = mc_pic.get_rect(x=200,y=200)
-
-    # villain_pic = pygame.image.load('villain.png')
-    # villain_rect = mc_pic.get_rect(x=600,y=100)
-
-    bg_rect = size1.get_rect(x=0,y=0)
+    bg_rect = scaled_bg.get_rect(x=0,y=0)
     title = charmenu_font(60).render("Choose your character", True, "White")
     title_rect = title.get_rect(x=320, y=100)
     SCREEN.blit(title, title_rect)
 
     while running:
-        display.blit(size1, bg_rect)
+        display.blit(scaled_bg, bg_rect)
 
         CHAR_MOUSE_POS = pygame.mouse.get_pos()
 
         BACK_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 630), 
                     text_input="BACK", font=get_font(70), base_color="White", hovering_color="#ba2323")
         
-        MC = Button(image=pygame.image.load("mc.png"), pos=(640, 360), 
+        MC = Button(image=pygame.image.load("assets/mc.png"), pos=(640, 360), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
         
-        LOVER = Button(image=pygame.image.load("lover.png"), pos=(320, 390), 
+        LOVER = Button(image=pygame.image.load("assets/lover.png"), pos=(320, 390), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
         
-        VILLAIN = Button(image=pygame.image.load("villain.png"), pos=(960, 330), 
+        VILLAIN = Button(image=pygame.image.load("assets/villain.png"), pos=(960, 330), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
             
         SCREEN.blit(title, title_rect)
@@ -76,6 +68,7 @@ def char_menu():
                 if MC.checkForInput(CHAR_MOUSE_POS):
                     print("working!")
                     fade1(1280,720)
+
                 
                 if LOVER.checkForInput(CHAR_MOUSE_POS):
                     print("working!")
@@ -100,8 +93,7 @@ def fade1(width, height):
             pygame.display.update()
             pygame.time.delay(5)
             screenfade == False
-        pygame.quit()
-        sys.exit()
+            screenbg()
 
 def loading_bar():
     loading = True
@@ -127,7 +119,7 @@ def title_font(size):
 
 #char menu font
 def charmenu_font(size):   
-    return pygame.font.Font("ARCADECLASSIC.TTF", size)
+    return pygame.font.Font("assets/ARCADECLASSIC.TTF", size)
 
 
 #Credits button
