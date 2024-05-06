@@ -68,7 +68,6 @@ def char_menu():
                 if MC.checkForInput(CHAR_MOUSE_POS):
                     print("working!")
                     fade1(1280,720)
-
                 
                 if LOVER.checkForInput(CHAR_MOUSE_POS):
                     print("working!")
