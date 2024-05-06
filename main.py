@@ -1,5 +1,5 @@
 import pygame, sys
-from menubutton import Button
+from button import Button
 from Chap1 import *
 
 pygame.init()
@@ -146,7 +146,7 @@ def credits():
         CREDITS_WILLIE = ("Lecturer and Teacher              Mr Willie")
         CREDITS_AFIQ = ("Storyboarding                                Afiq")
         CREDITS_CANDU = ("Game Mechanics                       Wan Amier")
-        CREDITS_AMIR = ("Data Sorter                        Amir Asyraf")
+        CREDITS_AMIR = ("Data Sorter                         Amir Asyraf")
 
         CREDITS_TEXT1 = get_font(50).render(CREDITS_WILLIE, True, "White")
         CREDITS_TEXT2 = get_font(50).render(CREDITS_AFIQ, True, "White")
