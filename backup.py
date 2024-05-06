@@ -1,38 +1,6 @@
 import pygame, sys
 from button import Button
-
-#Defining Buttons
-
-#class Button():
-	#def __init__(self, image, pos, text_input, font, base_color, hovering_color):
-		#self.image = image
-		#self.x_pos = pos[0]
-		#self.y_pos = pos[1]
-		#self.font = font
-		#self.base_color, self.hovering_color = base_color, hovering_color
-		#self.text_input = text_input
-		#self.text = self.font.render(self.text_input, True, self.base_color)
-		#if self.image is None:
-			#self.image = self.text
-		#self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
-		#self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
-
-	#def update(self, screen):
-		#if self.image is not None:
-			#screen.blit(self.image, self.rect)
-		#screen.blit(self.text, self.text_rect)
-
-	#def checkForInput(self, position):
-		#if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
-			#return True
-		#return False
-
-	#def changeColor(self, position):
-		#if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
-			#self.text = self.font.render(self.text_input, True, self.hovering_color)
-		#else:
-			#self.text = self.font.render(self.text_input, True, self.base_color)
-
+from Chap1 import *
 
 pygame.init()
 
@@ -45,6 +13,97 @@ BG = pygame.image.load("assets/background.png")
 
 #background music
 bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
+running = True
+font = pygame.font.Font('assets/ARCADECLASSIC.TTF', 32)
+
+def get_font(size): 
+    return pygame.font.Font("assets/font.ttf", size)
+
+def char_menu():
+
+    pygame.display.set_caption('Character Menu')
+
+    display = SCREEN
+    bg = pygame.image.load('assets/Background.png')
+    scaled_bg = pygame.transform.scale(bg, (1280,720))
+
+    bg_rect = scaled_bg.get_rect(x=0,y=0)
+    title = charmenu_font(60).render("Choose your character", True, "White")
+    title_rect = title.get_rect(x=320, y=100)
+    SCREEN.blit(title, title_rect)
+
+    while running:
+        display.blit(scaled_bg, bg_rect)
+
+        CHAR_MOUSE_POS = pygame.mouse.get_pos()
+
+        BACK_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 630), 
+                    text_input="BACK", font=get_font(70), base_color="White", hovering_color="#ba2323")
+        
+        MC = Button(image=pygame.image.load("assets/mc.png"), pos=(640, 360), 
+                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
+        
+        LOVER = Button(image=pygame.image.load("assets/lover.png"), pos=(320, 390), 
+                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
+        
+        VILLAIN = Button(image=pygame.image.load("assets/villain.png"), pos=(960, 330), 
+                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
+            
+        SCREEN.blit(title, title_rect)
+        
+        for button in [BACK_BUTTON, MC, LOVER, VILLAIN]:
+            button.changeColor(CHAR_MOUSE_POS)
+            button.update(display)
+
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT: #if pressing x button on window screen
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if BACK_BUTTON.checkForInput(CHAR_MOUSE_POS):
+                    main_menu()
+                
+                if MC.checkForInput(CHAR_MOUSE_POS):
+                    print("working!")
+                    fade1(1280,720)
+
+                
+                if LOVER.checkForInput(CHAR_MOUSE_POS):
+                    print("working!")
+                
+                if VILLAIN.checkForInput(CHAR_MOUSE_POS):
+                    print("working!")
+            
+            pygame.display.update()
+            bgmusic.play()
+
+def fade1(width, height): 
+    
+    screenfade = True
+
+    while screenfade == True:    
+        fade = pygame.Surface((width, height))
+        fade.fill((0,0,0))
+        for alpha in range(0, 300):
+            fade.set_alpha(alpha)
+            SCREEN.blit(fade, (0,0))
+            bgmusic.stop()
+            pygame.display.update()
+            pygame.time.delay(5)
+            screenfade == False
+            screenbg()
+
+def loading_bar():
+    loading = True
+    
+    while loading == True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+        
 
 #default font
 def get_font(size): 
@@ -58,41 +117,12 @@ def button_font(size):
 def title_font(size): 
     return pygame.font.Font("assets/titlefont.ttf", size)
 
-
-#Play button
-
-
-def play():
-    while True:
-        PLAY_MOUSE_POS = pygame.mouse.get_pos()
-
-        #from this point, story selection loop
-
-        SCREEN.fill("black")
-
-        PLAY_TEXT = get_font(45).render("This is the PLAY screen.", True, "White")
-        PLAY_RECT = PLAY_TEXT.get_rect(center=(640, 260))
-        SCREEN.blit(PLAY_TEXT, PLAY_RECT)
-
-        PLAY_BACK = Button(image=None, pos=(640, 460), 
-                            text_input="BACK", font=get_font(75), base_color="White", hovering_color="Green")
-
-        PLAY_BACK.changeColor(PLAY_MOUSE_POS)
-        PLAY_BACK.update(SCREEN)
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if PLAY_BACK.checkForInput(PLAY_MOUSE_POS):
-                    main_menu()
-
-        pygame.display.update()
+#char menu font
+def charmenu_font(size):   
+    return pygame.font.Font("assets/ARCADECLASSIC.TTF", size)
 
 
 #Credits button
-
 
 def credits():
     while True:
@@ -183,7 +213,7 @@ def main_menu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    play()
+                    char_menu()
                 if CREDITS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     credits()
                 if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS): #if pressing the quit button
