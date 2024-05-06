@@ -1,6 +1,12 @@
 import pygame, sys, time
 from config import *
 
+#things needed to add
+#1 text box
+#2 skip button
+#3 func to add charac in screen (and can move)
+#4 
+
 pygame.init()
 
 def text_font():

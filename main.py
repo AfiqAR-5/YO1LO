@@ -19,6 +19,10 @@ font = pygame.font.Font('assets/ARCADECLASSIC.TTF', 32)
 def get_font(size): 
     return pygame.font.Font("assets/font.ttf", size)
 
+
+#character menu screen
+
+
 def char_menu():
 
     pygame.display.set_caption('Character Menu')
@@ -79,6 +83,10 @@ def char_menu():
             pygame.display.update()
             bgmusic.play()
 
+
+#function to add fade in effect
+
+
 def fade1(width, height): 
     
     screenfade = True
@@ -94,6 +102,10 @@ def fade1(width, height):
             pygame.time.delay(5)
             screenfade == False
             screenbg()
+
+
+#function to add loading bar
+
 
 def loading_bar():
     loading = True
