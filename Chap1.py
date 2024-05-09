@@ -21,12 +21,11 @@ def screenbg():
     bg_rect = scaled_bg.get_rect(x=0,y=0)
     
     text = text_font().render("testing", True, "White")
-    text_rect = text.get_rect(x=320, y=100)
+    text_rect = text.get_rect(x=640, y=360)
 
     while True:
         SCREEN.blit(bg, bg_rect)
         SCREEN.blit(text, text_rect)
-        pygame.time.delay(1)
 
 
         for event in pygame.event.get():
@@ -34,7 +33,6 @@ def screenbg():
                 pygame.quit()
                 sys.exit()
 
-        pygame.display.update()
-        time.sleep(2)
+        pygame.display.flip()
     #def button(self):
        
