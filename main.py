@@ -83,7 +83,7 @@ def char_menu():
             bgmusic.play()
 
 
-#function to add fade in effect
+#prison scene
 
 
 def fade1(width, height): 

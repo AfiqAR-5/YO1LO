@@ -16,7 +16,7 @@ def screenbg():
 
     pygame.display.set_caption('YO1LO')
 
-    bg = pygame.image.load('assets/prisoncell.jpg')
+    bg = pygame.image.load('assets/prisoncell.png')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
     bg_rect = scaled_bg.get_rect(x=0,y=0)
     
