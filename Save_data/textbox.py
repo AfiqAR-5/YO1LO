@@ -41,7 +41,7 @@ class Button():
 		else:
 			self.text = font.render(self.text_input, True, "white")
 
-button_surface = pygame.image.load("Save_data/kontol.png")
+button_surface = pygame.image.load("Save_data/textbox.png")
 button_surface = pygame.transform.scale(button_surface, (850, 200))
 
 button = Button(button_surface, 640, 615, "")
