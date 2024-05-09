@@ -72,15 +72,15 @@ each line the follows"""
 
 def example1():
     # start up pygame
-    os.environ['SDL_VIDEO_WINDOW_POS'] = "1000,100"
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "100,100"
     pygame.init()
     # print(sorted(pygame.font.get_fonts()))
-    screen = pygame.display.set_mode((505, 250))
+    screen = pygame.display.set_mode((720, 480))
     screen.fill(GREY)
     clock = pygame.time.Clock()
 
     font = pygame.font.Font("assets/ARCADE.TTF", 30)
-    area = pygame.Rect(20, 20, 400, 142)
+    area = pygame.Rect(20, 20, 680, 142)
     box = area.inflate(2, 2)
     pygame.draw.rect(screen, BLUE, box, 1)
     pygame.display.flip()
