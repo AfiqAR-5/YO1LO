@@ -4,7 +4,7 @@ import sys
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("YO1LO")
-font = pygame.font.SysFont("Georgia", 100)
+font = pygame.font.Font("assets/ARCADE.TTF", 100)
 
 
 bg = pygame.image.load('assets/prisoncell.png')
