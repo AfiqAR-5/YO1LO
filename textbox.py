@@ -5,14 +5,9 @@ pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("YO1LO")
 font = pygame.font.SysFont("Georgia", 100)
-message = 'what the hellllllllllllll'
-snip = font.render('', True, 'white')
-counter = 0
-speed = 3
-done = False
 
 
-bg = pygame.image.load('Save_data/prisoncell.png')
+bg = pygame.image.load('assets/prisoncell.png')
 scaled_bg = pygame.transform.scale(bg, (1280,720))
 bg_rect = scaled_bg.get_rect(x=0,y=0)
 
@@ -41,7 +36,7 @@ class Button():
 		else:
 			self.text = font.render(self.text_input, True, "white")
 
-button_surface = pygame.image.load("Save_data/textbox.png")
+button_surface = pygame.image.load("assets/textbox.png")
 button_surface = pygame.transform.scale(button_surface, (850, 200))
 
 button = Button(button_surface, 640, 615, "")
@@ -56,15 +51,11 @@ while True:
 			sys.exit()
 		if event.type == pygame.MOUSEBUTTONDOWN:
 			button.checkForInput(pygame.mouse.get_pos())
-		if counter < speed * len(message):
-			done = True
 		
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
 		
-		snip = font.render(message[0: counter//speed], True, 'white')
-		screen.blit(snip, (10, 310))
 		
 	button.update()
 	button.changeColor(pygame.mouse.get_pos())
