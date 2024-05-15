@@ -40,8 +40,9 @@ button_surface = pygame.transform.scale(button_surface, (850, 200))
 
 button = Button(button_surface, 640, 615, "")
 
-screenshake = 0
-while True:
+run = True
+
+while run:
 
 	screen.blit(scaled_bg,bg_rect)
 

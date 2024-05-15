@@ -16,8 +16,21 @@ bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
 running = True
 font = pygame.font.Font('assets/ARCADECLASSIC.TTF', 32)
 
+#default font
 def get_font(size): 
-    return pygame.font.Font("assets/font.ttf", size)
+    return pygame.font.Font("assets/getfont.ttf", size)
+
+#button font
+def button_font(size): 
+    return pygame.font.Font("assets/buttonfont.ttf", size)
+
+#title font
+def title_font(size): 
+    return pygame.font.Font("assets/titlefont.ttf", size)
+
+#char menu font
+def charmenu_font(size):   
+    return pygame.font.Font("assets/ARCADECLASSIC.TTF", size)
 
 
 #character menu screen
@@ -100,7 +113,7 @@ def fade1(width, height):
             pygame.display.update()
             pygame.time.delay(5)
             screenfade == False
-            screenbg()
+            intro()
 
 
 #function to add loading bar
@@ -116,21 +129,7 @@ def loading_bar():
                 sys.exit()
         
 
-#default font
-def get_font(size): 
-    return pygame.font.Font("assets/getfont.ttf", size)
 
-#button font
-def button_font(size): 
-    return pygame.font.Font("assets/buttonfont.ttf", size)
-
-#title font
-def title_font(size): 
-    return pygame.font.Font("assets/titlefont.ttf", size)
-
-#char menu font
-def charmenu_font(size):   
-    return pygame.font.Font("assets/ARCADECLASSIC.TTF", size)
 
 
 #Credits button

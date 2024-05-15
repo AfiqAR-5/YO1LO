@@ -92,7 +92,7 @@ def fade1(width, height):
             pygame.display.update()
             pygame.time.delay(5)
             screenfade == False
-            screenbg()
+            text()
 
 def loading_bar():
     loading = True
