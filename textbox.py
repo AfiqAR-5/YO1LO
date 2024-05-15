@@ -1,7 +1,6 @@
-import pygame
-import sys
-
+import pygame,sys,random
 pygame.init()
+
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("YO1LO")
 font = pygame.font.Font("assets/ARCADE.TTF", 100)
@@ -41,6 +40,7 @@ button_surface = pygame.transform.scale(button_surface, (850, 200))
 
 button = Button(button_surface, 640, 615, "")
 
+screenshake = 0
 while True:
 
 	screen.blit(scaled_bg,bg_rect)
@@ -55,7 +55,23 @@ while True:
 		for event in pygame.event.get():
 			if event.type == pygame.QUIT:
 				run = False
-		
+	
+	keys = pygame.key.get_pressed()
+
+	 #screenshakey
+	if keys[pygame.K_SPACE]:
+		screenshake = 1000
+
+	if keys[pygame.K_RIGHT]:
+		screenshake = 30
+
+	if screenshake > 0:
+		screenshake -= 1
+
+	render_offset = [0,0]
+	if screenshake:
+		render_offset[0] = random.randint(0, 8) - 4
+		render_offset[1] = random.randint(0, 8)	- 4
 		
 	button.update()
 	button.changeColor(pygame.mouse.get_pos())

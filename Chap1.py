@@ -1,4 +1,4 @@
-import pygame, sys, time
+import pygame, sys, time, button
 from config import *
 
 #things needed to add
@@ -33,7 +33,7 @@ def screenbg():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
+    
         pygame.display.update()
         time.sleep(2)
     #def button(self):
