@@ -1,6 +1,7 @@
 import pygame, sys
 from config import *
 from button import Button
+from dialogue import dialogue
 
 #things needed to add
 #1 text box
@@ -129,7 +130,7 @@ def intro():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                     if CONTINUE_BUTTON.checkForInput(MENU_MOUSE_POS):
-                        chap1()
+                        dialogue()
                 
 
         pygame.display.flip()
