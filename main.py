@@ -115,23 +115,6 @@ def fade1(width, height):
             screenfade == False
             intro()
 
-
-#function to add loading bar
-
-
-def loading_bar():
-    loading = True
-    
-    while loading == True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-        
-
-
-
-
 #Credits button
 
 def credits():

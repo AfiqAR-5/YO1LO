@@ -35,10 +35,16 @@ def dialogue():
         bg = pygame.image.load('assets/prisoncell.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
         screen.blit(scaled_bg, bg_rect)
+        screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
-        pygame.draw.rect(screen, 'black', [180, 500, 900, 200])
+
         if counter < speed * len(message):
             counter += 1
         elif counter >= speed * len(message):
@@ -133,7 +139,6 @@ def dialogue3():
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         screen.blit(scaled_bg, bg_rect)
-        walter()
         mc()
 
         timer.tick(60)
@@ -153,10 +158,13 @@ def dialogue3():
                     done = False
                     message = messages[active_message]
                     counter = 0
-                if active_message == 4:
-                    dialogue2()
+                if active_message == 1:
+                    walter()
+
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (230, 550))
 
         pygame.display.flip()
+
+dialogue()
