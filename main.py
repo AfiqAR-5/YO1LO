@@ -60,10 +60,10 @@ def char_menu():
         MC = Button(image=pygame.image.load("assets/mc.png"), pos=(640, 360), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
         
-        LOVER = Button(image=pygame.image.load("assets/lover.png"), pos=(320, 390), 
+        LOVER = Button(image=pygame.image.load("assets/lover.png"), pos=(250, 430), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
         
-        VILLAIN = Button(image=pygame.image.load("assets/villain.png"), pos=(960, 330), 
+        VILLAIN = Button(image=pygame.image.load("assets/villain.png"), pos=(1030, 330), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
             
         SCREEN.blit(title, title_rect)
@@ -216,4 +216,27 @@ def main_menu():
         pygame.display.update()
         bgmusic.play() #to play the music while main menu is running
 
+def intro():
+    #intro screen
+    while True:
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+        INTRO_BUTTON = Button(image=BG, pos=(640, 360), 
+                        text_input="ACT ONE", font=button_font(100), base_color="White", hovering_color="white")
+        
+        INTRO_BUTTON.changeColor(MENU_MOUSE_POS)
+        INTRO_BUTTON.update(SCREEN)
+
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT: #if pressing x button on window screen
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if INTRO_BUTTON.checkForInput(MENU_MOUSE_POS):
+                    dialogue()
+
+        pygame.display.flip()
+    
 main_menu()

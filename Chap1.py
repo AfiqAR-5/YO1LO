@@ -16,7 +16,7 @@ pygame.display.set_caption("YO1LO")
 font = pygame.font.Font("assets/ARCADE.TTF", 100)
 
 
-bg = pygame.image.load('assets/prisoncell.png')
+bg = pygame.image.load('assets/prisoncell.jpg')
 scaled_bg = pygame.transform.scale(bg, (1280,720))
 bg_rect = scaled_bg.get_rect(x=0,y=0)
 
