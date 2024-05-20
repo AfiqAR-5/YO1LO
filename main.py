@@ -1,5 +1,6 @@
 import pygame, sys
 from button import Button
+from prologue import dialogue1
 
 pygame.init()
 
@@ -11,6 +12,7 @@ pygame.display.set_caption("Menu") #window name
 BG = pygame.image.load("assets/background.png")
 
 #background music
+menubgm = pygame.mixer.Sound("assets/mainmenubgm.mp3")
 bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
 running = True
 font = pygame.font.Font('assets/ARCADECLASSIC.TTF', 32)
@@ -191,6 +193,7 @@ def main_menu():
                     sys.exit()
 
         pygame.display.update()
+        
 
 def dialogue():
     font = pygame.font.Font('assets/Cinzel.ttf', 24)
@@ -198,13 +201,16 @@ def dialogue():
     timer = pygame.time.Clock()
     messages = ('In the cold, dim cell where time stretches like taffy...',
                 'A young soul lingers on the bitter memories of a life stolen.',
-                'A decade behind bars, yet the scene replays in his mind like yesterday\'s nightmare.',
+                'A decade behind bars, yet the scene-',
+                'Replays in his mind like yesterday\'s nightmare.',
                 'The door creaking open...',
                 'The sight of his mother\'s lifeless body...',
                 'The shadowy figure fleeing into the night...',
-                'Mistaken identity became his shackles, a cruel twist of fate that landed him here.',
-                'With each passing day, the echoes of that fateful evening grow louder...',
-                '...a relentless reminder of the injustice that binds him.',
+                'Mistaken identity became his shackles...',
+                'A cruel twist of fate that landed him here.',
+                'With each passing day, the echoes of that-',
+                'fateful evening grow louder...',
+                'A relentless reminder of the injustice that binds him.',
                 'This is a story that revolves around a certain figure...',
                 'With a name bestowed upon him...',
                 'IEMAN...',
@@ -236,9 +242,9 @@ def dialogue():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                if active_message == 12:
+                if active_message == 15:
                     bgmusic.stop()
-                    dialogue()
+                    dialogue1()
 
         snip = font.render(message[0:counter // speed], True, 'white')
         screen.blit(snip, (100, 360))

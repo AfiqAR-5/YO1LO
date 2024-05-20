@@ -1363,5 +1363,3 @@ def d7final():
                     sys.exit()
 
         pygame.display.flip()
-
-dialogue3()
