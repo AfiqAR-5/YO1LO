@@ -4,7 +4,7 @@ from button import Button
 pygame.init()
 
 bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
-gaycounter = 0
+gaycounter = 2
 
 def textbutton_font(size):   
     return pygame.font.Font("assets/ARCADE.TTF", size)
