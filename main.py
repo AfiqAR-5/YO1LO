@@ -1,6 +1,5 @@
 import pygame, sys
 from button import Button
-from Chap1 import *
 
 pygame.init()
 
@@ -83,8 +82,7 @@ def char_menu():
                     main_menu()
                 
                 if MC.checkForInput(CHAR_MOUSE_POS):
-                    print("working!")
-                    fade1(1280,720)
+                    dialogue()
                 
                 if LOVER.checkForInput(CHAR_MOUSE_POS):
                     print("working!")
@@ -93,27 +91,6 @@ def char_menu():
                     print("working!")
             
             pygame.display.update()
-            bgmusic.play()
-
-
-#prison scene
-
-
-def fade1(width, height): 
-    
-    screenfade = True
-
-    while screenfade == True:    
-        fade = pygame.Surface((width, height))
-        fade.fill((0,0,0))
-        for alpha in range(0, 300):
-            fade.set_alpha(alpha)
-            SCREEN.blit(fade, (0,0))
-            bgmusic.stop()
-            pygame.display.update()
-            pygame.time.delay(5)
-            screenfade == False
-            intro()
 
 #Credits button
 
@@ -214,29 +191,59 @@ def main_menu():
                     sys.exit()
 
         pygame.display.update()
-        bgmusic.play() #to play the music while main menu is running
 
-def intro():
-    #intro screen
-    while True:
+def dialogue():
+    font = pygame.font.Font('assets/Cinzel.ttf', 24)
+    screen = pygame.display.set_mode([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('In the cold, dim cell where time stretches like taffy...',
+                'A young soul lingers on the bitter memories of a life stolen.',
+                'A decade behind bars, yet the scene replays in his mind like yesterday\'s nightmare.',
+                'The door creaking open...',
+                'The sight of his mother\'s lifeless body...',
+                'The shadowy figure fleeing into the night...',
+                'Mistaken identity became his shackles, a cruel twist of fate that landed him here.',
+                'With each passing day, the echoes of that fateful evening grow louder...',
+                '...a relentless reminder of the injustice that binds him.',
+                'This is a story that revolves around a certain figure...',
+                'With a name bestowed upon him...',
+                'IEMAN...',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
 
-        MENU_MOUSE_POS = pygame.mouse.get_pos()
-        INTRO_BUTTON = Button(image=BG, pos=(640, 360), 
-                        text_input="ACT ONE", font=button_font(100), base_color="White", hovering_color="white")
-        
-        INTRO_BUTTON.changeColor(MENU_MOUSE_POS)
-        INTRO_BUTTON.update(SCREEN)
+    run = True
+    while run:
+
+        timer.tick(60)
+        screen.fill('black')
+
+        if counter < speed * len(message):
+            counter += 1
 
         for event in pygame.event.get():
-
-            if event.type == pygame.QUIT: #if pressing x button on window screen
+            if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if INTRO_BUTTON.checkForInput(MENU_MOUSE_POS):
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 12:
+                    bgmusic.stop()
                     dialogue()
 
+        snip = font.render(message[0:counter // speed], True, 'white')
+        screen.blit(snip, (100, 360))
+
         pygame.display.flip()
-    
+        bgmusic.play()
+
 main_menu()

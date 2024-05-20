@@ -4,7 +4,7 @@ from button import Button
 pygame.init()
 
 bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
-gaycounter = 2
+gaycounter = 0
 
 def textbutton_font(size):   
     return pygame.font.Font("assets/ARCADE.TTF", size)
@@ -291,7 +291,7 @@ def choice3():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        for button in [CHOICE1v2,CHOICE1 if gaycounter == 2 else CHOICE1v2,CHOICE2,PAUSE]:
+        for button in [CHOICE1v2,CHOICE1,CHOICE2,PAUSE if gaycounter == 2 else CHOICE1v2,CHOICE2,PAUSE]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
 
@@ -307,13 +307,14 @@ def choice3():
                         if CHOICE1.checkForInput(MENU_MOUSE_POS):
                             print(gaycounter)
                             dialogue7()
+                        if CHOICE1v2.checkForInput(MENU_MOUSE_POS):
+                            dialogue7v3()
                         if CHOICE2.checkForInput(MENU_MOUSE_POS):
                             dialogue7v2()
                 else:
-                    # If gaycounter is not 1, disable CHOICE1 functionality
+                    # If gaycounter is not 2, disable CHOICE1 functionality
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if CHOICE1v2.checkForInput(MENU_MOUSE_POS):
-                            print(gaycounter)
                             dialogue7v3()
                         if CHOICE2.checkForInput(MENU_MOUSE_POS):
                             dialogue7v2()
@@ -322,21 +323,21 @@ def choice3():
 
             pygame.display.flip()
 
-def dialogue():
+def dialogue1():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('Reality is often dissappointing, isn\'t it?',
-                'Imagine going through an exhausting day at school...',
-                'Only to witness a tragic massacre of your own family...',
-                '...and to be accused of the cruelty.',
+    messages = ('It\'s early in the morning, where the Sun shines the brightest.',
+                'Birds chirping... laughter of kids can be heard outside...',
+                'Birds...? Kids...?',
+                'W-wait, something\'s wrong...',
+                'This doesn\'t feel like... home?',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -345,25 +346,15 @@ def dialogue():
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
-        
-        bg = pygame.image.load('assets/prisoncell.jpg')
-        scaled_bg = pygame.transform.scale(bg, (1280,720))
-        bg_rect = scaled_bg.get_rect(x=0,y=0)
-        
-        textbox = pygame.image.load('assets/textbox.png')
-        scaled_texbox = pygame.transform.scale(textbox, (850,200))
-        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
 
-        screen.blit(scaled_bg, bg_rect)
-        screen.blit(scaled_texbox, textbox_rect)
+        SCREEN.fill('black')
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+
         timer.tick(60)
 
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -373,35 +364,171 @@ def dialogue():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
-                if active_message == 4:
-                    dialogue2()
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 5:
+                    dialogue1v2()
 
         snip = font.render(message[0:counter//speed], True, 'white')
-        screen.blit(snip, (280, 570))
+        screen.blit(snip, (100, 360))
 
         pygame.display.flip()
-        bgmusic.play()
+
+def dialogue1v2():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('Whoa! What\'s with the bright light!!!',
+                'I can\'t see anything...',
+                'It\'s getting brighter!',
+                '...')
+    snip = font.render('', True, 'black')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+    while run:
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load("assets/blackwhite.jpg")
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+        SCREEN.blit(scaled_bg,bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 3:
+                    dialogue1v3()
+
+        snip = font.render(message[0:counter//speed], True, 'black')
+        screen.blit(snip, (100, 360))
+
+        pygame.display.flip()
+
+def dialogue1v3():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('W-who\'s that...?',
+                'Mysterious Person : How have you been doing... MC...?',
+                'H-huh...?',
+                'Mysterious Person : I miss you so much...',
+                'Mysterious Person : I just hope everything will be back to normal...',
+                'Mysterious Person : But it seems that it was too late...',
+                'Mysterious Person : I\'m sorry... MC...',
+                'Mysterious Person : I\'m so sorry...',
+                'Mysterious Person : I love you, my dear MC...',
+                'W-wait! Who are you?!',
+                'H-hey!',
+                'Sh*t! The light\'s getting brighter!',
+                'Ahhhhh-!',
+                '...',
+                '...')
+    snip = font.render('', True, 'black')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+    while run:
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load("assets/blackwhite.jpg")
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+        mother = pygame.image.load("assets/mother.png")
+        mother_rect = mother.get_rect(x=800,y=100)
+
+        SCREEN.blit(scaled_bg,bg_rect)
+        SCREEN.blit(mother,mother_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 14:
+                    dialogue2()
+
+        snip = font.render(message[0:counter//speed], True, 'black')
+        screen.blit(snip, (100, 360))
+
+        pygame.display.flip()
 
 def dialogue2():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('This is a story about our MC : (Ieman)',
-                'MC : *yawns*',
-                'MC : Another day, another shitty meal from the warden',
-                'MC : You\'re not going to the cafeteria, NPC?',
+    messages = ('MC : Huhhhh!?',
+                'MC : What was that dream...?',
+                'MC : There\'s a silhoutte of a lady inside my dream...',
+                'MC : And it seems to know me...?',
+                'MC : Ack! My head hurts!',
+                'MC : I guess... I\'ll just fill up my belly first.',
+                'MC : Hey NPC, wake up...',
+                'MC : Today\'s brunch has already been served.',
+                'MC : Let\'s go dude.',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -429,8 +556,6 @@ def dialogue2():
 
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -440,12 +565,14 @@ def dialogue2():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
-                if active_message == 4:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 9:
                     dialogue3()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -457,7 +584,13 @@ def dialogue3():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('NPC : Could you not wake me up?',
+    messages = ('NPC : Ngh... Don\'t care about me...',
+                'NPC : Let me sleep bro...',
+                'MC : Come on dude, wake your ahh up!',
+                'MC shakes NPC body violently...',
+                'NPC : lemme SLEEP BRO!!!',
+                'MC : Gahhh!?',
+                'NPC : Frickin annoying...',
                 'NPC : I\'m in such a good dream, until you ruin it.',
                 'NPC : Why must you invite me, could you not...',
                 'NPC : ...go on your own...?',
@@ -511,7 +644,7 @@ def dialogue3():
                     done = False
                     message = messages[active_message]
                     counter = 0
-                if active_message == 4:
+                if active_message == 10:
                     choice1()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -1231,4 +1364,4 @@ def d7final():
 
         pygame.display.flip()
 
-choice3()
+dialogue3()
