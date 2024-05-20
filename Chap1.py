@@ -1,7 +1,7 @@
 import pygame, sys
 from config import *
 from button import Button
-from dialogue import dialogue
+from prologue import dialogue
 
 #things needed to add
 #1 text box

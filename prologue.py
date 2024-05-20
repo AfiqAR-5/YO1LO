@@ -236,12 +236,12 @@ def choice2():
             pygame.display.flip()
 
 def choice3():
-
+    global gaycounter
     while True:
 
         timer = pygame.time.Clock()
 
-        current  = textbutton_font(24).render("NPC : So, made up your mind?", True, "White")
+        current  = textbutton_font(24).render("NPC : So, ya made up your mind?", True, "White")
         current_rect = current.get_rect(x=280, y=570)
 
         bg = pygame.image.load('assets/prisoncell.jpg')
@@ -249,39 +249,49 @@ def choice3():
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
         textbox = pygame.image.load('assets/textbox.png')
-        scaled_texbox = pygame.transform.scale(textbox, (850,200))
-        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+        scaled_textbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_textbox.get_rect(x=220,y=500)
 
         c1 = pygame.image.load('assets/cbutton.png')
         scaled_c1 = pygame.transform.scale(c1, (500,70))
-        c1_rect = scaled_texbox.get_rect(x=400,y=228)
+        c1_rect = scaled_c1.get_rect(x=400,y=228)
 
         c2 = pygame.image.load('assets/cbutton.png')
         scaled_c2 = pygame.transform.scale(c2, (500,70))
-        c2_rect = scaled_texbox.get_rect(x=400,y=328)
+        c2_rect = scaled_c2.get_rect(x=400,y=328)
+
+        c3 = pygame.image.load('assets/cbutton.png')
+        scaled_c3 = pygame.transform.scale(c3, (500,70))
+        c3_rect = scaled_c3.get_rect(x=400,y=428)
 
         SCREEN.blit(scaled_bg, bg_rect)
         mcdark()
         walterdark()
-        SCREEN.blit(scaled_texbox, textbox_rect)
+        SCREEN.blit(scaled_textbox, textbox_rect)
         SCREEN.blit(current, current_rect)
         SCREEN.blit(scaled_c1, c1_rect)
         SCREEN.blit(scaled_c2, c2_rect)
+        if gaycounter == 2:
+            SCREEN.blit(scaled_c3, c3_rect)
 
         timer.tick(60)
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
 
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 265), 
-                            text_input="I've made up my mind. I'm gonna be your baby :3", font=textbutton_font(17), base_color="black", hovering_color="#FF3131") #find better colour
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 465), 
+                            text_input="...can I be your baby :3?", font=textbutton_font(17), base_color="black", hovering_color="#FF3131")
+
         
+        CHOICE1v2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 265), 
+                            text_input="Nah man, not gonna do some crazy shit like that.", font=textbutton_font(17), base_color="black", hovering_color="#FF3131")
+
         CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 365), 
                             text_input="...give me some time, would ya?", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        for button in [CHOICE1,CHOICE2,PAUSE]:
+        for button in [CHOICE1v2,CHOICE1 if gaycounter == 2 else CHOICE1v2,CHOICE2,PAUSE]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
 
@@ -292,10 +302,21 @@ def choice3():
                 sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if CHOICE1.checkForInput(MENU_MOUSE_POS):
-                    dialogue7()
-                if CHOICE2.checkForInput(MENU_MOUSE_POS):
-                    dialogue7v2()
+                if gaycounter == 2:
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if CHOICE1.checkForInput(MENU_MOUSE_POS):
+                            print(gaycounter)
+                            dialogue7()
+                        if CHOICE2.checkForInput(MENU_MOUSE_POS):
+                            dialogue7v2()
+                else:
+                    # If gaycounter is not 1, disable CHOICE1 functionality
+                    if event.type == pygame.MOUSEBUTTONDOWN:
+                        if CHOICE1v2.checkForInput(MENU_MOUSE_POS):
+                            print(gaycounter)
+                            dialogue7v3()
+                        if CHOICE2.checkForInput(MENU_MOUSE_POS):
+                            dialogue7v2()
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
 
@@ -1046,6 +1067,71 @@ def dialogue7v2():
 
         pygame.display.flip()
 
+def dialogue7v3():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('NPC : You\'re really a boring person...',
+                'NPC : But yeah... if you change your mind-',
+                'NPC : -come see me.',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    done = False
+
+    run = True
+    while run:
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/prisoncell.jpg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
+        screen.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(270,1)
+        walter(670,130)
+        screen.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+        if counter < speed * len(message):
+            counter += 1
+        elif counter >= speed * len(message):
+            done = True
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
+                    active_message += 1
+                    done = False
+                    message = messages[active_message]
+                    counter = 0
+                if active_message == 7:
+                    dialogue7v2()
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (280, 570))
+
+        pygame.display.flip()
+
 def d7troll():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
@@ -1145,4 +1231,4 @@ def d7final():
 
         pygame.display.flip()
 
-dialogue3()
+choice3()
