@@ -12,8 +12,9 @@ pygame.display.set_caption("Menu") #window name
 BG = pygame.image.load("assets/background.png")
 
 #background music
-menubgm = pygame.mixer.Sound("assets/mainmenubgm.mp3")
+introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
 bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
+clicksfx = pygame.mixer.Sound("assets/click.mp3")
 running = True
 font = pygame.font.Font('assets/ARCADECLASSIC.TTF', 32)
 
@@ -44,19 +45,18 @@ def char_menu():
     display = SCREEN
     bg = pygame.image.load('assets/Background.png')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
-
     bg_rect = scaled_bg.get_rect(x=0,y=0)
+
     title = charmenu_font(60).render("Choose your character", True, "White")
-    title_rect = title.get_rect(x=320, y=100)
-    SCREEN.blit(title, title_rect)
+    title_rect = title.get_rect(x=320, y=65)
 
     while running:
         display.blit(scaled_bg, bg_rect)
 
         CHAR_MOUSE_POS = pygame.mouse.get_pos()
 
-        BACK_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 630), 
-                    text_input="BACK", font=get_font(70), base_color="White", hovering_color="#ba2323")
+        BACK_BUTTON = Button(image=pygame.image.load("assets/backbutton.png"), pos=(130, 100), 
+                    text_input="       ", font=charmenu_font(70), base_color="White", hovering_color="#ba2323")
         
         MC = Button(image=pygame.image.load("assets/mc.png"), pos=(640, 360), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
@@ -97,12 +97,17 @@ def char_menu():
 #Credits button
 
 def credits():
+
+    title = charmenu_font(60).render("CREDITS", True, "White")
+    title_rect = title.get_rect(x=530, y=65)
+    SCREEN.blit(title, title_rect)
+
     while True:
         CREDITS_MOUSE_POS = pygame.mouse.get_pos()
 
         SCREEN.blit(BG, (0,0))
+        SCREEN.blit(title,title_rect)
 
-        #Credits message.. (I dont know how to do this so i made one by one ;-;)
 
         CREDITS_WILLIE = ("Lecturer and Teacher              Mr Willie")
         CREDITS_AFIQ = ("Storyboarding                                Afiq")
@@ -114,10 +119,10 @@ def credits():
         CREDITS_TEXT3 = get_font(50).render(CREDITS_CANDU, True, "White")
         CREDITS_TEXT4 = get_font(50).render(CREDITS_AMIR, True, "White")
 
-        CREDITS_RECT1 = CREDITS_TEXT1.get_rect(center=(640, 200))
-        CREDITS_RECT2 = CREDITS_TEXT2.get_rect(center=(640, 300))
-        CREDITS_RECT3 = CREDITS_TEXT3.get_rect(center=(640, 400))
-        CREDITS_RECT4 = CREDITS_TEXT4.get_rect(center=(640, 500))
+        CREDITS_RECT1 = CREDITS_TEXT1.get_rect(center=(640, 250))
+        CREDITS_RECT2 = CREDITS_TEXT2.get_rect(center=(640, 350))
+        CREDITS_RECT3 = CREDITS_TEXT3.get_rect(center=(640, 450))
+        CREDITS_RECT4 = CREDITS_TEXT4.get_rect(center=(640, 550))
 
         SCREEN.blit(CREDITS_TEXT1, CREDITS_RECT1)
         SCREEN.blit(CREDITS_TEXT2, CREDITS_RECT2)
@@ -126,8 +131,8 @@ def credits():
 
 
         #Credits back button
-        CREDITS_BACK = Button(image=None, pos=(640, 660), 
-                            text_input="BACK", font=title_font(75), base_color="White", hovering_color="#ba2323")
+        CREDITS_BACK = Button(image=pygame.image.load("assets/backbutton.png"), pos=(130, 100), 
+                            text_input="       ", font=charmenu_font(75), base_color="White", hovering_color="#ba2323")
 
         CREDITS_BACK.changeColor(CREDITS_MOUSE_POS)
         CREDITS_BACK.update(SCREEN)
@@ -193,7 +198,7 @@ def main_menu():
                     sys.exit()
 
         pygame.display.update()
-        
+        bgmusic.play()
 
 def dialogue():
     font = pygame.font.Font('assets/Cinzel.ttf', 24)
@@ -243,13 +248,14 @@ def dialogue():
                     else:
                         counter = speed * len(message)
                 if active_message == 15:
-                    bgmusic.stop()
+                    introbgm.stop()
                     dialogue1()
 
         snip = font.render(message[0:counter // speed], True, 'white')
         screen.blit(snip, (100, 360))
 
         pygame.display.flip()
-        bgmusic.play()
+        bgmusic.stop()
+        introbgm.play()
 
 main_menu()

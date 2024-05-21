@@ -4,6 +4,8 @@ from button import Button
 pygame.init()
 
 bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
+sadbgm = pygame.mixer.Sound("assets/sadbgm.mp3")
+introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
 gaycounter = 0
 
 def textbutton_font(size):   
@@ -327,7 +329,10 @@ def dialogue1():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('It\'s early in the morning, where the Sun shines the brightest.',
+    messages = ('...',
+                '...',
+                '...',
+                'It\'s early in the morning, where the Sun shines the brightest.',
                 'Birds chirping... laughter of kids can be heard outside...',
                 'Birds...? Kids...?',
                 'W-wait, something\'s wrong...',
@@ -342,14 +347,7 @@ def dialogue1():
     run = True
     while run:
 
-        MENU_MOUSE_POS = pygame.mouse.get_pos()
-
-        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
-                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
-
         SCREEN.fill('black')
-        PAUSE.update(SCREEN)
-        PAUSE.changeColor(MENU_MOUSE_POS)
 
         timer.tick(60)
 
@@ -360,9 +358,6 @@ def dialogue1():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if PAUSE.checkForInput(MENU_MOUSE_POS):
-                    pausemenu()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     if counter >= speed * len(message) and active_message < len(messages) - 1:
@@ -371,13 +366,15 @@ def dialogue1():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                if active_message == 5:
+                if active_message == 8:
                     dialogue1v2()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (100, 360))
 
         pygame.display.flip()
+        introbgm.stop()
+        sadbgm.play()
 
 def dialogue1v2():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
@@ -386,74 +383,8 @@ def dialogue1v2():
     messages = ('Whoa! What\'s with the bright light!!!',
                 'I can\'t see anything...',
                 'It\'s getting brighter!',
-                '...')
-    snip = font.render('', True, 'black')
-    counter = 0
-    speed = 1
-    active_message = 0
-    message = messages[active_message]
-
-    run = True
-    while run:
-
-        MENU_MOUSE_POS = pygame.mouse.get_pos()
-
-        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
-                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
-
-        bg = pygame.image.load("assets/blackwhite.jpg")
-        scaled_bg = pygame.transform.scale(bg, (1280,720))
-        bg_rect = scaled_bg.get_rect(x=0,y=0)
-
-        SCREEN.blit(scaled_bg,bg_rect)
-        PAUSE.update(SCREEN)
-        PAUSE.changeColor(MENU_MOUSE_POS)
-
-        timer.tick(60)
-
-        if counter < speed * len(message):
-            counter += 1
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if PAUSE.checkForInput(MENU_MOUSE_POS):
-                    pausemenu()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    if counter >= speed * len(message) and active_message < len(messages) - 1:
-                        active_message += 1
-                        message = messages[active_message]
-                        counter = 0
-                    else:
-                        counter = speed * len(message)
-                if active_message == 3:
-                    dialogue1v3()
-
-        snip = font.render(message[0:counter//speed], True, 'black')
-        screen.blit(snip, (100, 360))
-
-        pygame.display.flip()
-
-def dialogue1v3():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
-    screen = pygame.display.set_mode ([1280, 720])
-    timer = pygame.time.Clock()
-    messages = ('W-who\'s that...?',
-                'Mysterious Person : How have you been doing... MC...?',
-                'H-huh...?',
-                'Mysterious Person : I miss you so much...',
-                'Mysterious Person : I just hope everything will be back to normal...',
-                'Mysterious Person : But it seems that it was too late...',
-                'Mysterious Person : I\'m sorry... MC...',
-                'Mysterious Person : I\'m so sorry...',
-                'Mysterious Person : I love you, my dear MC...',
-                'W-wait! Who are you?!',
-                'H-hey!',
-                'Sh*t! The light\'s getting brighter!',
-                'Ahhhhh-!',
+                'Nghhh...!!!',
+                '...',
                 '...',
                 '...')
     snip = font.render('', True, 'black')
@@ -465,22 +396,11 @@ def dialogue1v3():
     run = True
     while run:
 
-        MENU_MOUSE_POS = pygame.mouse.get_pos()
-
-        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
-                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
-
         bg = pygame.image.load("assets/blackwhite.jpg")
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
-        mother = pygame.image.load("assets/mother.png")
-        mother_rect = mother.get_rect(x=800,y=100)
-
         SCREEN.blit(scaled_bg,bg_rect)
-        SCREEN.blit(mother,mother_rect)
-        PAUSE.update(SCREEN)
-        PAUSE.changeColor(MENU_MOUSE_POS)
 
         timer.tick(60)
 
@@ -491,9 +411,6 @@ def dialogue1v3():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if PAUSE.checkForInput(MENU_MOUSE_POS):
-                    pausemenu()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     if counter >= speed * len(message) and active_message < len(messages) - 1:
@@ -502,7 +419,76 @@ def dialogue1v3():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                if active_message == 14:
+                if active_message == 6:
+                    dialogue1v3()
+
+        snip = font.render(message[0:counter//speed], True, 'black')
+        screen.blit(snip, (100, 360))
+
+        pygame.display.flip()
+
+def dialogue1v3():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('Hmm...?',
+                'W-who\'s that...?',
+                'Mysterious Person : How have you been doing... MC...?',
+                'H-huh...?',
+                'Mysterious Person : I miss you so much...',
+                'Mysterious Person : I\'m just hoping that...',
+                'Mysterious Person : Everything will be back to normal...',
+                'Mysterious Person : But it seems that...',
+                'Mysterious Person : I failed to make you live a happy life...',
+                'Mysterious Person : I\'m sorry... MC...',
+                'Mysterious Person : I\'m so sorry...',
+                'Huh? I don\'t understand...?',
+                'Mysterious Person : I love you, my dear MC...',
+                'W-wait! Who are you?!',
+                'H-hey!',
+                'Sh*t! The light\'s getting brighter!',
+                'Ahhhhh-!',
+                '...',
+                '...',
+                '...',
+                '...')
+    snip = font.render('', True, 'black')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+    while run:
+
+        bg = pygame.image.load("assets/white.jpg")
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+        mother = pygame.image.load("assets/mother.png")
+        mother_rect = mother.get_rect(x=800,y=100)
+
+        SCREEN.blit(scaled_bg,bg_rect)
+        SCREEN.blit(mother,mother_rect)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 20:
                     dialogue2()
 
         snip = font.render(message[0:counter//speed], True, 'black')
@@ -521,7 +507,7 @@ def dialogue2():
                 'MC : Ack! My head hurts!',
                 'MC : I guess... I\'ll just fill up my belly first.',
                 'MC : Hey NPC, wake up...',
-                'MC : Today\'s brunch has already been served.',
+                'MC : Today\'s food\'s already been served.',
                 'MC : Let\'s go dude.',
                 '...')
     snip = font.render('', True, 'white')
@@ -600,7 +586,6 @@ def dialogue3():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -628,8 +613,6 @@ def dialogue3():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -639,11 +622,13 @@ def dialogue3():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 10:
                     choice1()
 
@@ -651,6 +636,8 @@ def dialogue3():
         screen.blit(snip, (280, 570))
 
         pygame.display.flip()
+        sadbgm.stop()
+        bgmusic.play()
 
 def dialogue4():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
@@ -666,7 +653,6 @@ def dialogue4():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -694,8 +680,6 @@ def dialogue4():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -705,11 +689,13 @@ def dialogue4():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 4:
                     dialogue6()
 
@@ -742,7 +728,6 @@ def dialogue4v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -770,8 +755,6 @@ def dialogue4v2():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -781,11 +764,13 @@ def dialogue4v2():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 14:
                     choice2()
 
@@ -811,7 +796,6 @@ def dialogue5():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -839,8 +823,6 @@ def dialogue5():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -850,11 +832,13 @@ def dialogue5():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 5:
                     dialogue5v2()
 
@@ -881,7 +865,6 @@ def dialogue5v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -909,8 +892,6 @@ def dialogue5v2():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -920,11 +901,13 @@ def dialogue5v2():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 6:
                     dialogue6()
 
@@ -947,7 +930,6 @@ def dialogue5v3():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -975,8 +957,6 @@ def dialogue5v3():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -986,11 +966,13 @@ def dialogue5v3():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 4:
                     dialogue5v2()
 
@@ -1018,7 +1000,6 @@ def dialogue6():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -1046,8 +1027,6 @@ def dialogue6():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1057,11 +1036,13 @@ def dialogue6():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 9:
                     choice3()
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -1081,7 +1062,6 @@ def dialogue7():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -1109,19 +1089,22 @@ def dialogue7():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 2:
                     d7troll()
 
@@ -1147,7 +1130,6 @@ def dialogue7v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -1175,8 +1157,6 @@ def dialogue7v2():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1186,11 +1166,13 @@ def dialogue7v2():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 7:
                     pygame.quit()
                     sys.exit()
@@ -1213,7 +1195,6 @@ def dialogue7v3():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
     while run:
@@ -1241,8 +1222,6 @@ def dialogue7v3():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1252,11 +1231,13 @@ def dialogue7v3():
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 7:
                     dialogue7v2()
 
@@ -1277,7 +1258,6 @@ def d7troll():
     speed = 2
     active_message = 0
     message = messages[active_message]
-    done = False
 
     run = True
 
@@ -1313,19 +1293,22 @@ def d7troll():
         timer.tick(60)
         if counter < speed * len(message):
             counter += 1
-        elif counter >= speed * len(message):
-            done = True
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN and done and active_message < len(messages) - 1:
-                    active_message += 1
-                    done = False
-                    message = messages[active_message]
-                    counter = 0
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
                 if active_message == 2:
                     d7final()
 
