@@ -1,6 +1,7 @@
 import pygame, sys
 from config import *
 from button import Button
+from Save_data import SaveLoadManager
 
 #things needed to add
 #1 text box
@@ -88,6 +89,9 @@ def text_font(size):
 
 def troll_font(size):
     return pygame.font.Font('assets/trollfont.ttf', size)
+
+def charmenu_font(size):   
+    return pygame.font.Font("assets/ARCADECLASSIC.TTF", size)
 
 def mc():
      mc = pygame.image.load('assets/mc.png')
@@ -208,22 +212,35 @@ def chap1():
         pygame.display.update()
 
 def Pause_button():
+
+    pygame.display.set_caption('Resume Menu')
+
+    display = SCREEN
+    bg = pygame.image.load('assets/Background.png')
+    scaled_bg = pygame.transform.scale(bg, (1280,720))
+
+    bg_rect = scaled_bg.get_rect(x=0,y=0)
+    title = charmenu_font(120).render("MENUS", True, "Gold")
+    title_rect = title.get_rect(x=480, y=90)
+    SCREEN.blit(title, title_rect)
         
     while True :
-        screen.fill((0,0,0))
-
+        display.blit(scaled_bg, bg_rect)
+        
         CHAR_MOUSE_POS = pygame.mouse.get_pos()
 
-        PAUSE_BUTTON = Button(image=pygame.image.load("assets/PauseButton.png"), pos=(100, 60),
-                       text_input="", font=button_font(100), base_color="White", hovering_color="#ba2323")
+        RESUME_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 280),
+                       text_input="RESUME", font=button_font(100), base_color="White", hovering_color="#ba2323")
         
-        RESUME_BUTTON = Button(image=pygame.image.load("assets/PauseButton.png"), pos=(300, 60),
-                       text_input="", font=button_font(100), base_color="White", hovering_color="#ba2323")
+        SAVE_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 430),
+                       text_input="SAVE", font=button_font(100), base_color="White", hovering_color="#ba2323")
         
-        EXIT_BUTTON = Button(image=pygame.image.load("assets/PauseButton.png"), pos=(600, 60),
-                       text_input="", font=button_font(100), base_color="White", hovering_color="#ba2323")
+        EXIT_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 580),
+                       text_input="QUIT", font=button_font(100), base_color="White", hovering_color="#ba2323")
         
-        for button in [PAUSE_BUTTON, RESUME_BUTTON, EXIT_BUTTON]:
+        SCREEN.blit(title, title_rect)
+        
+        for button in [RESUME_BUTTON, SAVE_BUTTON, EXIT_BUTTON]:
             button.changeColor(CHAR_MOUSE_POS)
             button.update(screen)
     
@@ -234,12 +251,10 @@ def Pause_button():
                     sys.exit()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                    if PAUSE_BUTTON.checkForInput(CHAR_MOUSE_POS):
-                        pygame.quit()
-                        sys.exit()
                     if RESUME_BUTTON.checkForInput(CHAR_MOUSE_POS):
-                        pygame.quit()
-                        sys.exit()
+                        chap1()
+                    if SAVE_BUTTON.checkForInput(CHAR_MOUSE_POS):
+                        SaveLoadManager()
                     if EXIT_BUTTON.checkForInput(CHAR_MOUSE_POS):
                         pygame.quit()
                         sys.exit()
