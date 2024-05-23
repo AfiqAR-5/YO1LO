@@ -1,6 +1,6 @@
 import pygame, sys
 from button import Button
-from Chap1 import *
+from prologue import dialogue1
 
 pygame.init()
 
@@ -12,7 +12,9 @@ pygame.display.set_caption("Menu") #window name
 BG = pygame.image.load("assets/background.png")
 
 #background music
+introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
 bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
+clicksfx = pygame.mixer.Sound("assets/click.mp3")
 running = True
 font = pygame.font.Font('assets/ARCADECLASSIC.TTF', 32)
 
@@ -43,27 +45,26 @@ def char_menu():
     display = SCREEN
     bg = pygame.image.load('assets/Background.png')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
-
     bg_rect = scaled_bg.get_rect(x=0,y=0)
+
     title = charmenu_font(60).render("Choose your character", True, "White")
-    title_rect = title.get_rect(x=320, y=100)
-    SCREEN.blit(title, title_rect)
+    title_rect = title.get_rect(x=320, y=65)
 
     while running:
         display.blit(scaled_bg, bg_rect)
 
         CHAR_MOUSE_POS = pygame.mouse.get_pos()
 
-        BACK_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 630), 
-                    text_input="BACK", font=get_font(70), base_color="White", hovering_color="#ba2323")
+        BACK_BUTTON = Button(image=pygame.image.load("assets/backbutton.png"), pos=(130, 100), 
+                    text_input="       ", font=charmenu_font(70), base_color="White", hovering_color="#ba2323")
         
         MC = Button(image=pygame.image.load("assets/mc.png"), pos=(640, 360), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
         
-        LOVER = Button(image=pygame.image.load("assets/lover.png"), pos=(320, 390), 
+        LOVER = Button(image=pygame.image.load("assets/lover.png"), pos=(250, 430), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
         
-        VILLAIN = Button(image=pygame.image.load("assets/villain.png"), pos=(960, 330), 
+        VILLAIN = Button(image=pygame.image.load("assets/villain.png"), pos=(1030, 330), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
             
         SCREEN.blit(title, title_rect)
@@ -83,8 +84,7 @@ def char_menu():
                     main_menu()
                 
                 if MC.checkForInput(CHAR_MOUSE_POS):
-                    print("working!")
-                    fade1(1280,720)
+                    dialogue()
                 
                 if LOVER.checkForInput(CHAR_MOUSE_POS):
                     print("working!")
@@ -93,54 +93,21 @@ def char_menu():
                     print("working!")
             
             pygame.display.update()
-            bgmusic.play()
-
-
-#prison scene
-
-
-def fade1(width, height): 
-    
-    screenfade = True
-
-    while screenfade == True:    
-        fade = pygame.Surface((width, height))
-        fade.fill((0,0,0))
-        for alpha in range(0, 300):
-            fade.set_alpha(alpha)
-            SCREEN.blit(fade, (0,0))
-            bgmusic.stop()
-            pygame.display.update()
-            pygame.time.delay(5)
-            screenfade == False
-            intro()
-
-
-#function to add loading bar
-
-
-def loading_bar():
-    loading = True
-    
-    while loading == True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-        
-
-
-
 
 #Credits button
 
 def credits():
+
+    title = charmenu_font(60).render("CREDITS", True, "White")
+    title_rect = title.get_rect(x=530, y=65)
+    SCREEN.blit(title, title_rect)
+
     while True:
         CREDITS_MOUSE_POS = pygame.mouse.get_pos()
 
         SCREEN.blit(BG, (0,0))
+        SCREEN.blit(title,title_rect)
 
-        #Credits message.. (I dont know how to do this so i made one by one ;-;)
 
         CREDITS_WILLIE = ("Lecturer and Teacher              Mr Willie")
         CREDITS_AFIQ = ("Storyboarding                                Afiq")
@@ -152,10 +119,10 @@ def credits():
         CREDITS_TEXT3 = get_font(50).render(CREDITS_CANDU, True, "White")
         CREDITS_TEXT4 = get_font(50).render(CREDITS_AMIR, True, "White")
 
-        CREDITS_RECT1 = CREDITS_TEXT1.get_rect(center=(640, 200))
-        CREDITS_RECT2 = CREDITS_TEXT2.get_rect(center=(640, 300))
-        CREDITS_RECT3 = CREDITS_TEXT3.get_rect(center=(640, 400))
-        CREDITS_RECT4 = CREDITS_TEXT4.get_rect(center=(640, 500))
+        CREDITS_RECT1 = CREDITS_TEXT1.get_rect(center=(640, 250))
+        CREDITS_RECT2 = CREDITS_TEXT2.get_rect(center=(640, 350))
+        CREDITS_RECT3 = CREDITS_TEXT3.get_rect(center=(640, 450))
+        CREDITS_RECT4 = CREDITS_TEXT4.get_rect(center=(640, 550))
 
         SCREEN.blit(CREDITS_TEXT1, CREDITS_RECT1)
         SCREEN.blit(CREDITS_TEXT2, CREDITS_RECT2)
@@ -164,8 +131,8 @@ def credits():
 
 
         #Credits back button
-        CREDITS_BACK = Button(image=None, pos=(640, 660), 
-                            text_input="BACK", font=title_font(75), base_color="White", hovering_color="#ba2323")
+        CREDITS_BACK = Button(image=pygame.image.load("assets/backbutton.png"), pos=(130, 100), 
+                            text_input="       ", font=charmenu_font(75), base_color="White", hovering_color="#ba2323")
 
         CREDITS_BACK.changeColor(CREDITS_MOUSE_POS)
         CREDITS_BACK.update(SCREEN)
@@ -231,6 +198,64 @@ def main_menu():
                     sys.exit()
 
         pygame.display.update()
-        bgmusic.play() #to play the music while main menu is running
+        bgmusic.play()
+
+def dialogue():
+    font = pygame.font.Font('assets/Cinzel.ttf', 24)
+    screen = pygame.display.set_mode([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('In the cold, dim cell where time stretches like taffy...',
+                'A young soul lingers on the bitter memories of a life stolen.',
+                'A decade behind bars, yet the scene-',
+                'Replays in his mind like yesterday\'s nightmare.',
+                'The door creaking open...',
+                'The sight of his mother\'s lifeless body...',
+                'The shadowy figure fleeing into the night...',
+                'Mistaken identity became his shackles...',
+                'A cruel twist of fate that landed him here.',
+                'With each passing day, the echoes of that-',
+                'fateful evening grow louder...',
+                'A relentless reminder of the injustice that binds him.',
+                'This is a story that revolves around a certain figure...',
+                'With a name bestowed upon him...',
+                'IEMAN...',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+    while run:
+
+        timer.tick(60)
+        screen.fill('black')
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 15:
+                    introbgm.stop()
+                    dialogue1()
+
+        snip = font.render(message[0:counter // speed], True, 'white')
+        screen.blit(snip, (100, 360))
+
+        pygame.display.flip()
+        bgmusic.stop()
+        introbgm.play()
 
 main_menu()
