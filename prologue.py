@@ -1,6 +1,7 @@
 import pygame, sys
 from config import *
 from button import Button
+from Chap1 import chap1
 pygame.init()
 
 bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
@@ -1456,10 +1457,11 @@ def prologue():
                         counter = speed * len(message)
                 if active_message == 1:
                     introbgm.stop()
-                    pygame.quit()
-                    sys.exit()
+                    chap1()
 
         snip = font.render(message[0:counter // speed], True, 'white')
         screen.blit(snip, (500, 360))
 
         pygame.display.flip()
+
+prologue()
