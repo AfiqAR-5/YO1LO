@@ -147,7 +147,7 @@ def credits():
 
 def main_menu():
     while True:
-        BG = pygame.image.load("assets/background.png")
+        BG = pygame.image.load("assets/backgroundmc.png")
         SCALED_BG = pygame.transform.scale(BG, (1280,720))
 
         SCREEN.blit(SCALED_BG, (0, 0))  #background
