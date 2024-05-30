@@ -1,6 +1,7 @@
 import pygame, sys
 from config import *
 from button import Button
+from Chap1 import chap1_opening
 pygame.init()
 
 bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
@@ -10,6 +11,9 @@ gaycounter = 0
 
 def textbutton_font(size):   
     return pygame.font.Font("assets/ARCADE.TTF", size)
+
+def prologuefont(size):
+    return pygame.font.Font("assets/Cinzel.ttf", size)
 
 def mc(xpos,ypos):
      mc = pygame.image.load('assets/mc.png')
@@ -299,7 +303,7 @@ def choice3():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        for button in [CHOICE1v2,CHOICE1,CHOICE2,PAUSE if gaycounter == 2 else CHOICE1v2,CHOICE2,PAUSE]:
+        for button in [CHOICE1v2,CHOICE1 if gaycounter == 2 else CHOICE1v2,CHOICE2,PAUSE]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
 
@@ -313,7 +317,6 @@ def choice3():
                 if gaycounter == 2:
                     if event.type == pygame.MOUSEBUTTONDOWN:
                         if CHOICE1.checkForInput(MENU_MOUSE_POS):
-                            print(gaycounter)
                             dialogue7()
                         if CHOICE1v2.checkForInput(MENU_MOUSE_POS):
                             dialogue7v3()
@@ -1422,25 +1425,25 @@ def d7final():
         pygame.display.flip()
 
 def prologue():
-    font = pygame.font.Font('assets/Cinzel.ttf', 30)
-    screen = pygame.display.set_mode([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('END OF PROLOGUE',
-                '...')
-    snip = font.render('', True, 'white')
-    counter = 0
-    speed = 1
-    active_message = 0
-    message = messages[active_message]
 
     run = True
     while run:
 
         timer.tick(60)
-        screen.fill('black')
+        SCREEN.fill('black')
 
-        if counter < speed * len(message):
-            counter += 1
+        end = prologuefont(60).render("You Only Live Once", True, "White")
+        end_rect = end.get_rect(x=325, y=300)
+        SCREEN.blit(end,end_rect)
+
+        troll = prologuefont(25).render("THE PROLOGUE", True, "White")
+        troll_rect = troll.get_rect(x=540, y=380)
+        SCREEN.blit(troll,troll_rect)
+
+        info = textbutton_font(24).render("(click Enter to continue...)", True, "White")
+        info_rect = end.get_rect(x=500, y=600)
+        SCREEN.blit(info,info_rect)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -1448,18 +1451,9 @@ def prologue():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    if counter >= speed * len(message) and active_message < len(messages) - 1:
-                        active_message += 1
-                        message = messages[active_message]
-                        counter = 0
-                    else:
-                        counter = speed * len(message)
-                if active_message == 1:
                     introbgm.stop()
-                    pygame.quit()
-                    sys.exit()
-
-        snip = font.render(message[0:counter // speed], True, 'white')
-        screen.blit(snip, (500, 360))
-
+                    chap1_opening()
+                    
         pygame.display.flip()
+
+prologue()
