@@ -6,7 +6,7 @@ pygame.init()
 pygame.mixer.init()
 
 # Background music
-pygame.mixer.music.load('assets/quicktimebgm.mp3')  
+pygame.mixer.music.load('assets/qtebgm.mp3')  
 pygame.mixer.music.play(-1)
 
 width, height = 1280, 720
@@ -33,7 +33,7 @@ image = prompt_images_scaled[prompt_index]
 image_rect = image.get_rect()
 
 # font
-font_file = 'assets/quicktimefont.ttf'
+font_file = 'assets/ARCADECLASSIC.ttf'
 custom_font = pygame.font.Font(font_file, 74)
 timer_font = pygame.font.Font(font_file, 50)
 
