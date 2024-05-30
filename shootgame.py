@@ -1,16 +1,31 @@
-import pygame
+import pygame, sys
 from sys import exit
 import math
+import random
 from settingsshoot import *
 
 pygame.init()
+
+pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("YO!LO")
 clock = pygame.time.Clock()
 
+# Background Sound
+pygame.mixer.music.load("assets/xiaolao.wav")
+pygame.mixer.music.play(-1)
+pygame.mixer.music.set_volume(0.5)
+
+#loadsoundeffect
+shoot_sound = pygame.mixer.Sound("assets/shoot_sound.wav")
+collision_sound = pygame.mixer.Sound("assets/oof.wav")
+dead_sound = pygame.mixer.Sound("assets/Death_sound.wav")
+gta_sound = pygame.mixer.Sound("assets/gta.wav")
+
 #backgroundimage
-background = pygame.image.load("assets/ground.png").convert()
+background = pygame.transform.scale(pygame.image.load("assets/warehouse.png").convert(), (WIDTH, HEIGHT))
+
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -23,6 +38,9 @@ class Player(pygame.sprite.Sprite):
         self.shoot = False
         self.shoot_cooldown = 0
         self.gun_barrel_offset = pygame.math.Vector2(GUN_OFFSET_X, GUN_OFFSET_Y)
+        self.max_health = PLAYER_HEALTH
+        self.health = self.max_health
+        self.health_cooldown = 0
 
     def player_rotation(self):
         self.mouse_coords = pygame.mouse.get_pos()
@@ -65,11 +83,27 @@ class Player(pygame.sprite.Sprite):
             bullet_group.add(self.bullet)
             all_sprites_group.add(self.bullet)
 
+            shoot_sound.play()
+
 
     def move(self):
         self.pos += pygame.math.Vector2(self.velocity_x, self.velocity_y)
+
+        # Ensure the player statys within the screen boundaries
+        self.pos.x = max(0, min(self.pos.x, WIDTH))
+        self.pos.y = max(0, min(self.pos.y, HEIGHT))
+        
         self.hitbox_rect.center = self.pos
         self.rect.center = self.hitbox_rect.center
+
+    def draw_health_bar(self, surface):
+        bar_width = 100
+        bar_height = 15
+        fill = (self.health / self.max_health) * bar_width
+        outline_rect = pygame.Rect(self.rect.centerx - bar_width / 2, self.rect.top - 20, bar_width, bar_height)
+        fill_rect = pygame.Rect(self.rect.centerx - bar_width / 2, self.rect.top - 20, fill, bar_height)
+        pygame.draw.rect(surface, (152, 251, 152), fill_rect)
+        pygame.draw.rect(surface, (255, 255, 255), outline_rect, 2)
 
     def update(self):
         self.user_input()
@@ -78,6 +112,18 @@ class Player(pygame.sprite.Sprite):
 
         if self.shoot_cooldown > 0:
             self.shoot_cooldown -= 1
+
+        if self.health_cooldown > 0:
+            self.health_cooldown -= 1
+
+        if self.health <= 0:
+            self.game_over()
+
+    def game_over(self):
+        pygame.mixer.music.stop()
+        gta_sound.play()
+        show_death_screen()
+
 
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, angle):
@@ -122,69 +168,143 @@ class Enemy(pygame.sprite.Sprite):
         self.speed = ENEMY_SPEED
 
         self.position = pygame.math.Vector2(position)
+        self.change_direction_interval = 1000
+        self.last_change_direction_time = pygame.time.get_ticks()
 
-    def hunt_player(self):
-        player_vector = pygame.math.Vector2(player.hitbox_rect.center)
-        enemy_vector = pygame.math.Vector2(self.rect.center)
-        distance = self.get_vector_distance(player_vector, enemy_vector)
+        self.max_health = ENEMY_HEALTH
+        self.health = self.max_health
 
-        if distance > 0:
-            self.direction = (player_vector - enemy_vector).normalize()
-        else:
-            self.direction = pygame.math.Vector2()
+    def random_movement(self):
+        current_time = pygame.time.get_ticks()
+        if current_time - self.last_change_direction_time > self.change_direction_interval:
+            self.direction = pygame.math.Vector2(random.uniform(-1, 1), random.uniform(-1, 1)).normalize()
+            self.velocity = self.direction * self.speed
+            self.last_change_direction_time = current_time
 
-        self.velocity = self.direction * self.speed
         self.position += self.velocity
+
+        # Ensure the enemy stays within the screen boundaries
+        self.position.x = max(0, min(self.position.x, WIDTH))
+        self.position.y = max(0, min(self.position.y, HEIGHT))
 
         self.rect.centerx = self.position.x
         self.rect.centery = self.position.y
 
-    def get_vector_distance(self, vector_1, vector_2):
-        return (vector_1 - vector_2).magnitude()
-
+    def draw_health_bar(self, surface):
+        bar_width = 100
+        bar_height = 15
+        fill = (self.health / self.max_health) * bar_width
+        outline_rect = pygame.Rect(self.rect.centerx - bar_width / 2, self.rect.top - 10, bar_width, bar_height)
+        fill_rect = pygame.Rect(self.rect.centerx - bar_width / 2, self.rect.top - 10, fill, bar_height)
+        pygame.draw.rect(surface, (255, 0, 0), fill_rect)
+        pygame.draw.rect(surface, (255, 255, 255), outline_rect, 2)  
+    
     def update(self):
-        self.hunt_player()
+        self.random_movement()
 
-class Camera(pygame.sprite.Group):
-    def __init__(self):
-        super().__init__()
-        self.offset = pygame.math.Vector2()
-        self.floor_rect = background.get_rect(topleft = (0, 0))
+        # check for collisions with bullets
+        hit_bullets = pygame.sprite.spritecollide(self, bullet_group, True)
+        if hit_bullets:
+            self.health -= 10
+            print(f"Enemy hit! Current health: {self.health}")
+            if self.health <= 0:
+                self.kill()
+                dead_sound.play()
+                print("Enemy Killed!")
 
-    def custom_draw(self):
-        self.offset.x = player.rect.centerx - WIDTH // 2
-        self.offset.y = player.rect.centery - HEIGHT // 2
+def show_death_screen():
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
-        floor_offset_pos = self.floor_rect.topleft - self.offset
-        screen.blit(background, floor_offset_pos)
+            if event.type == pygame.KEYDOWN:
+                run = False
 
-        for sprite in all_sprites_group:
-            offset_pos = sprite.rect.topleft - self.offset
-            screen.blit(sprite.image, offset_pos)
-
+        screen.fill((0, 0, 0))  # Black background
+        font = pygame.font.Font("assets/getfont.ttf", 50)
+        text = font.render("You Are DEAD!", True, (255, 0, 0))
+        text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        screen.blit(text, text_rect)
+        pygame.display.flip()
+        clock.tick(60)
+ 
 all_sprites_group = pygame.sprite.Group()
 bullet_group = pygame.sprite.Group()
 enemy_group = pygame.sprite.Group()
 
-camera = Camera()
 player = Player()
-thug = Enemy((400,400))
+
+# enemies at random position
+def create_enemies(num_enemies):
+    for _ in range(num_enemies):
+        x = random.randint(0, WIDTH)
+        y = random.randint(0, HEIGHT)
+        thug = Enemy((x, y))
+        all_sprites_group.add(thug)
+
+# create how many enemies
+create_enemies(5)
 
 all_sprites_group.add(player)
 
+def check_stage_cleared():
+    run = True
+    while run:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+                pygame.quit()
+                sys.exit()
+
+        popup_surface = pygame.Surface((640, 360))
+        popup_surface.fill((0, 0, 0))
+        popup_rect = popup_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+
+        font = pygame.font.Font("assets/ARCADECLASSIC.TTF", 50)
+        text = font.render("Mission Complete!", True, (255, 255, 255))
+        text_rect = text.get_rect(center=(325, 180))
+
+        popup_surface.blit(text, text_rect)
+
+        screen.blit(popup_surface, popup_rect)
+
+        pygame.display.flip()
+
+        clock.tick(60)
+
+waiting_for_key = False
 while True:
-    keys = pygame.key.get_pressed()
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            exit()
+            sys.exit()
 
     screen.blit(background, (0, 0))
     
-    camera.custom_draw()
+    all_sprites_group.draw(screen)
     all_sprites_group.update()
-    # pygame.draw.rect(screen, "red", player.hitbox_rect, width=2)
-    # pygame.draw.rect(screen, "yellow", player.rect, width=2)
+
+    player.draw_health_bar(screen) # Player's health Bar
+
+    # collisions between player & enemies
+    if pygame.sprite.spritecollide(player, enemy_group, False):
+        if player.health_cooldown <= 0:
+            player.health -= 10
+            print(f"Player hit! Cirrent health: {player.health}")
+            player.health_cooldown = 1000
+            collision_sound.play()
+
+    for enemy in enemy_group:
+        enemy.draw_health_bar(screen)
+
+    player.health_cooldown -= clock.get_time()
+
+    if len(enemy_group) == 0 and not waiting_for_key:
+        check_stage_cleared()
+        waiting_for_key = True
 
     pygame.display.update()
     clock.tick(FPS)
