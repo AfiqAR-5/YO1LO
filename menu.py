@@ -67,10 +67,10 @@ def char_menu():
                     print("working!")
                 
                 if LOVER.checkForInput(CHAR_MOUSE_POS):
-                    print("working!")
+                    pass
                 
                 if VILLAIN.checkForInput(CHAR_MOUSE_POS):
-                    print("working!")
+                    pass
             
             pygame.display.update()
             bgmusic.play()

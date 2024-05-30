@@ -18,11 +18,11 @@ white = (255, 255, 255)
 red = (255, 0, 0)
 green = (0, 255, 0)
 
-# Load background images
+# background image + scaling
 background_images_original = ['qtebg/clock.png', 'qtebg/dadstudy.png', 'qtebg/backyard.png', 'qtebg/livingroom.png', 'qtebg/mcroom.png', 'qtebg/shattered.png', 'qtebg/neighbourbg.png']
 background_images_scaled = [pygame.transform.scale(pygame.image.load(image_path), (1280, 720)) for image_path in background_images_original]
 
-# Load prompt images and scale them
+# prompt images + scaling
 prompt_images_original = ['qteimage/document.png', 'qteimage/daddiary.png', 'qteimage/bullet.png', 'qteimage/oldknife.png', 'qteimage/mcfavbook.png', 'qteimage/familyframe.png', 'qteimage/polaroid.png']
 prompt_images_scaled = [pygame.transform.scale(pygame.image.load(image_path), (150, 115)) for image_path in prompt_images_original]
 
@@ -32,12 +32,12 @@ background_image = background_images_scaled[background_index]
 image = prompt_images_scaled[prompt_index]
 image_rect = image.get_rect()
 
-# Font
+# font
 font_file = 'assets/quicktimefont.ttf'
 custom_font = pygame.font.Font(font_file, 74)
 timer_font = pygame.font.Font(font_file, 50)
 
-# Game variables
+# variables
 qte_time = 3  # Time in seconds to respond to the QTE
 qte_triggered = False
 qte_start_time = 0
