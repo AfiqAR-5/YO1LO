@@ -26,8 +26,8 @@ def char_menu():
     scaled_bg = pygame.transform.scale(bg, (1280,720))
 
     bg_rect = scaled_bg.get_rect(x=0,y=0)
-    title = charmenu_font(60).render("Choose your character", True, "White")
-    title_rect = title.get_rect(x=320, y=100)
+    title = charmenu_font(60).render("Choose   your    Story", True, "White")
+    title_rect = title.get_rect(x=350, y=50)
     SCREEN.blit(title, title_rect)
 
     while running:
@@ -35,16 +35,16 @@ def char_menu():
 
         CHAR_MOUSE_POS = pygame.mouse.get_pos()
 
-        BACK_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 630), 
-                    text_input="BACK", font=get_font(70), base_color="White", hovering_color="#ba2323")
+        BACK_BUTTON = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 660), 
+                    text_input="BACK", font=charmenu_font(60), base_color="White", hovering_color="#ba2323")
         
-        MC = Button(image=pygame.image.load("assets/mc.png"), pos=(640, 360), 
+        MC = Button(image=pygame.image.load("assets/mcbutton.png"), pos=(640, 360), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
         
-        LOVER = Button(image=pygame.image.load("assets/lover.png"), pos=(320, 390), 
+        LOVER = Button(image=pygame.image.load("assets/loverbutton.png"), pos=(320, 360), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
         
-        VILLAIN = Button(image=pygame.image.load("assets/villain.png"), pos=(960, 330), 
+        VILLAIN = Button(image=pygame.image.load("assets/villainbutton.png"), pos=(960, 360), 
                     text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
             
         SCREEN.blit(title, title_rect)
@@ -124,8 +124,8 @@ def credits():
 
 
         #Credits back button
-        CREDITS_BACK = Button(image=None, pos=(640, 660), 
-                            text_input="BACK", font=title_font(75), base_color="White", hovering_color="#ba2323")
+        CREDITS_BACK = Button(image=None, pos=(640, 650), 
+                            text_input="BACK", font=charmenu_font(70), base_color="White", hovering_color="#ba2323")
 
         CREDITS_BACK.changeColor(CREDITS_MOUSE_POS)
         CREDITS_BACK.update(SCREEN)
