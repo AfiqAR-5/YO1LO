@@ -7,8 +7,6 @@ pygame.init()
 SCREEN = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Menu") #window name
 
-#background picture
-BG = pygame.image.load("assets/background.png")
 
 #background music
 bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
@@ -22,7 +20,7 @@ def char_menu():
     pygame.display.set_caption('Character Menu')
 
     display = SCREEN
-    bg = pygame.image.load('assets/Background.png')
+    bg = pygame.image.load('assets/background2.png')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
 
     bg_rect = scaled_bg.get_rect(x=0,y=0)
@@ -39,13 +37,13 @@ def char_menu():
                     text_input="BACK", font=charmenu_font(60), base_color="White", hovering_color="#ba2323")
         
         MC = Button(image=pygame.image.load("assets/mcbutton.png"), pos=(640, 360), 
-                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
+                    text_input=None, font=credits_font(55), base_color="White", hovering_color="#ba2323")
         
         LOVER = Button(image=pygame.image.load("assets/loverbutton.png"), pos=(320, 360), 
-                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
+                    text_input=None, font=credits_font(55), base_color="White", hovering_color="#ba2323")
         
         VILLAIN = Button(image=pygame.image.load("assets/villainbutton.png"), pos=(960, 360), 
-                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
+                    text_input=None, font=credits_font(55), base_color="White", hovering_color="#ba2323")
             
         SCREEN.blit(title, title_rect)
         
@@ -77,8 +75,8 @@ def char_menu():
 
 
 #default font
-def get_font(size): 
-    return pygame.font.Font("assets/getfont.ttf", size)
+def credits_font(size): 
+    return pygame.font.Font("assets/creditsfont.ttf", size)
 
 #button font
 def button_font(size): 
@@ -96,9 +94,12 @@ def charmenu_font(size):
 #Credits button
 def credits():
     while True:
+        BG = pygame.image.load("assets/background2.png")
+        SCALED_BG = pygame.transform.scale(BG, (1280,720))
+
         CREDITS_MOUSE_POS = pygame.mouse.get_pos()
 
-        SCREEN.blit(BG, (0,0))
+        SCREEN.blit(SCALED_BG, (0,0))
 
         #Credits message.. (I dont know how to do this so i made one by one ;-;)
 
@@ -107,10 +108,10 @@ def credits():
         CREDITS_CANDU = ("Game Mechanics                       Wan Amier")
         CREDITS_AMIR = ("Data Sorter                         Amir Asyraf")
 
-        CREDITS_TEXT1 = get_font(50).render(CREDITS_WILLIE, True, "White")
-        CREDITS_TEXT2 = get_font(50).render(CREDITS_AFIQ, True, "White")
-        CREDITS_TEXT3 = get_font(50).render(CREDITS_CANDU, True, "White")
-        CREDITS_TEXT4 = get_font(50).render(CREDITS_AMIR, True, "White")
+        CREDITS_TEXT1 = credits_font(50).render(CREDITS_WILLIE, True, "White")
+        CREDITS_TEXT2 = credits_font(50).render(CREDITS_AFIQ, True, "White")
+        CREDITS_TEXT3 = credits_font(50).render(CREDITS_CANDU, True, "White")
+        CREDITS_TEXT4 = credits_font(50).render(CREDITS_AMIR, True, "White")
 
         CREDITS_RECT1 = CREDITS_TEXT1.get_rect(center=(640, 200))
         CREDITS_RECT2 = CREDITS_TEXT2.get_rect(center=(640, 300))
@@ -138,7 +139,7 @@ def credits():
                 if CREDITS_BACK.checkForInput(CREDITS_MOUSE_POS):
                     main_menu()
 
-        pygame.display.update()
+        pygame.display.flip()
 
 
 #Main menu (all buttons located, comes after defining buttons)
@@ -146,7 +147,10 @@ def credits():
 
 def main_menu():
     while True:
-        SCREEN.blit(BG, (0, 0))  #background
+        BG = pygame.image.load("assets/background2.png")
+        SCALED_BG = pygame.transform.scale(BG, (1280,720))
+
+        SCREEN.blit(SCALED_BG, (0, 0))  #background
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
 
@@ -190,7 +194,7 @@ def main_menu():
                     pygame.quit()
                     sys.exit()
 
-        pygame.display.update()
+        pygame.display.flip()
         bgmusic.play() #to play the music while main menu is running
 
 main_menu()
