@@ -76,7 +76,7 @@ def char_menu():
 
 #default font
 def credits_font(size): 
-    return pygame.font.Font("assets/creditsfont.ttf", size)
+    return pygame.font.Font("assets/getfont.ttf", size)
 
 #button font
 def button_font(size): 
