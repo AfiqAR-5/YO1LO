@@ -6,7 +6,6 @@ pygame.init()
 bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
 sadbgm = pygame.mixer.Sound("assets/sadbgm.mp3")
 introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
-steps = pygame.mixer.Sound("assets/footsteps.mp3")
 gaycounter = 0
 
 def textbutton_font(size):   
@@ -288,7 +287,7 @@ def chap1_opening():
         box_rect = scaled_box.get_rect(x=320,y=250)
         SCREEN.blit(scaled_box, box_rect)
 
-        end = prologuefont(40).render("Chapter 1", True, "White")
+        end = prologuefont(40).render("Chapter 1 - Act 1", True, "White")
         end_rect = end.get_rect(x=340, y=265)
         SCREEN.blit(end,end_rect)
 
@@ -383,14 +382,12 @@ def chap1_steps():
                     else:
                         counter = speed * len(message)
                 if active_message == 2:
-                    steps.stop()
                     chap1()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
 
         pygame.display.flip()
-        steps.play()
 
 def chap1():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
@@ -1003,14 +1000,14 @@ def dialogue9():
                     else:
                         counter = speed * len(message)
                 if active_message == 7:
-                    intermission()
+                    chap1v2_opening()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
 
         pygame.display.flip()
 
-def intermission():
+def chap1v2_opening():
     timer = pygame.time.Clock()
 
     run = True
@@ -1028,7 +1025,7 @@ def intermission():
         box_rect = scaled_box.get_rect(x=320,y=250)
         SCREEN.blit(scaled_box, box_rect)
 
-        end = prologuefont(40).render("Intermission", True, "White")
+        end = prologuefont(40).render("Chapter 1 - Act 2", True, "White")
         end_rect = end.get_rect(x=340, y=320)
         SCREEN.blit(end,end_rect)
 
@@ -1419,6 +1416,7 @@ def dialogue15():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(475,1)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1485,6 +1483,7 @@ def dialogue15v2():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(475,1)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1575,7 +1574,7 @@ def dialogue16v2():
                     dialogue17()
 
         snip = font.render(message[0:counter//speed], True, 'white')
-        screen.blit(snip, (70, 70))
+        screen.blit(snip, (280, 570))
 
         pygame.display.flip()
 
@@ -1640,7 +1639,7 @@ def dialogue16():
                     dialogue17()
 
         snip = font.render(message[0:counter//speed], True, 'white')
-        screen.blit(snip, (70, 70))
+        screen.blit(snip, (280, 570))
 
         pygame.display.flip()
 
@@ -1657,6 +1656,7 @@ def dialogue17():
                 'Mysterious Man : Uhh... Oh no...',
                 'The rack begins to broke apart...',
                 '...and the dumbbells fall on top of his foot.',
+                '*thud*',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
@@ -1686,79 +1686,7 @@ def dialogue17():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        silhoutte(-80,200)
-        SCREEN.blit(scaled_texbox, textbox_rect)
-
-        timer.tick(60)
-        if counter < speed * len(message):
-            counter += 1
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if PAUSE.checkForInput(MENU_MOUSE_POS):
-                    pausemenu()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    if counter >= speed * len(message) and active_message < len(messages) - 1:
-                        active_message += 1
-                        message = messages[active_message]
-                        counter = 0
-                    else:
-                        counter = speed * len(message)
-                if active_message == 9:
-                    dialogue18()
-
-        snip = font.render(message[0:counter//speed], True, 'white')
-        screen.blit(snip, (280, 570))
-
-        pygame.display.flip()
-
-def dialogue19():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
-    screen = pygame.display.set_mode ([1280, 720])
-    timer = pygame.time.Clock()
-    messages = ('AAAAAAAAAAAAAAAAAAAAAAAA!!!!!!!',
-                'MC : Huh, someone\'s losing their mind right now.',
-                'MC : Lately, everything feels weird',
-                'Mysterious Man : That brittle body of yours really annoys me!',
-                'Mysterious Man : You should focusing on buffing up your tiny muscles!',
-                'Mysterious Man : Dammit! *punches the dumbbell rack*',
-                'Mysterious Man : Uhh... Oh no...',
-                'The rack begins to broke apart...',
-                '...and the dumbbells fall on top of his foot.',
-                '...')
-    snip = font.render('', True, 'white')
-    counter = 0
-    speed = 2
-    active_message = 0
-    message = messages[active_message]
-
-    run = True
-
-    while run:
-
-        timer = pygame.time.Clock()
-
-        MENU_MOUSE_POS = pygame.mouse.get_pos()
-
-        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
-                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
-
-        bg = pygame.image.load('assets/prisongym.jpeg')
-        scaled_bg = pygame.transform.scale(bg, (1280,720))
-        bg_rect = scaled_bg.get_rect(x=0,y=0)
-        
-        textbox = pygame.image.load('assets/textbox.png')
-        scaled_texbox = pygame.transform.scale(textbox, (850,200))
-        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
-
-        SCREEN.blit(scaled_bg, bg_rect)
-        PAUSE.update(SCREEN)
-        PAUSE.changeColor(MENU_MOUSE_POS)
-        silhoutte(-80,200)
+        silhoutte(150,200)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1781,11 +1709,511 @@ def dialogue19():
                     else:
                         counter = speed * len(message)
                 if active_message == 10:
-                    dialogue17()
+                    dialogue18()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
 
         pygame.display.flip()
 
-dialogue17()
+def dialogue18():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('Distant voice : AAAAAAAAAAGHHHH!!!',
+                'MC : Huh, someone\'s losing their mind right now.',
+                'MC : To be honest, everything feels weird suddenly.',
+                'MC : Now to think of it, where\'s NPC?',
+                'MC : Oh, there he is.',
+                'MC : Yo NP- HUH???',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 2
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+
+    while run:
+
+        timer = pygame.time.Clock()
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/prisongym.jpeg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(475,1)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 6:
+                    dialogue19()
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (280, 570))
+
+        pygame.display.flip()
+
+def dialogue19():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('MC : EVEN NPC HAS PULLED A BITCH???',
+                'MC : This can\'t be real...',
+                'MC : Nah nah this can\'t be happening...',
+                'MC move towards NPC and pull his shoulder from behind.',
+                'MC : DUDE?!',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 2
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+
+    while run:
+
+        timer = pygame.time.Clock()
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/walterngf.jpg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(270,1)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 5:
+                    dialogue20()
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (280, 570))
+
+        pygame.display.flip()
+
+def dialogue20():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('NPC : What?',
+                'MC : WHAT YOU MEAN \'What?\'???',
+                'MC : I was busy doing some workout, and you casually...',
+                'MC : PULLED A GIRLFRIEND OUT OF NOWHERE???',
+                'MC : And???',
+                'MC : AND IT CERTAINLY NOT AN EASY THING TO DO BRO.',
+                'NPC : *smirks* Skill issue, bro!',
+                'NPC\'s GF : Let\'s go babe... This crazy guy is scaring me...',
+                'NPC : Oh, I\'m so sorry sweetie... Let\'s go somewhere else...',
+                'MC : *CURSING VIOLENTLY*',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 2
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+
+    while run:
+
+        timer = pygame.time.Clock()
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/walterngf.jpg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(270,1)
+        walter(670,130)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 8:
+                    dialogue21()
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (280, 570))
+
+        pygame.display.flip()
+
+def dialogue21():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('Meanwhile, Mysterious Man timeout\'d himself at the corner of the gym...',
+                'Mysterious Man : ...you audiences must think I\'m a fool, right?',
+                'Mysterious Man : ...well, maybe you\'re right though.',
+                'Mysterious Man : ...that kind of evil plot won\'t kill someone easily...',
+                'Mysterious Man : ...I give up. You can live your life peacefully, MC.',
+                'Mysterious Man : ...',
+                'Mysterious Man : ...',
+                'Mysterious Man suddenly stood up with full of spirits.',
+                'Mysterious Man : NOT SO FAST THERE, MYSELF!',
+                'Mysterious Man : I DIDN\'T WASTE MY TIME...',
+                'Mysterious man : GETTING INTO PRISON INTENTIONALLY...',
+                'Mysterious Man : ONLY FOR ME TO *bleep* UP HERE!',
+                'Mysterious Man : Alrighty alright, let\'s devise a new plan shall we?',
+                'Mysterious Man : I shall vanish for now...',
+                'Mysterious Man : See you later, MC...',
+                'Mysterious Man : ...mwahahaha... MWAHAHAHAHA!!!',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 2
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+
+    while run:
+
+        timer = pygame.time.Clock()
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/prisongym.jpeg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        silhoutte(150,200)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 16:
+                    chap1v3_opening
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (280, 570))
+
+        pygame.display.flip()
+
+def chap1v3_opening():
+    timer = pygame.time.Clock()
+
+    run = True
+    while run:
+
+        timer.tick(60)
+
+        bg = pygame.image.load('assets/prisoncellblur.jpg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        SCREEN.blit(scaled_bg, bg_rect)
+
+        box = pygame.image.load('assets/Play Rect.png')
+        scaled_box = pygame.transform.scale(box, (640,240))
+        box_rect = scaled_box.get_rect(x=320,y=250)
+        SCREEN.blit(scaled_box, box_rect)
+
+        end = prologuefont(40).render("Chapter 1 - Act 3", True, "White")
+        end_rect = end.get_rect(x=340, y=320)
+        SCREEN.blit(end,end_rect)
+
+        troll = prologuefont(22).render("Something Big\'s happening?", True, "White")
+        troll_rect = troll.get_rect(x=343, y=370)
+        SCREEN.blit(troll,troll_rect)
+
+        info = textbutton_font(19).render("New Klang Private Penitentiary - Activity Area - 4:43:09 PM", True, "White")
+        info_rect = end.get_rect(x=343, y=450)
+        SCREEN.blit(info,info_rect)
+
+        info = textbutton_font(24).render("(click Enter to continue...)", True, "White")
+        info_rect = end.get_rect(x=500, y=600)
+        SCREEN.blit(info,info_rect)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    dialogue22()
+
+        pygame.display.flip()
+
+def dialogue22():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('MC : ...',
+                'MC : I don\'t wanna live anymore...',
+                'MC : Another 5 years to serve...',
+                'MC : Before I start my own journey, to find a girlfriend...',
+                'MC : I don\'t want to die a virgin man...',
+                'MC : But, finding a girlfriend ain\'t an easy task though.',
+                'MC : What if, it took me 10 more years until I find mine?',
+                'MC : I\'ll be around 30 to 40 at that time...',
+                'MC : ...',
+                'MC : *tugging the cell bars* LET ME OUT, LET ME OUT PLEASE!',
+                'MC : I DON\'T WANNA DATE AN OLD WOMAN WHEN I GOT OUT!',
+                'MC : GOD, LET ME OUT!',
+                'Unknown Voice : Whoa there buddy...',
+                'Unknown Voice : You look terribly pathetic right now.',
+                'Unknown Voice : Something I can help?',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 2
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+
+    while run:
+
+        timer = pygame.time.Clock()
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/prisoncell.jpg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(475,1)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 15:
+                    chap1v3_opening
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (280, 570))
+
+        pygame.display.flip()
+
+def dialogue22():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('MC sees someone outside his cell.',
+                'MC : Who\'re you?',
+                'Unknown Person : I heard something about \'getting out\'?',
+                'Unknown Person : It might be risky...',
+                'Unknown Person : But I can help you with that.',
+                'Unknown Person : You said something about \'girlfriend\' too?',
+                'Unknown Person : Yeah yeah I can help you with that too.',
+                'MC : Hold the *bleep* up, All-Knowing-Dude. One at a time.',
+                'MC : And again, who the *bleep* are you?',
+                'Unknown Person : What kind of girlfriend do you desire?',
+                'Unknown Person : A cute one? A mommy one? A shy one?',
+                'Unknown Person : Tall or short? Clingy or independent?',
+                'Unknown Person : Flat is justice? Medium is premium? Oppai is truth?',
+                'MC : CHILL UP DUDE. STOP WITH THE ONE-SIDED CONVERSATION!',
+                'Unknown Person : Your name\'s MC right? Around 20? ',
+                'MC : I\'m not gonna entertain you if you won\'t tell me your name first.',
+                'Unknown Person : *laughs* Sorry for the rapid exchange of communication.',
+                'CJ : Just call me CJ.',
+                'MC : CJ...?',
+                'CJ : Let\'s talk business, shall we?',
+                'CJ : Do you want to get out of this prison?',
+                'MC : Yes?',
+                'CJ : Alright, deal has been made. Good to be working with you!',
+                'MC : WHO SAID THAT?!',
+                'CJ : ',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 2
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+
+    while run:
+
+        timer = pygame.time.Clock()
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/prisongym.jpeg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        silhoutte(150,200)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 16:
+                    chap1v3_opening
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (280, 570))
+
+        pygame.display.flip()
+
+chap1v3_opening()
