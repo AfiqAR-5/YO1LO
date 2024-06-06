@@ -956,7 +956,7 @@ def main():
     running = True
     clock = pygame.time.Clock()
     button = create_random_button()
-    button_timer = 1000
+    button_timer = 5000
     button_start_time = pygame.time.get_ticks()
     button_press_count = 0
     show_dialogue_1 = False
@@ -1004,7 +1004,7 @@ def main():
             button_timer = 15000
             button_start_time = pygame.time.get_ticks()
             fightdialogue1()
-            button_timer = 1000
+            button_timer = 5000
             button_start_time = pygame.time.get_ticks()
 
         if current_direction == 9 and not show_dialogue_2:
@@ -1012,7 +1012,7 @@ def main():
             button_timer = 15000
             button_start_time = pygame.time.get_ticks()
             fightdialogue2()
-            button_timer = 1000
+            button_timer =5000
             button_start_time = pygame.time.get_ticks()
 
         if current_direction == 12 and not show_dialogue_3:
@@ -1020,7 +1020,7 @@ def main():
             button_timer = 15000
             button_start_time = pygame.time.get_ticks()
             fightdialogue3()
-            button_timer = 1000
+            button_timer = 5000
             button_start_time = pygame.time.get_ticks()
 
         pygame.display.flip()
