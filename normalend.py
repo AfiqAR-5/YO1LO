@@ -620,7 +620,7 @@ def dialogue5():
 def dialogue6():
     font = pygame.font.Font("assets/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
-    messages = ('.....',
+    messages = ('MC : ',
                 '...')
     snip = font.render('', True, white)
     counter = 0
