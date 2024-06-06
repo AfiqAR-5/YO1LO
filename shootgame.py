@@ -255,7 +255,7 @@ def create_enemies(num_enemies):
         all_sprites_group.add(thug)
 
 # create how many enemies
-create_enemies(5)
+create_enemies(1)
 
 all_sprites_group.add(player)
 

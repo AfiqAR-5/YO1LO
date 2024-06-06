@@ -980,4 +980,4 @@ def choice4():
 
             pygame.display.flip()
 
-choice4()
+chap2_opening()
