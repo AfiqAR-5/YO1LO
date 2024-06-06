@@ -309,11 +309,19 @@ def choice5():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
         
+<<<<<<< HEAD
         CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 265), 
                             text_input="Pry open the vent", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
         CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 365), 
                             text_input="Resort to violence", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
+=======
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 365), 
+                            text_input="Pry open the vent", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 465), 
+                            text_input="Resort to violence", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+>>>>>>> main
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
@@ -3512,7 +3520,11 @@ def dialogue37():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
+<<<<<<< HEAD
         bg = pygame.image.load('assets/securitydoor.jpg')
+=======
+        bg = pygame.image.load('assets/securityroom.jpg')
+>>>>>>> main
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -3546,7 +3558,11 @@ def dialogue37():
                     else:
                         counter = speed * len(message)
                 if active_message == 1:
+<<<<<<< HEAD
                     choice5()
+=======
+                    dialogue38()
+>>>>>>> main
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
@@ -3576,7 +3592,11 @@ def dialogue38():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
+<<<<<<< HEAD
         bg = pygame.image.load('assets/securitydoor.jpg')
+=======
+        bg = pygame.image.load('assets/securityroom.jpg')
+>>>>>>> main
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
