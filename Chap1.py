@@ -1613,7 +1613,7 @@ def dialogue16v2():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/mcpulldown.jpg')
+        bg = pygame.image.load('assets/mcpullup.jpg')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -2074,7 +2074,7 @@ def dialogue21():
                     else:
                         counter = speed * len(message)
                 if active_message == 16:
-                    chap1v3_opening
+                    chap1v3_opening()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
@@ -3556,7 +3556,7 @@ def dialogue38():
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
-    speed = 2
+    speed = 1
     active_message = 0
     message = messages[active_message]
 
@@ -3612,3 +3612,4 @@ def dialogue38():
         screen.blit(snip, (280, 570))
 
         pygame.display.flip()
+chap1v2_opening()
