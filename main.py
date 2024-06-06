@@ -34,66 +34,6 @@ def title_font(size):
 def charmenu_font(size):   
     return pygame.font.Font("assets/ARCADECLASSIC.TTF", size)
 
-
-#character menu screen
-
-
-def char_menu():
-
-    pygame.display.set_caption('Character Menu')
-
-    display = SCREEN
-    bg = pygame.image.load('assets/Background.png')
-    scaled_bg = pygame.transform.scale(bg, (1280,720))
-    bg_rect = scaled_bg.get_rect(x=0,y=0)
-
-    title = charmenu_font(60).render("Choose your character", True, "White")
-    title_rect = title.get_rect(x=320, y=65)
-
-    while running:
-        display.blit(scaled_bg, bg_rect)
-
-        CHAR_MOUSE_POS = pygame.mouse.get_pos()
-
-        BACK_BUTTON = Button(image=pygame.image.load("assets/backbutton.png"), pos=(130, 100), 
-                    text_input="       ", font=charmenu_font(70), base_color="White", hovering_color="#ba2323")
-        
-        MC = Button(image=pygame.image.load("assets/mc.png"), pos=(640, 360), 
-                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
-        
-        LOVER = Button(image=pygame.image.load("assets/lover.png"), pos=(250, 430), 
-                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
-        
-        VILLAIN = Button(image=pygame.image.load("assets/villain.png"), pos=(1030, 330), 
-                    text_input=None, font=get_font(55), base_color="White", hovering_color="#ba2323")
-            
-        SCREEN.blit(title, title_rect)
-        
-        for button in [BACK_BUTTON, MC, LOVER, VILLAIN]:
-            button.changeColor(CHAR_MOUSE_POS)
-            button.update(display)
-
-        for event in pygame.event.get():
-
-            if event.type == pygame.QUIT: #if pressing x button on window screen
-                pygame.quit()
-                sys.exit()
-
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if BACK_BUTTON.checkForInput(CHAR_MOUSE_POS):
-                    main_menu()
-                
-                if MC.checkForInput(CHAR_MOUSE_POS):
-                    dialogue()
-                
-                if LOVER.checkForInput(CHAR_MOUSE_POS):
-                    print("working!")
-                
-                if VILLAIN.checkForInput(CHAR_MOUSE_POS):
-                    print("working!")
-            
-            pygame.display.update()
-
 #Credits button
 
 def credits():
@@ -190,7 +130,7 @@ def main_menu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    char_menu()
+                    dialogue()
                 if CREDITS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     credits()
                 if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS): #if pressing the quit button

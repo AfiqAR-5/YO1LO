@@ -7,7 +7,7 @@ bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
 sadbgm = pygame.mixer.Sound("assets/sadbgm.mp3")
 introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
 speed = 0
-strength = 1
+strength = 0
 sinful = 0
 righteous = 0
 
@@ -36,7 +36,7 @@ def villain(xpos,ypos):
     return SCREEN.blit(villain,villain_rect)
 
 def guard(xpos,ypos):
-    guard = pygame.image.load('assets/villain.png')
+    guard = pygame.image.load('assets/securityguard.png')
     guard_rect = guard.get_rect(x=xpos,y=ypos)
 
     return SCREEN.blit(guard,guard_rect)
@@ -295,11 +295,11 @@ def choice5():
 
         c1 = pygame.image.load('assets/cbutton.png')
         scaled_c1 = pygame.transform.scale(c1, (500,70))
-        c1_rect = scaled_c1.get_rect(x=400,y=228)
+        c1_rect = scaled_c1.get_rect(x=400,y=295)
 
         c2 = pygame.image.load('assets/cbutton.png')
         scaled_c2 = pygame.transform.scale(c2, (500,70))
-        c2_rect = scaled_c2.get_rect(x=400,y=328)
+        c2_rect = scaled_c2.get_rect(x=400,y=395)
 
         SCREEN.blit(scaled_bg, bg_rect)
         SCREEN.blit(scaled_c1, c1_rect)
@@ -309,19 +309,11 @@ def choice5():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
         
-<<<<<<< HEAD
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 265), 
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 330), 
                             text_input="Pry open the vent", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 365), 
-                            text_input="Resort to violence", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
-=======
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 365), 
-                            text_input="Pry open the vent", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
-
-        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 465), 
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 430), 
                             text_input="Resort to violence", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
->>>>>>> main
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
@@ -3417,8 +3409,8 @@ def dialogue36v2():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                if active_message == 1:
-                    choice5()
+                if active_message == 8:
+                    dialogue37()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
@@ -3430,14 +3422,9 @@ def dialogue36v3():
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Beep! The sound of the door unlocked after scanning the keycard.',
-                'MC : CJ\'s right though. Escaping a prison is easy.',
+                'MC : CJ\'s right though. Escaping a prison IS easy.',
                 'MC : Now, moving on to the next phase.',
                 'MC : Finding the master keycard.',
-                'MC kicks behind the guard\'s knee, forcing her to kneel down',
-                'Then, a powerful uppercut from MC knocks out the guard.',
-                'MC : That was too easy. Expected more from her.',
-                'MC : Have to thank CJ.', 
-                'MC : Haven\'t got a good fight like this in a long time.',
                 'MC enters the security room...',
                 '...')
     snip = font.render('', True, 'white')
@@ -3489,8 +3476,8 @@ def dialogue36v3():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                if active_message == 1:
-                    choice5()
+                if active_message == 5:
+                    dialogue37()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
@@ -3520,11 +3507,7 @@ def dialogue37():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-<<<<<<< HEAD
-        bg = pygame.image.load('assets/securitydoor.jpg')
-=======
         bg = pygame.image.load('assets/securityroom.jpg')
->>>>>>> main
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -3558,11 +3541,7 @@ def dialogue37():
                     else:
                         counter = speed * len(message)
                 if active_message == 1:
-<<<<<<< HEAD
-                    choice5()
-=======
                     dialogue38()
->>>>>>> main
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
@@ -3592,11 +3571,7 @@ def dialogue38():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-<<<<<<< HEAD
-        bg = pygame.image.load('assets/securitydoor.jpg')
-=======
         bg = pygame.image.load('assets/securityroom.jpg')
->>>>>>> main
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -3607,8 +3582,8 @@ def dialogue38():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        mc(270,1)
-        guard(670,130)
+        mc(250,1)
+        guard(550,170)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -3638,4 +3613,3 @@ def dialogue38():
 
         pygame.display.flip()
 
-choice5()
