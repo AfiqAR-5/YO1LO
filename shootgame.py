@@ -1,5 +1,5 @@
-import pygame, sys
-from sys import exit
+import pygame
+import sys
 import math
 import random
 from settingsshoot import *
@@ -32,7 +32,7 @@ class Player(pygame.sprite.Sprite):
         self.pos = pygame.math.Vector2(PLAYER_START_X, PLAYER_START_Y)
         self.image = pygame.transform.rotozoom(pygame.image.load("assets/Player11.png").convert_alpha(), 0, PLAYER_SIZE)
         self.base_player_image = self.image
-        self.hitbox_rect = self.base_player_image.get_rect(center = self.pos)
+        self.hitbox_rect = self.base_player_image.get_rect(center=self.pos)
         self.rect = self.hitbox_rect.copy()
         self.speed = PLAYER_SPEED
         self.shoot = False
@@ -41,6 +41,7 @@ class Player(pygame.sprite.Sprite):
         self.max_health = PLAYER_HEALTH
         self.health = self.max_health
         self.health_cooldown = 0
+        self.angle = 0  # Initialize the angle attribute
 
     def player_rotation(self):
         self.mouse_coords = pygame.mouse.get_pos()
@@ -48,7 +49,7 @@ class Player(pygame.sprite.Sprite):
         self.y_change_mouse_player = (self.mouse_coords[1] - HEIGHT // 2)
         self.angle = math.degrees(math.atan2(self.y_change_mouse_player, self.x_change_mouse_player))
         self.image = pygame.transform.rotate(self.base_player_image, -self.angle)
-        self.rect = self.image.get_rect(center = self.hitbox_rect.center)
+        self.rect = self.image.get_rect(center=self.hitbox_rect.center)
 
     def user_input(self):
         self.velocity_x = 0
@@ -65,7 +66,7 @@ class Player(pygame.sprite.Sprite):
         if keys[pygame.K_a]:
             self.velocity_x = -self.speed
 
-        if self.velocity_x !=0 and self.velocity_y != 0: #moving diagonally
+        if self.velocity_x != 0 and self.velocity_y != 0:  # moving diagonally
             self.velocity_x /= math.sqrt(2)
             self.velocity_y /= math.sqrt(2)
 
@@ -85,14 +86,13 @@ class Player(pygame.sprite.Sprite):
 
             shoot_sound.play()
 
-
     def move(self):
         self.pos += pygame.math.Vector2(self.velocity_x, self.velocity_y)
 
-        # Ensure the player statys within the screen boundaries
+        # Ensure the player stays within the screen boundaries
         self.pos.x = max(0, min(self.pos.x, WIDTH))
         self.pos.y = max(0, min(self.pos.y, HEIGHT))
-        
+
         self.hitbox_rect.center = self.pos
         self.rect.center = self.hitbox_rect.center
 
@@ -123,6 +123,7 @@ class Player(pygame.sprite.Sprite):
         pygame.mixer.music.stop()
         gta_sound.play()
         show_death_screen()
+
 
 
 class Bullet(pygame.sprite.Sprite):
@@ -158,10 +159,12 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self, position):
         super().__init__(enemy_group, all_sprites_group)
         self.image = pygame.image.load("assets/thug.png").convert_alpha()
-        self.image = pygame.transform.rotozoom(self.image, 0, 2)
+        self.image = pygame.transform.rotozoom(self.image, 0, 0.30)
 
         self.rect = self.image.get_rect()
         self.rect.center = position
+
+        self.hitbox_rect = self.rect.inflate(-self.rect.width * 0.3, -self.rect.height * 0.3)
 
         self.direction = pygame.math.Vector2()
         self.velocity = pygame.math.Vector2()
@@ -189,6 +192,8 @@ class Enemy(pygame.sprite.Sprite):
 
         self.rect.centerx = self.position.x
         self.rect.centery = self.position.y
+
+        self.hitbox_rect.center = self.rect.center
 
     def draw_health_bar(self, surface):
         bar_width = 100
@@ -246,7 +251,7 @@ def create_enemies(num_enemies):
         all_sprites_group.add(thug)
 
 # create how many enemies
-create_enemies(1)
+create_enemies(5)
 
 all_sprites_group.add(player)
 
@@ -275,36 +280,53 @@ def check_stage_cleared():
 
         clock.tick(60)
 
-waiting_for_key = False
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
+def countdown():
+    font = pygame.font.Font("assets/ARCADECLASSIC.TTF", 50)
+    for i in range(3, 0, -1):
+        screen.blit(background, (0, 0))
+        text = font.render(str(i), True, (255, 255, 255))
+        text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        screen.blit(text, text_rect)
+        pygame.display.flip()
+        pygame.time.wait(1000)
 
-    screen.blit(background, (0, 0))
-    
-    all_sprites_group.draw(screen)
-    all_sprites_group.update()
+def shootgame():
+    waiting_for_key = False
 
-    player.draw_health_bar(screen) # Player's health Bar
+    countdown()
 
-    # collisions between player & enemies
-    if pygame.sprite.spritecollide(player, enemy_group, False):
-        if player.health_cooldown <= 0:
-            player.health -= 10
-            print(f"Player hit! Cirrent health: {player.health}")
-            player.health_cooldown = 1000
-            collision_sound.play()
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
-    for enemy in enemy_group:
-        enemy.draw_health_bar(screen)
+        screen.blit(background, (0, 0))
+        
+        all_sprites_group.draw(screen)
+        all_sprites_group.update()
 
-    player.health_cooldown -= clock.get_time()
+        player.draw_health_bar(screen) # Player's health Bar
 
-    if len(enemy_group) == 0 and not waiting_for_key:
-        check_stage_cleared()
-        waiting_for_key = True
+        # collisions between player & enemies
+        if pygame.sprite.spritecollide(player, enemy_group, False):
+            if player.health_cooldown <= 0:
+                player.health -= 10
+                print(f"Player hit! Cirrent health: {player.health}")
+                player.health_cooldown = 1000
+                collision_sound.play()
 
-    pygame.display.update()
-    clock.tick(FPS)
+        for enemy in enemy_group:
+            enemy.draw_health_bar(screen)
+
+        player.health_cooldown -= clock.get_time()
+
+        if len(enemy_group) == 0 and not waiting_for_key:
+            check_stage_cleared()
+            waiting_for_key = True
+
+        pygame.display.update()
+        clock.tick(FPS)
+
+if __name__ == "__main__":
+    shootgame()
