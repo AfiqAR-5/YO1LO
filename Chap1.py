@@ -8,6 +8,7 @@ sadbgm = pygame.mixer.Sound("assets/sadbgm.mp3")
 introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
 speed = 0
 strength = 0
+strength = 0
 sinful = 0
 righteous = 0
 
@@ -36,6 +37,7 @@ def villain(xpos,ypos):
     return SCREEN.blit(villain,villain_rect)
 
 def guard(xpos,ypos):
+    guard = pygame.image.load('assets/securityguard.png')
     guard = pygame.image.load('assets/securityguard.png')
     guard_rect = guard.get_rect(x=xpos,y=ypos)
 
@@ -296,9 +298,11 @@ def choice5():
         c1 = pygame.image.load('assets/cbutton.png')
         scaled_c1 = pygame.transform.scale(c1, (500,70))
         c1_rect = scaled_c1.get_rect(x=400,y=295)
+        c1_rect = scaled_c1.get_rect(x=400,y=295)
 
         c2 = pygame.image.load('assets/cbutton.png')
         scaled_c2 = pygame.transform.scale(c2, (500,70))
+        c2_rect = scaled_c2.get_rect(x=400,y=395)
         c2_rect = scaled_c2.get_rect(x=400,y=395)
 
         SCREEN.blit(scaled_bg, bg_rect)
@@ -308,10 +312,10 @@ def choice5():
         timer.tick(60)
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
-        
+
         CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 330), 
                             text_input="Pry open the vent", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
-
+         
         CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 430), 
                             text_input="Resort to violence", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
@@ -417,6 +421,7 @@ def chap1_steps():
     run = True
     while run:
 
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
@@ -1613,7 +1618,7 @@ def dialogue16v2():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/mcpulldown.jpg')
+        bg = pygame.image.load('assets/mcpullup.jpg')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -2074,7 +2079,7 @@ def dialogue21():
                     else:
                         counter = speed * len(message)
                 if active_message == 16:
-                    chap1v3_opening
+                    chap1v3_opening()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
@@ -2310,6 +2315,7 @@ def dialogue24():
 
     while run:
 
+
         timer = pygame.time.Clock()
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
@@ -2501,6 +2507,7 @@ def dialogue26():
     message = messages[active_message]
 
     run = True
+
 
     while run:
 
@@ -2958,6 +2965,7 @@ def dialogue32():
 
     run = True
 
+
     while run:
 
         timer = pygame.time.Clock()
@@ -3411,6 +3419,8 @@ def dialogue36v2():
                         counter = speed * len(message)
                 if active_message == 8:
                     dialogue37()
+                if active_message == 8:
+                    dialogue37()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (280, 570))
@@ -3422,6 +3432,7 @@ def dialogue36v3():
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Beep! The sound of the door unlocked after scanning the keycard.',
+                'MC : CJ\'s right though. Escaping a prison IS easy.',
                 'MC : CJ\'s right though. Escaping a prison IS easy.',
                 'MC : Now, moving on to the next phase.',
                 'MC : Finding the master keycard.',
@@ -3476,6 +3487,8 @@ def dialogue36v3():
                         counter = 0
                     else:
                         counter = speed * len(message)
+                if active_message == 5:
+                    dialogue37()
                 if active_message == 5:
                     dialogue37()
 
@@ -3556,7 +3569,7 @@ def dialogue38():
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
-    speed = 2
+    speed = 1
     active_message = 0
     message = messages[active_message]
 
@@ -3582,6 +3595,8 @@ def dialogue38():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(250,1)
+        guard(550,170)
         mc(250,1)
         guard(550,170)
         SCREEN.blit(scaled_texbox, textbox_rect)
@@ -3613,3 +3628,4 @@ def dialogue38():
 
         pygame.display.flip()
 
+chap1v5_opening()
