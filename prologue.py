@@ -1455,5 +1455,3 @@ def prologue():
                     chap1_opening()
                     
         pygame.display.flip()
-
-prologue()
