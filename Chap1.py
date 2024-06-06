@@ -3627,5 +3627,3 @@ def dialogue38():
         screen.blit(snip, (280, 570))
 
         pygame.display.flip()
-
-chap1v5_opening()
