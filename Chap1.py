@@ -35,6 +35,12 @@ def villain(xpos,ypos):
 
     return SCREEN.blit(villain,villain_rect)
 
+def guard(xpos,ypos):
+    guard = pygame.image.load('assets/villain.png')
+    guard_rect = guard.get_rect(x=xpos,y=ypos)
+
+    return SCREEN.blit(guard,guard_rect)
+
 def mcdark():
      mc = pygame.image.load('assets/mcdark.png')
      mc_rect = mc.get_rect(x=270,y=1)
@@ -3424,6 +3430,7 @@ def dialogue36v3():
                 'MC : That was too easy. Expected more from her.',
                 'MC : Have to thank CJ.', 
                 'MC : Haven\'t got a good fight like this in a long time.',
+                'MC enters the security room...',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
@@ -3486,15 +3493,7 @@ def dialogue37():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('Shoot! There\'s guard!',
-                'MC : CJ\'s right though. Escaping a prison is easy.',
-                'MC : Now, moving on to the next phase.',
-                'MC : Finding the master keycard.',
-                'MC kicks behind the guard\'s knee, forcing her to kneel down',
-                'Then, a powerful uppercut from MC knocks out the guard.',
-                'MC : That was too easy. Expected more from her.',
-                'MC : Have to thank CJ.', 
-                'MC : Haven\'t got a good fight like this in a long time.',
+    messages = ('MC : Shoot! There\'s guard!',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
@@ -3524,6 +3523,72 @@ def dialogue37():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(270,1)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                if active_message == 1:
+                    choice5()
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (280, 570))
+
+        pygame.display.flip()
+
+def dialogue38():
+    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('MC : Shoot! There\'s guard!',
+                '...')
+    snip = font.render('', True, 'white')
+    counter = 0
+    speed = 2
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+
+    while run:
+
+        timer = pygame.time.Clock()
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/securitydoor.jpg')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        mc(270,1)
+        guard(670,130)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
