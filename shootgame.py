@@ -2,6 +2,7 @@ import pygame
 import sys
 import math
 import random
+from button import Button
 from settingsshoot import *
 
 pygame.init()
@@ -25,6 +26,9 @@ gta_sound = pygame.mixer.Sound("assets/gta.wav")
 
 #backgroundimage
 background = pygame.transform.scale(pygame.image.load("assets/warehouse.png").convert(), (WIDTH, HEIGHT))
+
+def textbutton_font(size):
+    return pygame.font.Font("assets/ARCADE.TTF", size)
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
@@ -229,7 +233,7 @@ def show_death_screen():
                 run = False
 
         screen.fill((0, 0, 0))  # Black background
-        font = pygame.font.Font("assets/getfont.ttf", 50)
+        font = pygame.font.Font("assets/getfont.ttf", 100)
         text = font.render("You Are DEAD!", True, (255, 0, 0))
         text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         screen.blit(text, text_rect)
@@ -263,25 +267,42 @@ def check_stage_cleared():
                 run = False
                 pygame.quit()
                 sys.exit()
+            
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if CHOICE1.checkForInput(MENU_MOUSE_POS):
+                    run == False
 
-        popup_surface = pygame.Surface((640, 360))
-        popup_surface.fill((0, 0, 0))
-        popup_rect = popup_surface.get_rect(center=(WIDTH // 2, HEIGHT // 2))
+        bg = pygame.image.load('assets/Background.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
 
         font = pygame.font.Font("assets/ARCADECLASSIC.TTF", 50)
-        text = font.render("Mission Complete!", True, (255, 255, 255))
-        text_rect = text.get_rect(center=(325, 180))
+        text = font.render("Mission  Complete", True, (255, 255, 255))
+        text_rect = text.get_rect(center=(640, 380))
 
-        popup_surface.blit(text, text_rect)
+        c1 = pygame.image.load('assets/cbutton.png')
+        scaled_c1 = pygame.transform.scale(c1, (300,70))
+        c1_rect = scaled_c1.get_rect(x=480,y=600)
 
-        screen.blit(popup_surface, popup_rect)
-
-        pygame.display.flip()
+        scaled_bg.blit(text, text_rect)
+        screen.blit(scaled_bg, bg_rect)
+        screen.blit(scaled_c1, c1_rect)
 
         clock.tick(60)
 
+        MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
+        
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(630, 637), 
+                            text_input="CONTINUE STORY", font=textbutton_font(21), base_color="white", hovering_color="#FF3131")
+        
+        for button in [CHOICE1]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(screen)
+
+        pygame.display.flip()
+
 def countdown():
-    font = pygame.font.Font("assets/ARCADECLASSIC.TTF", 50)
+    font = pygame.font.Font("assets/ARCADECLASSIC.TTF", 100)
     for i in range(3, 0, -1):
         screen.blit(background, (0, 0))
         text = font.render(str(i), True, (255, 255, 255))

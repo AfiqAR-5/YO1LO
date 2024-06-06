@@ -952,8 +952,6 @@ def choice4():
         SCREEN.blit(scaled_lover, lover_rect)
         SCREEN.blit(scaled_c2, c2_rect)
         
-    
-
         timer.tick(60)
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
