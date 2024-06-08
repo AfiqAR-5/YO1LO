@@ -981,5 +981,4 @@ def choice4():
                     pausemenu()
 
             pygame.display.flip()
-
-choice4()
+chap2_opening()

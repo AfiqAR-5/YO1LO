@@ -473,8 +473,8 @@ def chap1():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('MC : My belly really hurting right now...',
-                'MC : If NPC didn\'t delay my meal, my mood wouldn\'t get that bad...',
+    messages = ('MC : Damn, I\'m hungry...',
+                'MC : It\'s all because of NPC...',
                 '...')
     snip = font.render('', True, 'black')
     counter = 0
@@ -600,10 +600,10 @@ def dialogue3():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('MC takes a food tray and hands the plate to the server.',
+    messages = ('He hands over the food tray to the server.',
                 'The splatting sound coming from the soggy meal can be heard.',
-                'MC : ...',
-                'MC : Well, well, well... a new menu today huh?',
+                'Roman : ...',
+                'Roman : Well, well, well... a new menu today huh?',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
@@ -664,9 +664,9 @@ def dialogue4():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('MC : Even if it looks like somebody\'s shit...',
+    messages = ('MC : Even if it looks like somebody\'s puke...',
                 'MC : ...I\'m just gonna ignore it.',
-                'MC : Lowkey looks good though.',
+                'MC : But the smell\'s appetizing.',
                 'MC : Yo, NPC! Come on here!',
                 '...')
     snip = font.render('', True, 'white')
@@ -3565,7 +3565,33 @@ def dialogue38():
     font = pygame.font.Font('assets/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('MC : Shoot! There\'s guard!',
+    messages = ('Guard : Hey! Who are you? What are you doing here?',
+                'Roman : I\'m your new partner, and I\'ll be working here.',
+                'Guard : Is that so? Alright.',
+                'Roman : Yeah...',
+                'Guard : Okay.',
+                'Roman : ...',
+                'Guard : ...',
+                'Roman : ...',
+                'Guard : *tugs Roman\'s collar* You think I wouldn\'t notice?',
+                'Roman : Bet ya don\'t!',
+                'Roman shoves the guard into a desk.',
+                'The guard recovers quickly and immediately throws a punch',
+                'Roman dodges the punch and retaliates with a swift kick.',
+                'Guard : *grunts in pain* Ugh... son of a mother!',
+                'The guard grabs Alex\'s leg, pulling them off balance.',
+                'Roman falls but rolls away, grabbing a nearby chair to use as a shield.',
+                'Roman : Persistent, aren\'t you?',
+                'Guard : *draws a baton* It\'s my job. Now give up!',
+                'Roman dodges the baton strike and uses the chair to disarm the guard.',
+                'Guard : *staggers back, reaching for a taser on his belt* You\'re making a big mistake!',
+                'Alex throws the chair at the guard, disarming him of the taser.',
+                'Guard : *frustrated, lunges towards Roman* You\'re going down!',
+                'Alex: (catches the guard\'s arm, twisting it and pinning him against the wall) "Not today. Sleep tight.',
+
+               ' Guard: (struggles briefly, then slumps as Alex applies a chokehold) "Urgh... you...',
+
+                'Alex: (lets the guard slide to the floor, unconscious) "I did warn you.',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
@@ -3627,3 +3653,5 @@ def dialogue38():
         screen.blit(snip, (280, 570))
 
         pygame.display.flip()
+
+chap1_opening()
