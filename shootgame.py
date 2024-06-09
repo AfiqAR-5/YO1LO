@@ -13,9 +13,7 @@ pygame.display.set_caption("YO!LO")
 clock = pygame.time.Clock()
 
 # Background Sound
-pygame.mixer.music.load("assets/xiaolao.wav")
-pygame.mixer.music.play(-1)
-pygame.mixer.music.set_volume(0.5)
+shootbgm = pygame.mixer.Sound("assets/xiaolao.wav")
 
 #loadsoundeffect
 shoot_sound = pygame.mixer.Sound("assets/shoot_sound.wav")
@@ -277,6 +275,7 @@ def check_stage_cleared():
         screen.blit(popup_surface, popup_rect)
 
         pygame.display.flip()
+        shootgame.stop()
 
         clock.tick(60)
 
@@ -327,6 +326,7 @@ def shootgame():
 
         pygame.display.update()
         clock.tick(FPS)
+        shootgame.play()
 
 if __name__ == "__main__":
     shootgame()
