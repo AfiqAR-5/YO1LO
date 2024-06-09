@@ -1826,6 +1826,78 @@ def chap2_act2():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    dialogue13()
+
+        pygame.display.flip()
+
+def dialogue13():
+
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('Luna : What a mess!',
+                '...')
+    
+    snip = font.render('', True, 'black')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+    while run:
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/Chapter2/houselover.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+        lover = pygame.image.load('assets/Chapter2/lover3.png')
+        scaled_lover = pygame.transform.scale(lover, (400,450))
+        lover_rect = scaled_lover.get_rect(x=460,y=145)
+
+        textbox = pygame.image.load('assets/textboxlover.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,450))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=410)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        SCREEN.blit(scaled_lover, lover_rect)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 14:
+                        choice4()
+    
+    
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (295, 600))
 
         pygame.display.flip()
 
