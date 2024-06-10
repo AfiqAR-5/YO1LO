@@ -1837,7 +1837,11 @@ def dialogue13():
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('Luna : What a mess!',
+    messages = ('Luna : What is this place?',
+                'Luna : Where is that warehouse?',
+                '<Luna walked around looking for>',
+                '<Where Emir\'s warehouse was located>',
+                '<She walked around until she suddenly arrived at a lake>',
                 '...')
     
     snip = font.render('', True, 'black')
@@ -1854,13 +1858,13 @@ def dialogue13():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/Chapter2/houselover.png')
+        bg = pygame.image.load('assets/Chapter2/jungle.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
-        lover = pygame.image.load('assets/Chapter2/lover3.png')
-        scaled_lover = pygame.transform.scale(lover, (400,450))
-        lover_rect = scaled_lover.get_rect(x=460,y=145)
+        lover = pygame.image.load('assets/Chapter2/loverOTW.png')
+        scaled_lover = pygame.transform.scale(lover, (350,400))
+        lover_rect = scaled_lover.get_rect(x=480,y=200)
 
         textbox = pygame.image.load('assets/textboxlover.png')
         scaled_texbox = pygame.transform.scale(textbox, (850,450))
@@ -1892,8 +1896,8 @@ def dialogue13():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                    if active_message == 14:
-                        choice4()
+                    if active_message == 5:
+                        dialogue14()
     
     
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -1901,5 +1905,308 @@ def dialogue13():
 
         pygame.display.flip()
 
+def dialogue14():
+
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('<Where on the other side stood a warehouse>',
+                'Luna : Is that Emir\'s warehouse?',
+                '<She asked herself>',
+                '<Luna looked around the area>',
+                '<Examining and investigating to see if there was anyone around>',
+                '<Then she approached the warehouse>',
+                'Luna : Is Roman here?',
+                '<Suddenly, Luna saw Emir\'s henchmen coming out of the warehouse>',
+                'Luna : These must be Emir\'s henchmen.',
+                'Luna : Emir and Roman must be inside.',
+                '<Abruptly, Luna heard a voice coming from behind her>',
+                '<She quickly hid in the nearest bushes>',
+                '<Luna saw many henchmen coming from behind earlier>',
+                'Luna : Oooohhh Freak!',
+                'Luna : There are so many of them!',
+                '...')
+    
+    snip = font.render('', True, 'black')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+    while run:
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/Chapter2/Warehousecari.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+        lover = pygame.image.load('assets/Chapter2/loverOTW.png')
+        scaled_lover = pygame.transform.scale(lover, (350,400))
+        lover_rect = scaled_lover.get_rect(x=480,y=200)
+
+        textbox = pygame.image.load('assets/textboxlover.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,450))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=410)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        SCREEN.blit(scaled_lover, lover_rect)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 15:
+                        dialogue15()
+    
+    
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (295, 600))
+
+        pygame.display.flip()
+
+def dialogue15():
+
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('<A henchman suddenly approached the bushes>',
+                '...')
+    
+    snip = font.render('', True, 'black')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+    while run:
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/Chapter2/Warehousecari.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+        lover = pygame.image.load('assets/Chapter2/konco2.png')
+        scaled_lover = pygame.transform.scale(lover, (350,400))
+        lover_rect = scaled_lover.get_rect(x=480,y=200)
+
+        textbox = pygame.image.load('assets/textboxlover.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,450))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=410)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        SCREEN.blit(scaled_lover, lover_rect)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 1:
+                        dialogue16()
+    
+    
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (295, 600))
+
+        pygame.display.flip()
+
+def dialogue16():
+
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
+    screen = pygame.display.set_mode ([1280, 720])
+    timer = pygame.time.Clock()
+    messages = ('<Luna is terrified>',
+                '<She needs to do something to avoid getting caught>',
+                '<But she has no idea what to do>',
+                'Luna : OH GOD... OH GOD...',
+                '<The henchman is getting closer to Luna>',
+                '<If she acts recklessly,>',
+                '<She\'ll attract the attention of many henchmen there>',
+                '<But she only has two options at that moment>',
+                '<Either assassinate him quietly or open fire>',
+                'Luna : Fuc* it!',
+                '...')
+    
+    snip = font.render('', True, 'black')
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+
+    run = True
+    while run:
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/Chapter2/Warehousecari.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+        lover = pygame.image.load('assets/Chapter2/loverOTW.png')
+        scaled_lover = pygame.transform.scale(lover, (350,400))
+        lover_rect = scaled_lover.get_rect(x=480,y=200)
+
+        textbox = pygame.image.load('assets/textboxlover.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,450))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=410)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        PAUSE.update(SCREEN)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        SCREEN.blit(scaled_lover, lover_rect)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 10:
+                        choice5()
+    
+    
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (295, 600))
+
+        pygame.display.flip()
+
+def choice5():
+    while True:
+
+        timer = pygame.time.Clock()
+
+        current  = textbutton_font(24).render("CHOOSE THE BEST DECISION", True, "White")
+        current_rect = current.get_rect(x=485,y=625)
+
+        bg = pygame.image.load('assets/Chapter2/houseloverblur.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+        lover = pygame.image.load('assets/Chapter2/loverOTWblur.png')
+        scaled_lover = pygame.transform.scale(lover, (350,500))
+        lover_rect = scaled_lover.get_rect(x=480,y=100)
+
+        textbox = pygame.image.load('assets/textboxlover.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,450))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=410)
+
+        c1 = pygame.image.load('assets/cbutton.png')
+        scaled_c1 = pygame.transform.scale(c1, (500,70))
+        c1_rect = scaled_c1.get_rect(x=400,y=250)
+
+        c2 = pygame.image.load('assets/cbutton.png')
+        scaled_c2 = pygame.transform.scale(c2, (500,70))
+        c2_rect = scaled_c2.get_rect(x=400,y=435)
+
+        SCREEN.blit(scaled_bg, bg_rect)
+        SCREEN.blit(scaled_lover, lover_rect)
+        SCREEN.blit(scaled_c1, c1_rect)
+        SCREEN.blit(scaled_c2, c2_rect)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+        SCREEN.blit(current, current_rect)
+
+        timer.tick(60)
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
+
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650,290), 
+                            text_input="ASSASSINATE STEALTHILY", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
+
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 475), 
+                            text_input="CHARGE AT THEM", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        for button in [PAUSE,CHOICE1,CHOICE2,]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+
+            if event.type == pygame.QUIT: #if pressing x button on window screen
+                pygame.quit()
+                sys.exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if CHOICE1.checkForInput(MENU_MOUSE_POS):
+                    print('ASSASSINATE STEALTHILY CHOOSED')
+                    dialogue3()
+                
+                if CHOICE2.checkForInput(MENU_MOUSE_POS):
+                    print('CHARGE AT THEM CHOOSED')
+                    dialogue3()
+
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+
+            pygame.display.flip()
+
+
 if __name__ == "__main__":
-    choice1()
+    dialogue1()
