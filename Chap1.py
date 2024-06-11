@@ -3,10 +3,10 @@ from config import *
 from button import Button
 pygame.init()
 
-bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
-sadbgm = pygame.mixer.Sound("assets/sadbgm.mp3")
-introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
-steps = pygame.mixer.Sound("assets/footsteps.mp3")
+bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
+sadbgm = pygame.mixer.Sound("assets/Audio/sadbgm.mp3")
+introbgm = pygame.mixer.Sound("assets/Audio/introbgm.mp3")
+steps = pygame.mixer.Sound("assets/Audio/footsteps.mp3")
 speed = 0
 strength = 0
 strength = 0
@@ -14,10 +14,10 @@ sinful = 0
 righteous = 0
 
 def textbutton_font(size):   
-    return pygame.font.Font("assets/ARCADE.TTF", size)
+    return pygame.font.Font("assets/Font/ARCADE.TTF", size)
 
 def prologuefont(size):
-    return pygame.font.Font("assets/Cinzel.ttf", size)
+    return pygame.font.Font("assets/Font/Cinzel.ttf", size)
 
 def mc(xpos,ypos):
      mc = pygame.image.load('assets/mc.png')

@@ -979,8 +979,5 @@ def choice4():
                     pausemenu()
 
             pygame.display.flip()
-<<<<<<< HEAD
-=======
             
->>>>>>> main
 chap2_opening()
