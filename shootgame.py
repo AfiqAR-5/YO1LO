@@ -5,6 +5,7 @@ import random
 from config import *
 from button import Button
 from settingsshoot import *
+from Charge import dialogue1v1
 
 pygame.init()
 
@@ -382,8 +383,7 @@ def ending1():
                 'Perhaps Roman won\'t know that she\'s already dead',
                 'Will Roman look for her again after this?',
                 'It\'s pointless because Luna is dead',
-                'HMMM',
-                '...',
+                'HMMM...',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
@@ -412,7 +412,7 @@ def ending1():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                    if active_message == 11:
+                    if active_message == 10:
                         pygame.mixer.music.stop()
                         retry()
     
@@ -2196,11 +2196,11 @@ def choice5():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if CHOICE1.checkForInput(MENU_MOUSE_POS):
                     print('ASSASSINATE STEALTHILY CHOOSED')
-                    dialogue3()
+                    dialogue1v1()
                 
                 if CHOICE2.checkForInput(MENU_MOUSE_POS):
                     print('CHARGE AT THEM CHOOSED')
-                    dialogue3()
+                    dialogue1v1()
 
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
