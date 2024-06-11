@@ -6,6 +6,7 @@ pygame.init()
 bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
 sadbgm = pygame.mixer.Sound("assets/sadbgm.mp3")
 introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
+steps = pygame.mixer.Sound("assets/footsteps.mp3")
 speed = 0
 strength = 0
 strength = 0
@@ -412,6 +413,7 @@ def chap1_steps():
     messages = ('*thud* *thud*',
                 'Footsteps can be heard going into the cafeteria...',
                 '...')
+    steps.play(1)
     snip = font.render('', True, 'black')
     counter = 0
     speed = 1
