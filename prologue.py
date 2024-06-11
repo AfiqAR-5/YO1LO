@@ -4,16 +4,16 @@ from button import Button
 from Chap1 import chap1_opening
 pygame.init()
 
-bgmusic = pygame.mixer.Sound("assets/bgmtwo.mp3")
-sadbgm = pygame.mixer.Sound("assets/sadbgm.mp3")
-introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
+bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
+sadbgm = pygame.mixer.Sound("assets/Audio/sadbgm.mp3")
+introbgm = pygame.mixer.Sound("assets/Audio/introbgm.mp3")
 gaycounter = 0
 
 def textbutton_font(size):   
-    return pygame.font.Font("assets/ARCADE.TTF", size)
+    return pygame.font.Font("assets/Font/ARCADE.TTF", size)
 
 def prologuefont(size):
-    return pygame.font.Font("assets/Cinzel.ttf", size)
+    return pygame.font.Font("assets/Font/Cinzel.ttf", size)
 
 def mc(xpos,ypos):
      mc = pygame.image.load('assets/mc.png')
@@ -335,7 +335,7 @@ def choice3():
             pygame.display.flip()
 
 def dialogue1():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('...',
@@ -383,10 +383,10 @@ def dialogue1():
 
         pygame.display.flip()
         introbgm.stop()
-        sadbgm.play()
+        sadbgm.play(1)
 
 def dialogue1v2():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Whoa! What\'s with the bright light!!!',
@@ -437,7 +437,7 @@ def dialogue1v2():
         pygame.display.flip()
 
 def dialogue1v3():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Hmm...?',
@@ -506,7 +506,7 @@ def dialogue1v3():
         pygame.display.flip()
 
 def dialogue2():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('MC : Huhhhh!?',
@@ -573,7 +573,7 @@ def dialogue2():
         pygame.display.flip()
 
 def dialogue3():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('MC : Hey NPC, wake up...',
@@ -646,10 +646,10 @@ def dialogue3():
 
         pygame.display.flip()
         sadbgm.stop()
-        bgmusic.play()
+        bgmusic.play(1)
 
 def dialogue4():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('NPC : Self-proclaimed \'good friend\' huh?',
@@ -714,7 +714,7 @@ def dialogue4():
         pygame.display.flip()
 
 def dialogue4v2():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('NPC : Alright bro, c\'mere',
@@ -789,7 +789,7 @@ def dialogue4v2():
         pygame.display.flip()
 
 def dialogue5():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('NPC : W-what!? Ugh... I didn\'t ask you to play along!',
@@ -857,7 +857,7 @@ def dialogue5():
         pygame.display.flip()
 
 def dialogue5v2():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('NPC : Yeah... That\'s more like it.',
@@ -926,7 +926,7 @@ def dialogue5v2():
         pygame.display.flip()
 
 def dialogue5v3():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('NPC chokeholded MC and covered his mouth.',
@@ -991,7 +991,7 @@ def dialogue5v3():
         pygame.display.flip()
 
 def dialogue6():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('MC : Hmm... You\'re right though.',
@@ -1059,10 +1059,10 @@ def dialogue6():
 
         pygame.display.flip()
         bgmusic.stop()
-        introbgm.play()
+        introbgm.play(1)
 
 def dialogue7():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('NPC : That\'s it. You\'re done.',
@@ -1124,10 +1124,10 @@ def dialogue7():
 
         pygame.display.flip()
         introbgm.stop()
-        bgmusic.play()
+        bgmusic.play(1)
 
 def dialogue7v2():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('NPC : Ya better think it through.',
@@ -1195,7 +1195,7 @@ def dialogue7v2():
         pygame.display.flip()
 
 def dialogue7v3():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('NPC : You\'re really a boring person...',
@@ -1262,7 +1262,7 @@ def dialogue7v3():
         pygame.display.flip()
 
 def dialogue8():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('A mysterious person watches MC from afar...',
@@ -1324,7 +1324,7 @@ def dialogue8():
         pygame.display.flip()
 
 def d7troll():
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('> pygame.quit()',
