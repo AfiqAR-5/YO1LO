@@ -10,8 +10,8 @@ pygame.mixer.init()
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("Luna Side Story")
 
-bgsound = pygame.mixer.Sound("assets/gta.wav")
-boomsound = pygame.mixer.Sound("assets/shoot_sound.wav")
+bgsound = pygame.mixer.Sound("assets/Audio/gta.wav")
+boomsound = pygame.mixer.Sound("assets/Audio/shoot_sound.wav")
 
 def mc(xpos, ypos):
      mc = pygame.image.load('assets/mc.png')
@@ -32,10 +32,10 @@ def lover(xpos, ypos):
     return SCREEN.blit(lover, lover_rect)
 
 def prologuefont(size):
-    return pygame.font.Font("assets/Cinzel.ttf", size)
+    return pygame.font.Font("assets/Font/Cinzel.ttf", size)
 
 def textbutton_font(size):
-    return pygame.font.Font("assets/ARCADE.TTF", size)
+    return pygame.font.Font("assets/Font/ARCADE.TTF", size)
 
 def pausemenu():
 
@@ -111,11 +111,11 @@ def chap2_opening():
         SCREEN.blit(info,info_rect)
         pygame.draw.rect(SCREEN, 'white', (343, 360, 590, 75))
 
-        text1 = prologuefont(13).render("After Luna failed to convince the MC, she was left alone in this warehouse.", True, "black")
+        text1 = prologuefont(13).render("After Luna failed to convince Roman, she was left alone in this warehouse.", True, "black")
         text1_rect = text1.get_rect(x=350, y=370)
         SCREEN.blit(text1,text1_rect)
 
-        text2 = prologuefont(13).render("She is very upset with MC and is thinking about how to overcome the odds.", True, "black")
+        text2 = prologuefont(13).render("She is very upset with Roman and is thinking about how to overcome the odds.", True, "black")
         text2_rect = text2.get_rect(x=350, y=390)
         SCREEN.blit(text2,text2_rect)
 
@@ -140,7 +140,7 @@ def chap2_opening():
 
 def dialogue1():
 
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Luna : ARRRRGGHHHHHHHHHH!!!',
@@ -151,7 +151,7 @@ def dialogue1():
                 'Luna : Huuuurrrrmmmmmmm!',
                 'Luna : I must do something.',
                 'Luna : I must come up with a new plan to convince him-',
-                'Luna : -that the VILLAIN is the murderer.',
+                'Luna : -that Emir is the murderer.',
                 '...')
     snip = font.render('', True, 'black')
     counter = 0
@@ -220,11 +220,11 @@ def choice1():
 
         lover = pygame.image.load('assets/Chapter2/lover2.png')
         scaled_lover = pygame.transform.scale(lover, (330,500))
-        lover_rect = scaled_lover.get_rect(x=525,y=120)
+        lover_rect = scaled_lover.get_rect(x=515,y=120)
 
         c2 = pygame.image.load('assets/cbutton.png')
         scaled_c2 = pygame.transform.scale(c2, (300,70))
-        c2_rect = scaled_c2.get_rect(x=525,y=600)
+        c2_rect = scaled_c2.get_rect(x=515,y=600)
 
         SCREEN.blit(scaled_bg, bg_rect)
         SCREEN.blit(scaled_lover, lover_rect)
@@ -235,7 +235,7 @@ def choice1():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
         
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(675, 637), 
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(665, 637), 
                             text_input="GO HOME", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
@@ -253,13 +253,13 @@ def choice1():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if CHOICE1.checkForInput(MENU_MOUSE_POS):
-                    chap2_act2()
+                    chap2_act1()
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
 
             pygame.display.flip()
 
-def chap2_act2():
+def chap2_act1():
     timer = pygame.time.Clock()
 
     run = True
@@ -277,7 +277,7 @@ def chap2_act2():
         box_rect = scaled_box.get_rect(x=320,y=250)
         SCREEN.blit(scaled_box, box_rect)
 
-        title = prologuefont(40).render("Chapter II Act 2", True, "White")
+        title = prologuefont(40).render("Chapter II Act I", True, "White")
         title_rect = title.get_rect(x=340, y=265)
         SCREEN.blit(title, title_rect)
 
@@ -285,12 +285,12 @@ def chap2_act2():
         head_rect = head.get_rect(x=343, y=320)
         SCREEN.blit(head,head_rect)
 
-        info = textbutton_font(19).render("Damansare Heights - Mansion - 1:05:58 AM", True, "White")
+        info = textbutton_font(19).render("Damansara Villa - Mansion - 1:05:58 AM", True, "White")
         info_rect = title.get_rect(x=343, y=425)
         SCREEN.blit(info,info_rect)
         pygame.draw.rect(SCREEN, 'white', (343, 360, 590, 45))
 
-        text1 = prologuefont(13).render("Luna seems to have gotten an idea to convince Ieman. Hope still exists for Luna.", True, "black")
+        text1 = prologuefont(13).render("Luna seems to have gotten an idea to convince Roman. Hope still exists for Luna.", True, "black")
         text1_rect = text1.get_rect(x=350, y=362.5)
         SCREEN.blit(text1,text1_rect)
 
@@ -314,7 +314,7 @@ def chap2_act2():
 
 def dialogue2():
 
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Luna : GULPPP... (Drinking Coffee)',
@@ -324,7 +324,7 @@ def dialogue2():
                 'Luna : What\'s so hard for him to believe me?',
                 'Luna : How can I convince him?',
                 'Luna : I feel like I have an idea.',
-                'Luna : I need to think like the VILLAIN.',
+                'Luna : I need to think like Emir.',
                 'Luna : Let me make a plan first.',
                 '...')
     snip = font.render('', True, 'black')
@@ -461,7 +461,7 @@ def choice2():
     
 def dialogue3():
 
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Luna : I feel like this is a solid idea.',
@@ -529,7 +529,7 @@ def dialogue3():
 
 def dialogue4():
 
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('<BOOM> <BOOM> SOUND OF WINDOW BROKEN!!!',
@@ -597,7 +597,7 @@ def dialogue4():
 
 def dialogue5():
 
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Luna : WHO THE HECK IS RAIDING MY HOUSE!!!',
@@ -625,8 +625,8 @@ def dialogue5():
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
         lover = pygame.image.load('assets/Chapter2/lover3.png')
-        scaled_lover = pygame.transform.scale(lover, (300,330))
-        lover_rect = scaled_lover.get_rect(x=500,y=280)
+        scaled_lover = pygame.transform.scale(lover, (400,450))
+        lover_rect = scaled_lover.get_rect(x=460,y=145)
         
         textbox = pygame.image.load('assets/textboxlover.png')
         scaled_texbox = pygame.transform.scale(textbox, (850,450))
@@ -678,11 +678,11 @@ def choice3():
 
         lover = pygame.image.load('assets/Chapter2/lover3.png')
         scaled_lover = pygame.transform.scale(lover, (350,450))
-        lover_rect = scaled_lover.get_rect(x=525,y=180)
+        lover_rect = scaled_lover.get_rect(x=515,y=180)
 
         c2 = pygame.image.load('assets/cbutton.png')
         scaled_c2 = pygame.transform.scale(c2, (300,70))
-        c2_rect = scaled_c2.get_rect(x=525,y=600)
+        c2_rect = scaled_c2.get_rect(x=515,y=600)
 
         SCREEN.blit(scaled_bg, bg_rect)
         SCREEN.blit(scaled_lover, lover_rect)
@@ -694,7 +694,7 @@ def choice3():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
         
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(675, 637), 
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(665, 637), 
                             text_input="PICK A GUN", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
@@ -720,7 +720,7 @@ def choice3():
 
 def dialogue6():
 
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Luna : WHO TF IS THERE?',
@@ -747,8 +747,8 @@ def dialogue6():
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
         lover = pygame.image.load('assets/Chapter2/lover3.png')
-        scaled_lover = pygame.transform.scale(lover, (300,330))
-        lover_rect = scaled_lover.get_rect(x=500,y=280)
+        scaled_lover = pygame.transform.scale(lover, (400,450))
+        lover_rect = scaled_lover.get_rect(x=460,y=145)
         
         textbox = pygame.image.load('assets/textboxlover.png')
         scaled_texbox = pygame.transform.scale(textbox, (850,450))
@@ -791,7 +791,7 @@ def dialogue6():
 
 def dialogue7():
 
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Suddenly, five men appear with their mask on...',
@@ -816,8 +816,8 @@ def dialogue7():
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
         lover = pygame.image.load('assets/Chapter2/robbers.png')
-        scaled_lover = pygame.transform.scale(lover, (500,400))
-        lover_rect = scaled_lover.get_rect(x=400,y=280)
+        scaled_lover = pygame.transform.scale(lover, (550,500))
+        lover_rect = scaled_lover.get_rect(x=370,y=190)
         
         textbox = pygame.image.load('assets/textboxlover.png')
         scaled_texbox = pygame.transform.scale(textbox, (850,450))
@@ -860,7 +860,7 @@ def dialogue7():
 
 def dialogue8():
 
-    font = pygame.font.Font('assets/ARCADE.TTF', 24)
+    font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Luna : What the fuc* do you want from me?',
@@ -889,8 +889,8 @@ def dialogue8():
         bg_rect = scaled_bg.get_rect(x=0,y=0)
        
         lover = pygame.image.load('assets/Chapter2/lover3.png')
-        scaled_lover = pygame.transform.scale(lover, (300,330))
-        lover_rect = scaled_lover.get_rect(x=500,y=280)
+        scaled_lover = pygame.transform.scale(lover, (400,450))
+        lover_rect = scaled_lover.get_rect(x=460,y=145)
         
         textbox = pygame.image.load('assets/textboxlover.png')
         scaled_texbox = pygame.transform.scale(textbox, (850,450))
@@ -942,23 +942,21 @@ def choice4():
 
         lover = pygame.image.load('assets/Chapter2/lover3.png')
         scaled_lover = pygame.transform.scale(lover, (350,450))
-        lover_rect = scaled_lover.get_rect(x=525,y=180)
+        lover_rect = scaled_lover.get_rect(x=515,y=180)
 
         c2 = pygame.image.load('assets/cbutton.png')
         scaled_c2 = pygame.transform.scale(c2, (300,70))
-        c2_rect = scaled_c2.get_rect(x=525,y=600)
+        c2_rect = scaled_c2.get_rect(x=515,y=600)
 
         SCREEN.blit(scaled_bg, bg_rect)
         SCREEN.blit(scaled_lover, lover_rect)
         SCREEN.blit(scaled_c2, c2_rect)
         
-    
-
         timer.tick(60)
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
         
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(675, 637), 
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(665, 637), 
                             text_input="KILL THEM ALL", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
@@ -981,4 +979,8 @@ def choice4():
                     pausemenu()
 
             pygame.display.flip()
+<<<<<<< HEAD
+=======
+            
+>>>>>>> main
 chap2_opening()
