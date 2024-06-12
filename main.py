@@ -12,27 +12,26 @@ pygame.display.set_caption("Menu") #window name
 BG = pygame.image.load("assets/background.png")
 
 #background music
-introbgm = pygame.mixer.Sound("assets/introbgm.mp3")
-bgmusic = pygame.mixer.Sound("assets/bgmone.mp3")
-clicksfx = pygame.mixer.Sound("assets/click.mp3")
+introbgm = pygame.mixer.Sound("assets/Audio/introbgm.mp3")
+bgmusic = pygame.mixer.Sound("assets/Audio/bgmone.mp3")
 running = True
-font = pygame.font.Font('assets/ARCADECLASSIC.TTF', 32)
+font = pygame.font.Font('assets/Font/ARCADECLASSIC.TTF', 32)
 
 #default font
 def get_font(size): 
-    return pygame.font.Font("assets/getfont.ttf", size)
+    return pygame.font.Font("assets/Font/getfont.ttf", size)
 
 #button font
 def button_font(size): 
-    return pygame.font.Font("assets/buttonfont.ttf", size)
+    return pygame.font.Font("assets/Font/buttonfont.ttf", size)
 
 #title font
 def title_font(size): 
-    return pygame.font.Font("assets/titlefont.ttf", size)
+    return pygame.font.Font("assets/Font/titlefont.ttf", size)
 
 #char menu font
 def charmenu_font(size):   
-    return pygame.font.Font("assets/ARCADECLASSIC.TTF", size)
+    return pygame.font.Font("assets/Font/ARCADECLASSIC.TTF", size)
 
 #Credits button
 
@@ -138,10 +137,10 @@ def main_menu():
                     sys.exit()
 
         pygame.display.update()
-        bgmusic.play()
+        bgmusic.play(1)
 
 def dialogue():
-    font = pygame.font.Font('assets/Cinzel.ttf', 24)
+    font = pygame.font.Font('assets/Font/Cinzel.ttf', 24)
     screen = pygame.display.set_mode([1280, 720])
     timer = pygame.time.Clock()
     messages = ('In the cold, dim cell where time stretches like taffy...',
@@ -196,6 +195,6 @@ def dialogue():
 
         pygame.display.flip()
         bgmusic.stop()
-        introbgm.play()
+        introbgm.play(1)
 
 main_menu()
