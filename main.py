@@ -91,6 +91,7 @@ def credits():
 
 
 def main_menu():
+    bgmusic.play(1)
     while True:
         SCREEN.blit(BG, (0, 0))  #background
 
@@ -137,7 +138,7 @@ def main_menu():
                     sys.exit()
 
         pygame.display.update()
-        bgmusic.play(1)
+        
 
 def dialogue():
     font = pygame.font.Font('assets/Font/Cinzel.ttf', 24)
@@ -157,13 +158,15 @@ def dialogue():
                 'A relentless reminder of the injustice that binds him.',
                 'This is a story that revolves around a certain figure...',
                 'With a name bestowed upon him...',
-                'IEMAN...',
+                'Roman...',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.stop()
+    introbgm.play(1)
 
     run = True
     while run:
@@ -194,7 +197,5 @@ def dialogue():
         screen.blit(snip, (100, 360))
 
         pygame.display.flip()
-        bgmusic.stop()
-        introbgm.play(1)
 
 main_menu()
