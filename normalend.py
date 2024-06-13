@@ -1717,14 +1717,27 @@ def dialogue20():  # black/narrator textbox
 def dialogue21():   # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
-    messages = ('Roman : ',
-                'Roman : She\'s lost a lot of blood..',
-                'Roman : And she\'s losing her consciousness..',
-                'Nurse : Alright, I\'ll bring her in to get some proper treatment',
-                'Nurse : Fortunately, the doctor\'s still here',
-                'Nurse : For now, you can come inside.',
-                'Roman : Thank you so much..',
-                '...')
+    messages = ('Roman : Yes I am..',
+                'Roman : How\'s her condition..?',
+                'Doctor : She seems fine for now',
+                'Doctor : The bleeding\'s stopped and she only have a bruise on her face',
+                'Doctor : If I may..',
+                'Doctor : Can I ask exactly what happened to her?',
+                'Roman : ...',
+                'Roman : I\'m sorry..',
+                'Roman : It\'s a long story..',
+                'Doctor : I\'m sure it is.',
+                'Doctor : Don\'t worry, I\'m not gonna pry',
+                'Doctor : However, If you have any further business',
+                'Doctor : It\'s gonna have to wait until she recovers..',
+                'Doctor : She was hit pretty hard.',
+                'Roman : Alright, thank you doctor.',
+                'Roman : Doctor.. I have a favour to ask of you',
+                'Doctor : What is it?',
+                'Roman : After she recovers..',
+                'Roman : Could I get a ride out to the nearest town?',
+                'Doctor : Alright, consider it done..',
+                'Doctor : ')
     snip = font.render('', True, white)
     counter = 0
     speed = 1
@@ -1776,7 +1789,7 @@ def dialogue21():   # roman textbox
                         counter = speed * len(message)
                     if active_message == 7:
                         continue_button_press = True                # adjust sini kalau ada byk message
-                        dialogue17()
+                        
                 if continue_button_press:
                     return
 
@@ -1863,4 +1876,4 @@ def main():
 
     pygame.quit()
 
-dialogue21()
+main()
