@@ -163,7 +163,7 @@ def pausemenu():
 
         pygame.display.flip()
 
-def fightdialogue1():   # roman textbox
+def fightdialogue1():  # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Roman : Why!!!!!!!!',
@@ -302,7 +302,7 @@ def fightdialogue2():  # black/narrator textbox
 
         pygame.display.flip()
 
-def fightdialogue3():   # roman textbox
+def fightdialogue3():  # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Roman : Why!!!!!!!!',
@@ -504,7 +504,7 @@ def dialogue3():  # black/narrator textbox
 
         pygame.display.flip()
 
-def dialogue4():   # roman textbox
+def dialogue4():  # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Roman : Luna..?',
@@ -568,7 +568,7 @@ def dialogue4():   # roman textbox
 
         pygame.display.flip()
 
-def dialogue5():   # lover textbox
+def dialogue5():  # lover textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Luna : It\'s alright..',
@@ -635,7 +635,7 @@ def dialogue5():   # lover textbox
 
         pygame.display.flip()
 
-def dialogue6():   # roman textbox
+def dialogue6():  # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Roman : LUNA !!',
@@ -778,7 +778,7 @@ def dialogue7():  # black/narrator textbox
 
         pygame.display.flip()
 
-def dialogue8():   # roman textbox
+def dialogue8():  # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Roman : Please..',
@@ -1066,7 +1066,7 @@ def dialogue11():  # black/narrator textbox
 
         pygame.display.flip()
 
-def dialogue12():   # roman textbox
+def dialogue12():  # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Roman : HELP!!',
@@ -1352,7 +1352,7 @@ def dialogue15():  # black/narrator textbox
 
         pygame.display.flip()
 
-def dialogue16():   # roman textbox
+def dialogue16():  # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Roman : Please..',
@@ -1714,7 +1714,7 @@ def dialogue20():  # black/narrator textbox
 
         pygame.display.flip()
 
-def dialogue21():   # roman textbox
+def dialogue21():  # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Roman : Yes I am..',
@@ -1737,7 +1737,10 @@ def dialogue21():   # roman textbox
                 'Roman : After she recovers..',
                 'Roman : Could I get a ride out to the nearest town?',
                 'Doctor : Alright, consider it done..',
-                'Doctor : ')
+                'Doctor : I assume you can\'t tell me why either?',
+                'Roman : Yes doc, but I don\'t mean any harm',
+                'Doctor : Oh I know you don\'t. If you did, you would have done so long ago',
+                'Doctor : For now, get some much needed rest.')
     snip = font.render('', True, white)
     counter = 0
     speed = 1
