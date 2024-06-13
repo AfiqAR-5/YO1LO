@@ -6,7 +6,7 @@ from button import Button
 pygame.init()
 pygame.display.set_caption("YO1LO") #window name
 
-bg_music = pygame.mixer.music.load('assets/Audio/normalendost.mp3')  
+pygame.mixer.music.load('assets/Audio/normalendfight.mp3')  
 pygame.mixer.music.play(-1)
 
 screen_width = 1280
@@ -43,17 +43,29 @@ background_images_scaled = [pygame.transform.scale(pygame.image.load(image_path)
 def textbutton_font(size):   
     return pygame.font.Font("assets/Font/ARCADE.TTF", size)
 
-def mc(xpos, ypos):
-     mc = pygame.image.load('assets/mc.png')
-     mc_rect = mc.get_rect(x=xpos, y=ypos)
+def roman(xpos, ypos):
+     roman = pygame.image.load('assets/seriousmc.png')
+     roman_rect = roman.get_rect(x=xpos, y=ypos)
 
-     return screen.blit(mc,mc_rect)
+     return screen.blit(roman,roman_rect)
 
 def lover(xpos, ypos):
     lover = pygame.image.load('assets/Chapter2/lover2.png')
     lover_rect = lover.get_rect(x=xpos, y=ypos)
 
     return screen.blit(lover, lover_rect)
+
+def nurse(xpos, ypos):
+     nurse = pygame.image.load('assets/countrynurse.png')
+     nurse_rect = nurse.get_rect(x=xpos, y=ypos)
+
+     return screen.blit(nurse,nurse_rect)
+
+def doctor(xpos, ypos):
+     doctor = pygame.image.load('assets/countrydoc.png')
+     doctor_rect = doctor.get_rect(x=xpos, y=ypos)
+
+     return screen.blit(doctor ,doctor_rect)
 
 def create_random_button():
     button_width = 150
@@ -100,7 +112,7 @@ def retry_screen():
                 running = False
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    pygame.mixer.music.load('assets/Audio/normalendost.mp3')  
+                    pygame.mixer.music.load('assets/Audio/normalendfight.mp3')  
                     pygame.mixer.music.play(-1)
                     main()
 
@@ -151,13 +163,13 @@ def pausemenu():
 
         pygame.display.flip()
 
-def fightdialogue1():   # mc textbox
+def fightdialogue1():   # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
-    messages = ('MC : Why!!!!!!!!',
-                'MC : Why did you kill him !!!!!!',
-                "MC : He was going to give me my answer!",
-                "MC : About everything that happened that night!!",
+    messages = ('Roman : Why!!!!!!!!',
+                'Roman : Why did you kill him !!!!!!',
+                "Roman : He was going to give me my answer!",
+                "Roman : About everything that happened that night!!",
                 "...")
     snip = font.render('', True, white)
     counter = 0
@@ -184,7 +196,7 @@ def fightdialogue1():   # mc textbox
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(screen)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        mc(475,-0.5)
+        roman(475,-0.5)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -217,7 +229,7 @@ def fightdialogue1():   # mc textbox
 
         pygame.display.flip()
 
-def fightdialogue2():  #black/narrator textbox
+def fightdialogue2():  # black/narrator textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('In the midst of his barrage of fists',
@@ -290,12 +302,12 @@ def fightdialogue2():  #black/narrator textbox
 
         pygame.display.flip()
 
-def fightdialogue3():   # mc textbox
+def fightdialogue3():   # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
-    messages = ('MC : Why!!!!!!!!',
-                'MC : Why must you always get in my way like this !!!!!!',
-                "MC : LUUNAAAAAA !!!!!!",
+    messages = ('Roman : Why!!!!!!!!',
+                'Roman : Why must you always get in my way like this !!!!!!',
+                "Roman : LUUNAAAAAA !!!!!!",
                 "...")
     snip = font.render('', True, white)
     counter = 0
@@ -322,7 +334,7 @@ def fightdialogue3():   # mc textbox
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(screen)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        mc(475,-0.5)
+        roman(475,-0.5)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -416,6 +428,7 @@ def dialogue2():  # pygame time delay not working
     bg_image = pygame.image.load("assets/blackscreen.png")
     start_time = pygame.time.get_ticks()  
     pygame.mixer.music.pause()
+    pygame.mixer.music.load("assets/Audio/normalendsad.mp3")
 
     run = True
     while run:
@@ -427,7 +440,7 @@ def dialogue2():  # pygame time delay not working
         screen.blit(bg_image, (0, 0))
 
         if pygame.time.get_ticks() - start_time >= 4000:
-            pygame.mixer.music.unpause()
+            pygame.mixer.music.play(-1)
             dialogue3()
             return 
         
@@ -491,10 +504,10 @@ def dialogue3():  # black/narrator textbox
 
         pygame.display.flip()
 
-def dialogue4():   # mc textbox
+def dialogue4():   # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
-    messages = ('MC : Luna..?',
+    messages = ('Roman : Luna..?',
                 "...")
     snip = font.render('', True, white)
     counter = 0
@@ -521,7 +534,7 @@ def dialogue4():   # mc textbox
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(screen)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        mc(475,-0.5)
+        roman(475,-0.5)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -560,8 +573,8 @@ def dialogue5():   # lover textbox
     timer = pygame.time.Clock()
     messages = ('Luna : It\'s alright..',
                 'Luna : Everything\'s fine now..',
-                'Luna : It\'s all over...',
-                '...'
+                'Luna : It\'s not your fault...',
+                '...',
                 '...')
     snip = font.render('', True, white)
     counter = 0
@@ -622,15 +635,15 @@ def dialogue5():   # lover textbox
 
         pygame.display.flip()
 
-def dialogue6():   # mc textbox
+def dialogue6():   # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
-    messages = ('MC : LUNA !!',
-                'MC : Oh god...',
-                'MC : What have I done...',
-                'MC : Luna, I will get you to a hospital!',
-                'MC : So please..',
-                'MC : Bear with me..'
+    messages = ('Roman : LUNA !!',
+                'Roman : Oh god...',
+                'Roman : You\'re bleeding!',
+                'Roman : I\'m so sorry!',
+                'Roman : Luna, I\'ll bring you to a hospital',
+                'Roman : So please, bear with me..',
                 '...')
     snip = font.render('', True, white)
     counter = 0
@@ -657,7 +670,7 @@ def dialogue6():   # mc textbox
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(screen)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        mc(475,-0.5)
+        roman(475,-0.5)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -691,16 +704,16 @@ def dialogue6():   # mc textbox
 
         pygame.display.flip()
 
-def dialogue7():  #black/narrator textbox
+def dialogue7():  # black/narrator textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
-    messages = ('The MC, having picked up her lover Luna-',
-                'began to run in a direction he picked randomly',
+    messages = ('Roman picked up Luna-',
+                'and began to run in a direction he picked randomly',
                 'hoping that-',
                 'wherever he might end up..',
                 'maybe..',
                 'maybe a hospital, or a clinic..',
-                'atleast, that way there\'s a chance at redemption.',
+                'atleast, that way he can get some help.',
                 "...")
     snip = font.render('', True, white)
     counter = 0
@@ -720,7 +733,7 @@ def dialogue7():  #black/narrator textbox
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg_image = pygame.image.load("assets/background2.png")
+        bg_image = pygame.image.load("assets/bgspeedlines.png")
         screen.blit(bg_image, (0, 0))
 
         PAUSE.update(screen)
@@ -765,15 +778,14 @@ def dialogue7():  #black/narrator textbox
 
         pygame.display.flip()
 
-def dialogue8():   # mc textbox
+def dialogue8():   # roman textbox
     font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
-    messages = ('MC : Please..',
-                'MC : Please for the love of god..',
-                'MC : PLEASE LET THERE BE A HOSPITAL!',
-                'MC : Luna, I will get you to a hospital!',
-                'MC : So please..',
-                'MC : Bear with me..'
+    messages = ('Roman : Please..',
+                'Roman : Please for the love of god..',
+                'Roman : PLEASE, HELP! ANYONE!!!!',
+                'Roman : Luna, please hang in there',
+                'Roman : I will make sure you get some help',
                 '...')
     snip = font.render('', True, white)
     counter = 0
@@ -789,7 +801,7 @@ def dialogue8():   # mc textbox
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/background2.png')
+        bg = pygame.image.load('assets/bgspeedlines.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -800,7 +812,7 @@ def dialogue8():   # mc textbox
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(screen)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        mc(475,-0.5)
+        roman(475,-0.5)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -823,14 +835,953 @@ def dialogue8():   # mc textbox
                         counter = 0
                     else:
                         counter = speed * len(message)
-                    if active_message == 6:
+                    if active_message == 5:
                         continue_button_press = True                # adjust sini kalau ada byk message
-                        
+                        dialogue9()
                 if continue_button_press:
                     return
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (275, 570))
+
+        pygame.display.flip()
+
+def dialogue9():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Where he ran..',
+                'Where he might end up..',
+                'He knows not..',
+                'He only knows that all he can do now..',
+                'All he can do to prevent tragedy from happening..',
+                'is to keep running',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg_image = pygame.image.load("assets/bgspeedlines.png")
+        screen.blit(bg_image, (0, 0))
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 6:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue10()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue10():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Then..',
+                'As if a miracle had occured..',
+                'As if his prayers were being answered..',
+                'At the edge of the forest..',
+                'he saw a shape of a building..',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg_image = pygame.image.load("assets/bgspeedlines2.png")
+        screen.blit(bg_image, (0, 0))
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 5:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue11()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue11():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('What came into view',
+                'was what looks like a clinic',
+                'an old run-down countryside clinic',
+                'Roman doesn\'t know whether it still runs or not',
+                'All he knows...',
+                'Is that help is here!',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        screen.blit(scaled_bg, bg_rect)
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 6:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue12()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue12():   # roman textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Roman : HELP!!',
+                'Roman : HELP PLEASE!!',
+                'Roman : SOMEONE\'S UNCONSCIOUS!!',
+                'Roman : IS ANYONE THERE?!?!',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,250))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=475)
+
+        screen.blit(scaled_bg, bg_rect)
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        roman(475,-0.5)
+        screen.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 4:
+                        continue_button_press = True                # adjust sini kalau ada byk message
+                        dialogue13()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (275, 570))
+
+        pygame.display.flip()
+
+def dialogue13():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Frantically knocking on the door',
+                'He hoped that someone would answer..',
+                'Begged even..',
+                'All that was going through his mind was',
+                'PLEASE SOMEONE ANSWER THE DOOR',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        screen.blit(scaled_bg, bg_rect)
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 5:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue14()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue14():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Suddenly, a knock is heard on the door.',
+                '"Coming!", a voice responded from behind the door',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        screen.blit(scaled_bg, bg_rect)
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 2:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue15()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue15():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Nurse : Is something wrong?',
+                'A nurse came out',
+                'An immense feeling of relief',
+                'came over Roman',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        screen.blit(scaled_bg, bg_rect)
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        nurse(400, 130)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 4:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue16()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue16():   # roman textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Roman : Please..',
+                'Roman : She\'s lost a lot of blood..',
+                'Roman : And she\'s losing her consciousness..',
+                'Nurse : Alright, I\'ll bring her in to get some proper treatment',
+                'Nurse : Fortunately, the doctor\'s still here',
+                'Nurse : For now, you can come inside.',
+                'Roman : Thank you so much..',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,250))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=475)
+
+        screen.blit(scaled_bg, bg_rect)
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        roman(175,-0.5)
+        nurse(600, 130)
+        screen.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 7:
+                        continue_button_press = True                # adjust sini kalau ada byk message
+                        dialogue17()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (275, 570))
+
+        pygame.display.flip()
+
+def dialogue17():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Nurse : Make yourself comfortable',
+                'Nurse : have a sit while I call for the doctor',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countrynursehosp.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        screen.blit(scaled_bg, bg_rect)
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 2:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue18()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue18():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Nurse : Make yourself comfortable',
+                'Nurse : have a sit while I call for the doctor',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countrynursehosp.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        screen.blit(scaled_bg, bg_rect)
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 2:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue19()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue19():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Roman, a bit uneasy',
+                'figured that the best way to calm down',
+                'was to take her up on her offer and sit down',
+                'though his mind was racing, he can only wait for the doctor',
+                '*AFTER A FEW MINUTES*',
+                'The door to the room suddenly opens',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp2.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        screen.blit(scaled_bg, bg_rect)
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 6:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue20()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue20():  # black/narrator textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('A long haired person walks into the room',
+                'They made their approach to Roman',
+                'Doctor : Are you the one who brought in the girl?',
+                'Roman was taken aback',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    dialogue_box_width = 1160  
+    dialogue_box_height = 200  
+    dialogue_box_alpha = 225
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp2.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        screen.blit(scaled_bg, bg_rect)
+
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        doctor(380 , 85)
+
+        dialog_x = (screen.get_width() - dialogue_box_width) // 2
+        dialog_y = (screen.get_height() - dialogue_box_height) - 25    # adjust dialogue box sini
+
+        dialogue_box = pygame.Surface((dialogue_box_width, dialogue_box_height), pygame.SRCALPHA)
+        dialogue_box.fill((0, 0, 0, dialogue_box_alpha))
+
+        screen.blit(dialogue_box, (dialog_x, dialog_y))
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 4:               # adjust sini kalau ada byk message
+                        continue_button_press = True
+                        dialogue21()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter // speed], True, white)
+        screen.blit(snip, (dialog_x + 50, dialog_y + 30))  # adjust text pos sini
+
+        pygame.display.flip()
+
+def dialogue21():   # roman textbox
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
+    timer = pygame.time.Clock()
+    messages = ('Roman : ',
+                'Roman : She\'s lost a lot of blood..',
+                'Roman : And she\'s losing her consciousness..',
+                'Nurse : Alright, I\'ll bring her in to get some proper treatment',
+                'Nurse : Fortunately, the doctor\'s still here',
+                'Nurse : For now, you can come inside.',
+                'Roman : Thank you so much..',
+                '...')
+    snip = font.render('', True, white)
+    counter = 0
+    speed = 1
+    active_message = 0
+    message = messages[active_message]
+    continue_button_press = False
+
+    run = True
+    while run:
+        MENU_MOUSE_POS = pygame.mouse.get_pos()
+
+        PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
+                            text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+
+        bg = pygame.image.load('assets/countryhosp2.png')
+        scaled_bg = pygame.transform.scale(bg, (1280,720))
+        bg_rect = scaled_bg.get_rect(x=0,y=0)
+        
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (1100,250))
+        textbox_rect = scaled_texbox.get_rect(x=80,y=475)
+
+        screen.blit(scaled_bg, bg_rect)
+        PAUSE.update(screen)
+        PAUSE.changeColor(MENU_MOUSE_POS)
+        roman(175,-0.5)
+        doctor(600, 80)
+        screen.blit(scaled_texbox, textbox_rect)
+
+        timer.tick(60)
+
+        if counter < speed * len(message):
+            counter += 1
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if PAUSE.checkForInput(MENU_MOUSE_POS):
+                    pausemenu()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if counter >= speed * len(message) and active_message < len(messages) - 1:
+                        active_message += 1
+                        message = messages[active_message]
+                        counter = 0
+                    else:
+                        counter = speed * len(message)
+                    if active_message == 7:
+                        continue_button_press = True                # adjust sini kalau ada byk message
+                        dialogue17()
+                if continue_button_press:
+                    return
+
+        snip = font.render(message[0:counter//speed], True, 'white')
+        screen.blit(snip, (150, 570))
 
         pygame.display.flip()
 
@@ -912,5 +1863,4 @@ def main():
 
     pygame.quit()
 
-if __name__ == "__main__":
-    main()
+dialogue21()
