@@ -3211,3 +3211,5 @@ def credits():
                     sys.exit()
 
             pygame.display.flip()
+
+dialogue28()
