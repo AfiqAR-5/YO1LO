@@ -16,10 +16,10 @@ drive = pygame.mixer.Sound("assets/Audio/driving.mp3")
 fleeing = pygame.mixer.Sound("assets/Audio/planscene.mp3")
 crisis = pygame.mixer.Sound("assets/Audio/shootoutscene.mp3")
 fight = pygame.mixer.Sound("assets/Audio/fightscene.mp3")
-speed = 1
+speed = 0
 strength = 0
-sinful = 1
-righteous = 1
+sinful = 0
+righteous = 0
 rifle = 0
 
 def textbutton_font(size):   
@@ -6864,4 +6864,4 @@ def end_chap1():
 
 # if conditions for right and sin is : 3 or 4
 
-chap1_opening()
+dialogue14()
