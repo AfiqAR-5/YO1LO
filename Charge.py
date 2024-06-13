@@ -2988,9 +2988,8 @@ def dialogue33():
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
-        lover = pygame.image.load('assets/Chapter2/lovershoot1.png')
-        scaled_lover = pygame.transform.scale(lover, (500,600))
-        lover_rect = scaled_lover.get_rect(x=350,y=10)
+        lover = pygame.image.load('assets/Chapter2/lovershot1.png')
+        lover_rect = lover.get_rect(x=320,y=150)
 
         textbox = pygame.image.load('assets/textboxlover.png')
         scaled_texbox = pygame.transform.scale(textbox, (850,450))
@@ -2999,7 +2998,7 @@ def dialogue33():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        SCREEN.blit(scaled_lover, lover_rect)
+        SCREEN.blit(lover, lover_rect)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -3060,9 +3059,8 @@ def dialogue34():
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
-        mc = pygame.image.load('assets/Chapter2/lovercalmdead.png')
-        scaled_mc = pygame.transform.scale(mc, (350,400))
-        mc_rect = scaled_mc.get_rect(x=450,y=180)
+        lover = pygame.image.load('assets/Chapter2/lovershot1dead.png')
+        lover_rect = lover.get_rect(x=320,y=150)
 
         textbox = pygame.image.load('assets/textboxlover.png')
         scaled_texbox = pygame.transform.scale(textbox, (850,450))
@@ -3071,7 +3069,7 @@ def dialogue34():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        SCREEN.blit(scaled_mc, mc_rect)
+        SCREEN.blit(lover, lover_rect)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -3212,4 +3210,4 @@ def credits():
 
             pygame.display.flip()
 
-dialogue28()
+dialogue25()

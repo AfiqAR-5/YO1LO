@@ -607,7 +607,7 @@ def dialogue4():
         pygame.display.flip()
 
 def dialogue5():
-
+    pygame.mixer.stop()
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()

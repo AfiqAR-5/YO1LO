@@ -21,6 +21,7 @@ collision_sound = pygame.mixer.Sound("assets/Audio/oof.wav")
 dead_sound = pygame.mixer.Sound("assets/Audio/Death_sound.wav")
 gta_sound = pygame.mixer.Sound("assets/Audio/gta.wav")
 wth_sound = pygame.mixer.Sound("assets/Audio/wth.wav")
+cough_sound = pygame.mixer.Sound("assets/Audio/cough.mp3")
 
 #backgroundimage
 background = pygame.transform.scale(pygame.image.load("assets/warehouse.png").convert(), (WIDTH, HEIGHT))
@@ -519,9 +520,9 @@ def shootgame():
 
 def dialogue1():
     pygame.mixer.music.stop()
-    pygame.mixer.music.load("assets/Audio/xiaolao.wav")
+    pygame.mixer.music.load("assets/Audio/hoho.mp3")
     pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
-    pygame.mixer.music.set_volume(0.1)
+    pygame.mixer.music.set_volume(0.05)
 
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
@@ -601,6 +602,8 @@ def dialogue2():
                 '<UGH> <UGH>...',
                 'UHUK UHUK...',
                 '...')
+    
+    cough_sound.play(1)
     snip = font.render('', True, 'black')
     counter = 0
     speed = 1
@@ -663,7 +666,7 @@ def dialogue2():
         pygame.display.flip()
 
 def dialogue3():
-    
+    pygame.mixer.stop()
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
@@ -1731,7 +1734,8 @@ def choice3():
 
 def choice4():
     while True:
-
+        
+        pygame.mixer.music.stop()
         timer = pygame.time.Clock()
 
         bg = pygame.image.load('assets/Chapter2/jungleblur.png')
@@ -2149,7 +2153,7 @@ def choice5():
         current  = textbutton_font(24).render("CHOOSE THE BEST DECISION", True, "White")
         current_rect = current.get_rect(x=485,y=625)
 
-        bg = pygame.image.load('assets/Chapter2/houseloverblur.png')
+        bg = pygame.image.load('assets/Chapter2/Warehousecariblur.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
