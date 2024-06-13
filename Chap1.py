@@ -11,7 +11,6 @@ endingbgm = pygame.mixer.Sound("assets/Audio/chap1_ending.mp3")
 shootout = pygame.mixer.Sound("assets/Audio/shootout.mp3")
 shootexit = pygame.mixer.Sound("assets/Audio/exitdoorshoot.mp3")
 rifleshoot = pygame.mixer.Sound("assets/Audio/rifle.mp3")
-humveesound = pygame.mixer.Sound("assets/Audio/humveesound.mp3")
 tirescreech = pygame.mixer.Sound("assets/Audio/tirescreech.mp3")
 drive = pygame.mixer.Sound("assets/Audio/driving.mp3")
 fleeing = pygame.mixer.Sound("assets/Audio/planscene.mp3")
@@ -5892,7 +5891,6 @@ def dialogue51v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    humveesound.play()
 
     run = True
 
@@ -6109,6 +6107,7 @@ def dialogue53v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    rifleshoot.stop()
     drive.play()
 
     run = True
@@ -6703,7 +6702,6 @@ def dialogue52v3():
     active_message = 0
     message = messages[active_message]
     shootout.stop()
-    humveesound.play()
 
     run = True
 
@@ -6778,7 +6776,6 @@ def dialogue54v3():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    humveesound.play()
 
     run = True
 
@@ -6867,4 +6864,4 @@ def end_chap1():
 
 # if conditions for right and sin is : 3 or 4
 
-dialogue47v2()
+chap1_opening()
