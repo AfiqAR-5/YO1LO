@@ -14,6 +14,9 @@ rifleshoot = pygame.mixer.Sound("assets/Audio/rifle.mp3")
 humveesound = pygame.mixer.Sound("assets/Audio/humveesound.mp3")
 tirescreech = pygame.mixer.Sound("assets/Audio/tirescreech.mp3")
 drive = pygame.mixer.Sound("assets/Audio/driving.mp3")
+fleeing = pygame.mixer.Sound("assets/Audio/planscene.mp3")
+crisis = pygame.mixer.Sound("assets/Audio/shootoutscene.mp3")
+fight = pygame.mixer.Sound("assets/Audio/fightscene.mp3")
 speed = 1
 strength = 0
 sinful = 1
@@ -873,7 +876,7 @@ def chap1():
     active_message = 0
     message = messages[active_message]
     steps.stop()
-    bgmusic.play()
+    bgmusic.play(-1)
 
     run = True
     while run:
@@ -1482,6 +1485,7 @@ def dialogue9():
 
 def chap1v2_opening():
     timer = pygame.time.Clock()
+    bgmusic.stop()
 
     run = True
     while run:
@@ -1539,6 +1543,7 @@ def dialogue10():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.play(-1)
 
     run = True
     while run:
@@ -2648,6 +2653,7 @@ def dialogue21():
 
 def chap1v3_opening():
     timer = pygame.time.Clock()
+    bgmusic.stop()
 
     run = True
     while run:
@@ -2715,6 +2721,7 @@ def dialogue22():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.play(-1)
 
     run = True
 
@@ -3006,6 +3013,7 @@ def dialogue25():
 
 def chap1v4_opening():
     timer = pygame.time.Clock()
+    bgmusic.stop()
 
     run = True
     while run:
@@ -3070,6 +3078,7 @@ def dialogue26():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.play(-1)
 
     run = True
 
@@ -3475,6 +3484,7 @@ def dialogue31():
 
 def chap1v5_opening():
     timer = pygame.time.Clock()
+    bgmusic.stop()
 
     run = True
     while run:
@@ -3529,10 +3539,9 @@ def dialogue32():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fleeing.play(-1)
 
     run = True
-
-
     while run:
 
         timer = pygame.time.Clock()
@@ -3876,6 +3885,8 @@ def dialogue36():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fleeing.stop()
+    fight.play(-1)
 
     run = True
 
@@ -3921,6 +3932,7 @@ def dialogue36():
                     else:
                         counter = speed * len(message)
                 if active_message == 13:
+                    fight.stop()
                     dialogue36v3()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -4015,6 +4027,7 @@ def dialogue36v3():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fleeing.play(-1)
 
     run = True
 
@@ -4078,6 +4091,8 @@ def dialogue37():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fleeing.stop()
+    fight.play(-1)
 
     run = True
 
@@ -4588,6 +4603,7 @@ def dialogue39v3():
                     else:
                         counter = speed * len(message)
                 if active_message == 27:
+                    fight.stop()
                     dialoguerifle()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -4610,6 +4626,7 @@ def dialoguerifle():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fleeing.play(-1)
 
     run = True
 
@@ -4851,6 +4868,7 @@ def dialogue40v2():
                     else:
                         counter = speed * len(message)
                 if active_message == 2:
+                    fight.stop()
                     dialogue41v2()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -4875,6 +4893,7 @@ def dialogue41v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fleeing.play(-1)
 
     run = True
 
@@ -5076,6 +5095,8 @@ def dialogue44v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fleeing.stop()
+    fight.play(-1)
 
     run = True
 
@@ -5578,6 +5599,8 @@ def dialogue47v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fight.stop()
+    fleeing.stop()
 
     run = True
 
@@ -5651,6 +5674,7 @@ def dialogue48v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    crisis.play(-1)
     rifleshoot.play(-1)
 
     run = True
@@ -5938,7 +5962,8 @@ def dialogue52v2():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    rifleshoot.stop()
+    shootout.stop()
+    crisis.stop()
     endingbgm.play()
     tirescreech.play()
 
@@ -6011,7 +6036,7 @@ def dialogue53v3():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    rifleshoot.stop()
+    crisis.stop()
     endingbgm.play()
 
     run = True
@@ -6312,6 +6337,7 @@ def dialogue48v3():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    crisis.play(-1)
 
     run = True
 
@@ -6841,4 +6867,4 @@ def end_chap1():
 
 # if conditions for right and sin is : 3 or 4
 
-dialogue54v3()
+dialogue47v2()
