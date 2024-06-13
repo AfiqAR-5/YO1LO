@@ -6,12 +6,12 @@ pygame.init()
 pygame.mixer.init()
 
 # Background music
-bg_music = pygame.mixer.music.load('assets/qtebgm.mp3')  
+bg_music = pygame.mixer.music.load('assets/Audio/qtebgm.mp3')  
 pygame.mixer.music.play(-1)
 
 width, height = 1280, 720
 window = pygame.display.set_mode((width, height))
-pygame.display.set_caption('finding clues')
+pygame.display.set_caption('YO1LO')
 
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -19,11 +19,11 @@ red = (255, 0, 0)
 green = (0, 255, 0)
 
 # background image + scaling
-background_images_original = ['qtebg/clock.png', 'qtebg/dadstudy.png', 'qtebg/backyard.png', 'qtebg/livingroom.png', 'qtebg/mcroom.png', 'qtebg/shattered.png', 'qtebg/neighbourbg.png']
+background_images_original = ['assets/cluesbg/clock.png', 'assets/cluesbg/dadstudy.png', 'assets/cluesbg/backyard.png', 'assets/cluesbg/livingroom.png', 'assets/cluesbg/mcroom.png', 'assets/cluesbg/shattered.png', 'assets/cluesbg/neighbourbg.png']
 background_images_scaled = [pygame.transform.scale(pygame.image.load(image_path), (1280, 720)) for image_path in background_images_original]
 
 # prompt images + scaling
-prompt_images_original = ['qteimage/document.png', 'qteimage/daddiary.png', 'qteimage/bullet.png', 'qteimage/oldknife.png', 'qteimage/mcfavbook.png', 'qteimage/familyframe.png', 'qteimage/polaroid.png']
+prompt_images_original = ['assets/cluesimg/document.png', 'assets/cluesimg/daddiary.png', 'assets/cluesimg/bullet.png', 'assets/cluesimg/oldknife.png', 'assets/cluesimg/mcfavbook.png', 'assets/cluesimg/familyframe.png', 'assets/cluesimg/polaroid.png']
 prompt_images_scaled = [pygame.transform.scale(pygame.image.load(image_path), (150, 115)) for image_path in prompt_images_original]
 
 background_index = 0
@@ -33,7 +33,7 @@ image = prompt_images_scaled[prompt_index]
 image_rect = image.get_rect()
 
 # font
-font_file = 'assets/ARCADECLASSIC.ttf'
+font_file = 'assets/Font/ARCADECLASSIC.ttf'
 custom_font = pygame.font.Font(font_file, 74)
 timer_font = pygame.font.Font(font_file, 50)
 
@@ -66,7 +66,7 @@ def reset_qte():
 def win_screen():
     win_background_image = pygame.image.load('assets/background.png')
     win_alpha = 0
-    pygame.mixer.music.load('assets/yay.mp3')
+    pygame.mixer.music.load('assets/Audio/yay.mp3')
     pygame.mixer.music.play()
     while win_alpha < 255:
         window.fill(black)
