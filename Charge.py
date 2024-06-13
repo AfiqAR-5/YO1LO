@@ -4,6 +4,7 @@ import random
 from settingshot1 import *
 from button import Button
 from config import *
+from main import main_menu
 
 pygame.init()
 
@@ -2966,6 +2967,7 @@ def dialogue33():
                 '<She smiled for the last time-',
                 '-and enjoyed the beauty of the world for the last time>',
                 'Luna : Thank you for all your sweet memories with me Roman.',
+                'Luna : I love you very much!',
                 '...')
     
     snip = font.render('', True, 'black')
@@ -3020,7 +3022,7 @@ def dialogue33():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                    if active_message == 4:
+                    if active_message == 5:
                         dialogue34()
     
     
@@ -3102,22 +3104,25 @@ def dialogue34():
         pygame.display.flip() 
 
 def bad_ending():
-    font = pygame.font.Font('assets/Font/Cinzel.ttf', 28)
+    font = pygame.font.Font('assets/Font/Cinzel.ttf', 35)
     screen = pygame.display.set_mode([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('Luna felt powerless to face them',
-                'Luna was stabbed multiple times in her abdomen until she died',
-                'After the henchmen captured Luna',
-                'They told Emir that Luna was dead',
-                'Roman had no idea about Luna\'s death',
-                'Emir and his henchmen kept Luna\'s death a secret from Roman',
-                'Afterward, Emir and his henchmen moved Luna\'s body far from the place',
-                'They butchered Luna\'s body',
-                'They then cooked the Luna\'s meat, making it their meal for the night',
-                'That night, everyone ate the dish, including Roman',
-                'They all enjoyed the dish',
-                'Such a pity, Roman doesn\'t know he\'s enjoying the flesh of his lover',
-                'HHMMMMM...',
+    messages = ('Luna chose to commit suicide',
+                'She lost everything',
+                'She felt that she failed',
+                'She can\'t accept that Roman is dead',
+                'She thinks life is useless without Roman',
+                'Emir is also dead',
+                'She no longer has anything important in the world',
+                'Maybe love stories don\'t always have happy endings',
+                'A wise man once said',
+                'At the end of True Love is death,',
+                'And only the love that ends in death is love',
+                'Only Love can hurt like this...',
+                '...',
+                '..',
+                '.',
+                'THE END',
                 '...')
     snip = font.render('', True, 'white')
     counter = 0
@@ -3146,7 +3151,7 @@ def bad_ending():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                    if active_message == 13:
+                    if active_message == 16:
                         pygame.mixer.music.stop()
                         credits()
     
@@ -3166,19 +3171,27 @@ def credits():
 
         c1 = pygame.image.load('assets/cbutton.png')
         scaled_c1 = pygame.transform.scale(c1, (300,70))
-        c1_rect = scaled_c1.get_rect(x=490,y=615)
+        c1_rect = scaled_c1.get_rect(x=490,y=500)
+
+        c2 = pygame.image.load('assets/cbutton.png')
+        scaled_c2 = pygame.transform.scale(c2, (300,70))
+        c2_rect = scaled_c2.get_rect(x=490,y=615)
 
         SCREEN.blit(scaled_c1, c1_rect)
+        SCREEN.blit(scaled_c2, c2_rect)
         SCREEN.blit(current, current_rect)
 
         timer.tick(60)
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
+
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(644,540), 
+                            text_input="MAIN MENU", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
         
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(644,655), 
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(644,655), 
                             text_input="QUIT", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
 
-        for button in [CHOICE1]:
+        for button in [CHOICE1,CHOICE2]:
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
 
@@ -3190,10 +3203,11 @@ def credits():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if CHOICE1.checkForInput(MENU_MOUSE_POS):
+                    print('MAIN MENU')
+                    main_menu()
+                if CHOICE1.checkForInput(MENU_MOUSE_POS):
                     print('QUIT')
                     pygame.quit()
                     sys.exit()
 
             pygame.display.flip()
-
-credits()
