@@ -6,8 +6,7 @@ pygame.init()
 pygame.mixer.init()
 
 # Background music
-bg_music = pygame.mixer.music.load('assets/Audio/qtebgm.mp3')  
-pygame.mixer.music.play(-1)
+bg_music = pygame.mixer.Sound('assets/Audio/qtebgm.mp3')
 
 width, height = 1280, 720
 window = pygame.display.set_mode((width, height))
@@ -64,6 +63,7 @@ def reset_qte():
     image_rect.y = random.randint(0, height - image_rect.height)
 
 def win_screen():
+    bg_music.stop()
     win_background_image = pygame.image.load('assets/background.png')
     win_alpha = 0
     pygame.mixer.music.load('assets/Audio/yay.mp3')
@@ -79,6 +79,7 @@ def win_screen():
     pygame.time.delay(4000)
 
 def start_screen():
+    bg_music.play(-1)
     start_background_image = pygame.image.load('assets/background.png')
     start_alpha = 255
     while start_alpha > 0:
@@ -91,49 +92,53 @@ def start_screen():
         start_alpha -= 1
     pygame.time.delay(2000)
 
-start_screen()
 
-running = True
-reset_qte()
+def start():
+    global success_count
+    start_screen()
 
-while running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if qte_triggered and image_rect.collidepoint(event.pos):
-                if time.time() - qte_start_time < qte_time:
-                    success_count += 1
-                    draw_text('You found a clue!', custom_font, white, window, width // 2, height // 2, alpha=255)
-                    pygame.display.flip()
-                    pygame.time.delay(2000)
-                    if success_count < max_successes:
-                        reset_qte()
-                    else:
-                        win_screen()
-                        running = False
-                else:
-                    if success_count < max_successes:
-                        draw_text('Too Late!', custom_font, red, window, width // 2, height // 2, alpha=255)
+    running = True
+    reset_qte()
+    
+
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if qte_triggered and image_rect.collidepoint(event.pos):
+                    if time.time() - qte_start_time < qte_time:
+                        success_count += 1
+                        draw_text('You found a clue!', custom_font, white, window, width // 2, height // 2, alpha=255)
                         pygame.display.flip()
-                        pygame.time.delay(1000)
-                        reset_qte()
+                        pygame.time.delay(2000)
+                        if success_count < max_successes:
+                            reset_qte()
+                        else:
+                            win_screen()
+                            running = False
+                    else:
+                        if success_count < max_successes:
+                            draw_text('Too Late!', custom_font, red, window, width // 2, height // 2, alpha=255)
+                            pygame.display.flip()
+                            pygame.time.delay(1000)
+                            reset_qte()
 
-    window.blit(background_image, (0, 0))
+        window.blit(background_image, (0, 0))
 
-    if qte_triggered:
-        time_left = qte_time - (time.time() - qte_start_time)
-        if time_left > 0:
-            window.blit(image, image_rect)
-        else:
-            if success_count < max_successes:
-                draw_text('Too Late!', custom_font, red, window, width // 2, height // 2, alpha=255)
-                pygame.display.flip()
-                pygame.time.delay(1000)
-                reset_qte()
+        if qte_triggered:
+            time_left = qte_time - (time.time() - qte_start_time)
+            if time_left > 0:
+                window.blit(image, image_rect)
+            else:
+                if success_count < max_successes:
+                    draw_text('Too Late!', custom_font, red, window, width // 2, height // 2, alpha=255)
+                    pygame.display.flip()
+                    pygame.time.delay(1000)
+                    reset_qte()
 
-    pygame.display.flip()
-    pygame.time.Clock().tick(30)
+        pygame.display.flip()
+        pygame.time.Clock().tick(30)
 
-pygame.mixer.music.stop()
-pygame.quit()
+    bg_music.stop()
+    pygame.quit()
