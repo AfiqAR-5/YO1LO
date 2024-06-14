@@ -54,7 +54,7 @@ def draw_text(text, font, color, surface, x, y, alpha=255):
 def retry_screen():
     retry_background_image = pygame.image.load("assets/background2.png")
     retry_alpha = 0
-    font = pygame.font.Font("assets/ARCADE.TTF", 46)  
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 46)  
     text1 = "You have been knocked out.."
     text2 = "Would you like to retry?"
     text3 = "Press Enter"
@@ -93,7 +93,7 @@ def you_win():
     pygame.quit()           
 
 def qtebdialogue1():
-    font = pygame.font.Font("assets/ARCADE.TTF", 24)
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Whoa! What\'s with the bright light!!!',
                 'I can\'t see anything...',
@@ -158,7 +158,7 @@ def qtebdialogue1():
         pygame.display.flip()
 
 def qtebdialogue2():
-    font = pygame.font.Font("assets/ARCADE.TTF", 24)
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Whoa! What\'s with the bright light!!!',
                 'I can\'t see anything...',
@@ -223,7 +223,7 @@ def qtebdialogue2():
         pygame.display.flip()
 
 def qtebdialogue3():
-    font = pygame.font.Font("assets/ARCADE.TTF", 24)
+    font = pygame.font.Font("assets/Font/ARCADE.TTF", 24)
     timer = pygame.time.Clock()
     messages = ('Whoa! What\'s with the bright light!!!',
                 'I can\'t see anything...',
