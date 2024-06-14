@@ -1,6 +1,7 @@
 import pygame, sys
 from config import *
 from button import Button
+from righteous import chap2_opening
 pygame.init()
 
 bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
@@ -19,8 +20,15 @@ fight = pygame.mixer.Sound("assets/Audio/fightscene.mp3")
 speed = 0
 strength = 0
 sinful = 0
-righteous = 0
+righteous = 4
 rifle = 0
+
+def draw_text(text, font, color, surface, x, y, alpha=255):
+    text_obj = font.render(text, True, color)
+    text_obj.set_alpha(alpha)
+    text_rect = text_obj.get_rect()
+    text_rect.center = (x, y)
+    surface.blit(text_obj, text_rect)
 
 def textbutton_font(size):   
     return pygame.font.Font("assets/Font/ARCADE.TTF", size)
@@ -6154,7 +6162,7 @@ def dialogue53v2():
                     else:
                         counter = speed * len(message)
                 if active_message == 7:
-                    end_chap1()
+                    transition1()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (290, 570))
@@ -6830,8 +6838,10 @@ def dialogue54v3():
 
         pygame.display.flip()
 
-def end_chap1():
+def transition_beginning():
+    transition()
     timer = pygame.time.Clock()
+    global righteous,sinful
 
     run = True
     while run:
@@ -6839,17 +6849,45 @@ def end_chap1():
         timer.tick(60)
         SCREEN.fill('black')
 
-        end = prologuefont(70).render("CHAPTER 1", True, "White")
-        end_rect = end.get_rect(x=450, y=300)
+        end = textbutton_font(70).render("Continue?", True, "White")
+        end_rect = end.get_rect(x=500, y=260)
         SCREEN.blit(end,end_rect)
 
-        troll = prologuefont(25).render("THE GREAT ESCAPE", True, "White")
-        troll_rect = troll.get_rect(x=520, y=390)
+        troll = textbutton_font(25).render("Warning : If you choose to quit, then the progress resets.", True, "White")
+        troll_rect = troll.get_rect(x=310, y=320)
         SCREEN.blit(troll,troll_rect)
 
-        info = textbutton_font(24).render("(click Enter to continue...)", True, "White")
-        info_rect = end.get_rect(x=500, y=600)
-        SCREEN.blit(info,info_rect)
+        MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
+
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(640, 460), 
+                            text_input="CONTINUE", font=textbutton_font(23), base_color="white", hovering_color="#FF3131")
+         
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(640, 550), 
+                            text_input="QUIT", font=textbutton_font(23), base_color="white", hovering_color="#FF3131")
+
+        for button in [CHOICE1,CHOICE2]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                    if CHOICE1.checkForInput(MENU_MOUSE_POS):
+                        if righteous >= 3:
+                            print("righteous")
+                            pygame.quit()
+                            sys.exit()
+                        # righteous_path()
+                        elif sinful >= 3:
+                            print("sinful")
+                            pygame.quit()
+                            sys.exit()
+                            # sinful_path()
+                    if CHOICE2.checkForInput(MENU_MOUSE_POS):
+                        pygame.quit()
+                        sys.exit()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -6857,11 +6895,135 @@ def end_chap1():
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    pygame.quit()
-                    sys.exit()
+                    if righteous >= 3:
+                        print("righteous")
+                        pygame.quit()
+                        sys.exit()
+                        # righteous_path()
+                    elif sinful >= 3:
+                        print("sinful")
+                        pygame.quit()
+                        sys.exit()
+                        # sinful_path()
 
         pygame.display.flip()
 
-# if conditions for right and sin is : 3 or 4
+def transition():
+    global righteous,sinful
+    start_background_image = pygame.image.load('assets/black.png')
+    start_alpha = 0
+    drive.stop()
 
-dialogue14()
+    while start_alpha < 255:
+        SCREEN.fill(BLACK)
+        start_background_image.set_alpha(start_alpha)
+        SCREEN.blit(start_background_image, (0, 0))
+        draw_text('CHAPTER I', prologuefont(100), WHITE, SCREEN, 640, 360, alpha=start_alpha)
+        draw_text('THE GREAT ESCAPE', prologuefont(30), WHITE, SCREEN, 640, 450, alpha=start_alpha)
+        pygame.display.flip()
+        pygame.time.delay(10)
+        start_alpha += 1
+    if start_alpha == 255:
+        transition2()
+    pygame.time.delay(10000)
+
+def transition1():
+    global righteous,sinful
+    start_alpha = 255
+    drive.stop()
+
+    bg = pygame.image.load('assets/humveeondesert.jpg')
+    scaled_bg = pygame.transform.scale(bg, (1280,720))
+    bg_rect = scaled_bg.get_rect(x=0,y=0)
+
+    current  = textbutton_font(24).render("Goodbye, prison. Hello, uncertainty.", True, "White")
+    current_rect = current.get_rect(x=290, y=570)
+
+    textbox = pygame.image.load('assets/textbox.png')
+    scaled_texbox = pygame.transform.scale(textbox, (850,200))
+    textbox_rect = scaled_texbox.get_rect(x=220,y=500)
+    
+    while start_alpha > 0:
+        SCREEN.fill(BLACK)
+        scaled_bg.set_alpha(start_alpha)
+        SCREEN.blit(scaled_bg, bg_rect)
+        SCREEN.blit(scaled_texbox, textbox_rect)
+        SCREEN.blit(current, current_rect)
+        pygame.display.flip()
+        pygame.time.delay(10)
+        start_alpha -= 1
+    if start_alpha == 0:
+        transition_beginning()
+    pygame.time.delay(2000)
+
+def transition2():
+    global righteous,sinful
+    start_background_image = pygame.image.load('assets/black.png')
+    start_alpha = 255
+    drive.stop()
+    
+    while start_alpha > 0:
+        SCREEN.fill(BLACK)
+        start_background_image.set_alpha(start_alpha)
+        SCREEN.blit(start_background_image, (0, 0))
+        draw_text('CHAPTER I', prologuefont(100), WHITE, SCREEN, 640, 360, alpha=start_alpha)
+        draw_text('THE GREAT ESCAPE', prologuefont(30), WHITE, SCREEN, 640, 450, alpha=start_alpha)
+        pygame.display.flip()
+        pygame.time.delay(10)
+        start_alpha -= 1
+    if start_alpha == 0:
+        end_chap1()
+    pygame.time.delay(10000)
+
+def end_chap1():
+    timer = pygame.time.Clock()
+    global righteous,sinful
+
+    run = True
+    while run:
+
+        timer.tick(60)
+        SCREEN.fill('black')
+
+        end = textbutton_font(70).render("Continue?", True, "White")
+        end_rect = end.get_rect(x=500, y=260)
+        SCREEN.blit(end,end_rect)
+
+        troll = textbutton_font(25).render("Warning : If you choose to quit, then the progress resets.", True, "White")
+        troll_rect = troll.get_rect(x=310, y=320)
+        SCREEN.blit(troll,troll_rect)
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
+
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(640, 460), 
+                            text_input="CONTINUE", font=textbutton_font(23), base_color="white", hovering_color="#FF3131")
+         
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(640, 550), 
+                            text_input="QUIT", font=textbutton_font(23), base_color="white", hovering_color="#FF3131")
+
+        for button in [CHOICE1,CHOICE2]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                    if CHOICE1.checkForInput(MENU_MOUSE_POS):
+                        if righteous >= 3:
+                            endingbgm.stop()
+                            print("righteous")
+                            chap2_opening()
+                        elif sinful >= 3:
+                            print("sinful")
+                            pygame.quit()
+                            sys.exit()
+                            # sinful_path()
+                    if CHOICE2.checkForInput(MENU_MOUSE_POS):
+                        pygame.quit()
+                        sys.exit()
+
+        pygame.display.flip()
+
+dialogue52v2()
