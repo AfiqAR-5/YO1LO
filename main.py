@@ -199,5 +199,3 @@ def dialogue():
         pygame.display.flip()
 
 main_menu()
-
-#entirely made by sufyan, ieman, and aqil roblox
