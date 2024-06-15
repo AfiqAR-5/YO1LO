@@ -2475,7 +2475,7 @@ def dialogue27():
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('Emir : MWAH MWAH MWAH (Evil Laugh)',
+    messages = ('Emir : MWAHAHAHAHA!!! (Evil Laugh)',
                 'Emir : You have such a foolish boyfriend.',
                 'Emir : I have killed his mother, and I have also taken his life.',
                 'Emir : STUPID GENES!',

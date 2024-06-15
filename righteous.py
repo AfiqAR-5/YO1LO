@@ -8,9 +8,14 @@ pygame.init()
 keyboard = pygame.mixer.Sound("assets/Audio/keyboard.mp3")
 chap2_bgm = pygame.mixer.Sound("assets/Audio/chap2_opening.mp3")
 chap2_ending = pygame.mixer.Sound("assets/Audio/chap2_ending.mp3")
+bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
 phone = pygame.mixer.Sound("assets/Audio/phone.mp3")
 rifleshoot = pygame.mixer.Sound("assets/Audio/rifle.mp3")
 tirescreech = pygame.mixer.Sound("assets/Audio/tirescreech.mp3")
+siren = pygame.mixer.Sound("assets/Audio/policesiren.mp3")
+sadbgm = pygame.mixer.Sound("assets/Audio/sadbgm.mp3")
+crisis = pygame.mixer.Sound("assets/Audio/shootoutscene.mp3")
+fight = pygame.mixer.Sound("assets/Audio/fightscene.mp3")
 
 # background image + scaling
 background_images_original = ['assets/cluesbg/clock.png', 'assets/cluesbg/dadstudy.png', 'assets/cluesbg/backyard.png', 'assets/cluesbg/livingroom.png', 'assets/cluesbg/mcroom.png', 'assets/cluesbg/shattered.png', 'assets/cluesbg/neighbourbg.png']
@@ -198,25 +203,21 @@ def choice1():
 
         timer = pygame.time.Clock()
 
-        end = textbutton_font(40).render("CHOOSE YOUR TARGET WISELY", True, "White")
-        end_rect = end.get_rect(x=340, y=320)
-        SCREEN.blit(end,end_rect)
-
         bg = pygame.image.load('assets/3car.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
         c1 = pygame.image.load('assets/cbutton.png')
-        scaled_c1 = pygame.transform.scale(c1, (500,70))
-        c1_rect = scaled_c1.get_rect(x=400,y=550)
+        scaled_c1 = pygame.transform.scale(c1, (200,50))
+        c1_rect = scaled_c1.get_rect(x=420,y=640)
 
         c2 = pygame.image.load('assets/cbutton.png')
-        scaled_c2 = pygame.transform.scale(c2, (500,70))
-        c2_rect = scaled_c2.get_rect(x=400,y=550)
+        scaled_c2 = pygame.transform.scale(c2, (200,50))
+        c2_rect = scaled_c2.get_rect(x=670,y=580)
 
         c3 = pygame.image.load('assets/cbutton.png')
-        scaled_c3 = pygame.transform.scale(c3, (500,70))
-        c3_rect = scaled_c3.get_rect(x=400,y=550)
+        scaled_c3 = pygame.transform.scale(c3, (200,50))
+        c3_rect = scaled_c3.get_rect(x=480,y=390)
 
         SCREEN.blit(scaled_bg, bg_rect)
         SCREEN.blit(scaled_c1, c1_rect)
@@ -227,13 +228,13 @@ def choice1():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
 
-        CHOICE3 = Button(image=pygame.image.load("assets/transparent.png"), pos=(1150, 365), 
-                            text_input="SHOOT", font=textbutton_font(21), base_color="black", hovering_color="#FF3131") #find better colour
+        CHOICE3 = Button(image=pygame.image.load("assets/transparent.png"), pos=(587, 420), 
+                            text_input="SHOOT", font=textbutton_font(30), base_color="black", hovering_color="#FF3131") #find better colour
         
-        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(130, 365), 
-                            text_input="SHOOT", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(522, 670), 
+                            text_input="SHOOT", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
 
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 590), 
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(773, 610), 
                             text_input="SHOOT", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
@@ -271,12 +272,12 @@ def choice2():
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
         c1 = pygame.image.load('assets/cbutton.png')
-        scaled_c1 = pygame.transform.scale(c1, (500,70))
-        c1_rect = scaled_c1.get_rect(x=400,y=550)
+        scaled_c1 = pygame.transform.scale(c1, (200,50))
+        c1_rect = scaled_c1.get_rect(x=670,y=580)
 
         c2 = pygame.image.load('assets/cbutton.png')
-        scaled_c2 = pygame.transform.scale(c2, (500,70))
-        c2_rect = scaled_c2.get_rect(x=400,y=550)
+        scaled_c2 = pygame.transform.scale(c2, (200,50))
+        c2_rect = scaled_c2.get_rect(x=480,y=390)
 
         SCREEN.blit(scaled_bg, bg_rect)
         SCREEN.blit(scaled_c1, c1_rect)
@@ -286,11 +287,11 @@ def choice2():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
         
-        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(130, 365), 
-                            text_input="SHOOT", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(587, 420), 
+                            text_input="SHOOT", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
 
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 590), 
-                            text_input="SHOOT", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(773, 610), 
+                            text_input="SHOOT", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
@@ -325,8 +326,8 @@ def choice3():
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
         c1 = pygame.image.load('assets/cbutton.png')
-        scaled_c1 = pygame.transform.scale(c1, (500,70))
-        c1_rect = scaled_c1.get_rect(x=400,y=550)
+        scaled_c1 = pygame.transform.scale(c1, (200,50))
+        c1_rect = scaled_c1.get_rect(x=670,y=580)
 
         SCREEN.blit(scaled_bg, bg_rect)
         SCREEN.blit(scaled_c1, c1_rect)
@@ -335,7 +336,7 @@ def choice3():
 
         MENU_MOUSE_POS = pygame.mouse.get_pos()
 
-        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(650, 590), 
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(773, 610), 
                             text_input="SHOOT", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
 
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
@@ -447,6 +448,8 @@ def dialogue1():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.play(-1)
+
 
     run = True
     while run:
@@ -541,7 +544,6 @@ def dialogue2():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/mc.png',430,1)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -631,6 +633,7 @@ def dialogue3():
                     else:
                         counter = speed * len(message)
                 if active_message == 3:
+                    bgmusic.stop()
                     start()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -653,6 +656,7 @@ def dialogue4():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.play()
 
     run = True
     while run:
@@ -662,7 +666,7 @@ def dialogue4():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/cafeteriabg.jpg')
+        bg = pygame.image.load('assets/bedroom.jpg')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -673,7 +677,7 @@ def dialogue4():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/mc.png',430,1)
+        char('assets/loverotwcandu.png',475,150)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -696,6 +700,7 @@ def dialogue4():
                     else:
                         counter = speed * len(message)
                 if active_message == 5:
+                    bgmusic.stop()
                     dialogue5()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -821,6 +826,7 @@ def dialogue6():
                     else:
                         counter = speed * len(message)
                 if active_message == 1:
+                    phone.stop()
                     transition1()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -857,6 +863,7 @@ def dialogue7():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.play(-1)
 
     run = True
     while run:
@@ -866,7 +873,7 @@ def dialogue7():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/cafeteriabg.jpg')
+        bg = pygame.image.load('assets/bedroom.jpg')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -877,7 +884,7 @@ def dialogue7():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/silhoutte.png',400,1)
+        char('assets/lovercalmcandu.png',475,175)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -943,7 +950,7 @@ def dialogue8():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/Chapter2/lovercalm.png',450,180)
+        char('assets/loverotwcandu.png',475,150)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -996,7 +1003,7 @@ def dialogue9():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/chap2.png')
+        bg = pygame.image.load('assets/Chapter2/chap2.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1007,7 +1014,7 @@ def dialogue9():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/Chapter2/lover4.png',500,-20)
+        char('assets/Chapter2/lover4.png',450,-50)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1070,7 +1077,7 @@ def dialogue10():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/prisongym.jpeg')
+        bg = pygame.image.load('assets/Chapter2/chap2.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1081,7 +1088,7 @@ def dialogue10():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/Chapter2/lover4.png',270,1)
+        char('assets/Chapter2/lover4.png',270,-70)
         char('assets/mc.png',630,20)
         screen.blit(scaled_texbox, textbox_rect)
 
@@ -1104,7 +1111,8 @@ def dialogue10():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                if active_message == 5:
+                if active_message == 14:
+                    bgmusic.stop()
                     dialogue11()
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (295, 600))
@@ -1135,6 +1143,7 @@ def dialogue11():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    sadbgm.play(-1)
 
     run = True
     while run:
@@ -1144,7 +1153,7 @@ def dialogue11():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/womaninmates.jpg')
+        bg = pygame.image.load('assets/Chapter2/chap2.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1155,6 +1164,9 @@ def dialogue11():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+        char('assets/Chapter2/lover4.png',170,-70)
+        char('assets/mc.png',350,20)
+        char('assets/casualemir.png',730,50)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1221,7 +1233,7 @@ def dialogue12():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/prisongym.jpeg')
+        bg = pygame.image.load('assets/Chapter2/chap2.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1232,8 +1244,9 @@ def dialogue12():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/mc.png',270,1)
-        char('assets/confusedwalter.png',600,20)
+        char('assets/Chapter2/lover4.png',170,-70)
+        char('assets/mc.png',350,20)
+        char('assets/casualemir.png',730,50)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1285,7 +1298,7 @@ def dialogue13():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/prisongym.jpeg')
+        bg = pygame.image.load('assets/Chapter2/chap2.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1296,7 +1309,9 @@ def dialogue13():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/silhoutte.png',475,1)
+        char('assets/Chapter2/lover4.png',170,-70)
+        char('assets/mc.png',350,20)
+        char('assets/confusedemir.png',730,50)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1342,7 +1357,7 @@ def dialogue14():
     speed = 1
     active_message = 0
     message = messages[active_message]
-    siren.play()
+    siren.play(-1)
 
     run = True
     while run:
@@ -1352,7 +1367,7 @@ def dialogue14():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/prisongym.jpeg')
+        bg = pygame.image.load('assets/Chapter2/chap2.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1363,7 +1378,8 @@ def dialogue14():
         screen.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/mc.png',430,1)
+        char('assets/seriousmc.png',270,100)
+        char('assets/Chapter2/villainnormal.png',630,20)
         screen.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1386,7 +1402,7 @@ def dialogue14():
                     else:
                         counter = speed * len(message)
                 if active_message == 6:
-                    choice2()
+                    dialogue15()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (295, 600))
@@ -1423,7 +1439,7 @@ def dialogue15():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/prisongym.jpeg')
+        bg = pygame.image.load('assets/Chapter2/chap2.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1434,7 +1450,8 @@ def dialogue15():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char("assets/mc.png",450,1)
+        char("assets/mc.png",630,1)
+        char('assets/Chapter2/lover4.png',270,-70)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1457,7 +1474,8 @@ def dialogue15():
                     else:
                         counter = speed * len(message)
                 if active_message == 8:
-                    transition2()
+                    sadbgm.stop()
+                    transition3()
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (295, 600))
@@ -1467,38 +1485,32 @@ def dialogue15():
 def transition3():
     start_alpha = 255
 
-    bg = pygame.image.load('assets/warehouse.png')
+    bg = pygame.image.load('assets/Chapter2/chap2.png')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
     bg_rect = scaled_bg.get_rect(x=0,y=0)
-
-    current  = textbutton_font(24).render("But for now, they\'ve to retreat to Luna\'s home first.", True, "White")
-    current_rect = current.get_rect(x=290, y=570)
-
-    textbox = pygame.image.load('assets/textboxlover.png')
-    scaled_texbox = pygame.transform.scale(textbox, (850,200))
-    textbox_rect = scaled_texbox.get_rect(x=220,y=500)
-    
     while start_alpha > 0:
         SCREEN.fill(BLACK)
         scaled_bg.set_alpha(start_alpha)
         SCREEN.blit(scaled_bg, bg_rect)
-        SCREEN.blit(scaled_texbox, textbox_rect)
-        SCREEN.blit(current, current_rect)
         pygame.display.flip()
-        pygame.time.delay(10)
+        pygame.time.delay(5)
         start_alpha -= 1
     if start_alpha == 0:
+        siren.stop()
         transition4()
     pygame.time.delay(2000)
 
 def transition4():
-    start_background_image = pygame.image.load('assets/houselover.png')
     start_alpha = 0
+
+    bg = pygame.image.load('assets/Chapter2/houselover.png')
+    scaled_bg = pygame.transform.scale(bg, (1280,720))
+    bg_rect = scaled_bg.get_rect(x=0,y=0)
 
     while start_alpha < 255:
         SCREEN.fill(BLACK)
-        start_background_image.set_alpha(start_alpha)
-        SCREEN.blit(start_background_image, (0, 0))
+        scaled_bg.set_alpha(start_alpha)
+        SCREEN.blit(scaled_bg, bg_rect)
         pygame.display.flip()
         pygame.time.delay(10)
         start_alpha += 1
@@ -1529,6 +1541,7 @@ def dialogue16():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.play(-1)
 
     run = True
 
@@ -1552,7 +1565,8 @@ def dialogue16():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/mc.png',430,1)
+        char("assets/mc.png",630,1)
+        char('assets/lover3candu.png',300,175)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1588,20 +1602,11 @@ def transition5():
     bg = pygame.image.load('assets/Chapter2/houselover.png')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
     bg_rect = scaled_bg.get_rect(x=0,y=0)
-
-    current  = textbutton_font(24).render("Luna : Now, let me brief you about the evidences. Come inside.", True, "White")
-    current_rect = current.get_rect(x=290, y=570)
-
-    textbox = pygame.image.load('assets/textboxlover.png')
-    scaled_texbox = pygame.transform.scale(textbox, (850,200))
-    textbox_rect = scaled_texbox.get_rect(x=220,y=500)
     
     while start_alpha > 0:
         SCREEN.fill(BLACK)
         scaled_bg.set_alpha(start_alpha)
         SCREEN.blit(scaled_bg, bg_rect)
-        SCREEN.blit(scaled_texbox, textbox_rect)
-        SCREEN.blit(current, current_rect)
         pygame.display.flip()
         pygame.time.delay(10)
         start_alpha -= 1
@@ -1610,7 +1615,6 @@ def transition5():
     pygame.time.delay(2000)
 
 def transition6():
-    start_background_image = pygame.image.load('assets/bedroom.jpg')
     start_alpha = 0
 
     bg = pygame.image.load('assets/bedroom.jpg')
@@ -1619,8 +1623,8 @@ def transition6():
 
     while start_alpha < 255:
         SCREEN.fill(BLACK)
-        start_background_image.set_alpha(start_alpha)
-        SCREEN.blit(start_background_image, (0, 0))
+        scaled_bg.set_alpha(start_alpha)
+        SCREEN.blit(scaled_bg, bg_rect)
         pygame.display.flip()
         pygame.time.delay(10)
         start_alpha += 1
@@ -1671,6 +1675,8 @@ def dialogue17():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+        char("assets/casualmc.png",630,1)
+        char('assets/loverotwcandu.png',300,175)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1706,20 +1712,11 @@ def transition7():
     bg = pygame.image.load('assets/bedroom.jpg')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
     bg_rect = scaled_bg.get_rect(x=0,y=0)
-
-    current  = textbutton_font(24).render("Luna : Goodnight too...", True, "White")
-    current_rect = current.get_rect(x=290, y=570)
-
-    textbox = pygame.image.load('assets/textboxlover.png')
-    scaled_texbox = pygame.transform.scale(textbox, (850,200))
-    textbox_rect = scaled_texbox.get_rect(x=220,y=500)
     
     while start_alpha > 0:
         SCREEN.fill(BLACK)
         scaled_bg.set_alpha(start_alpha)
         SCREEN.blit(scaled_bg, bg_rect)
-        SCREEN.blit(scaled_texbox, textbox_rect)
-        SCREEN.blit(current, current_rect)
         pygame.display.flip()
         pygame.time.delay(10)
         start_alpha -= 1
@@ -1730,50 +1727,21 @@ def transition7():
 def transition8():
     start_alpha = 0
 
-    bg = pygame.image.load('assets/drivewayblur.jpg')
+    bg = pygame.image.load('assets/driveway.jpg')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
     bg_rect = scaled_bg.get_rect(x=0,y=0)
-
-    box = pygame.image.load('assets/Play Rect.png')
-    scaled_box = pygame.transform.scale(box, (640,240))
-    box_rect = scaled_box.get_rect(x=320,y=250)
 
     while start_alpha < 255:
         SCREEN.fill(BLACK)
         scaled_bg.set_alpha(start_alpha)
-        scaled_box.set_alpha(start_alpha)
         SCREEN.blit(scaled_bg, bg_rect)
-        SCREEN.blit(scaled_box, box_rect)
         pygame.display.flip()
         pygame.time.delay(10)
         start_alpha += 1
     if start_alpha == 255:
-        transition9()
-    pygame.time.delay(10000)
-
-def transition9():
-    start_alpha = 255
-
-    bg = pygame.image.load('assets/drivewayblur.jpg')
-    scaled_bg = pygame.transform.scale(bg, (1280,720))
-    bg_rect = scaled_bg.get_rect(x=0,y=0)
-
-    box = pygame.image.load('assets/Play Rect.png')
-    scaled_box = pygame.transform.scale(box, (640,240))
-    box_rect = scaled_box.get_rect(x=320,y=250)
-    
-    while start_alpha > 0:
-        SCREEN.fill(BLACK)
-        scaled_bg.set_alpha(start_alpha)
-        scaled_box.set_alpha(start_alpha)
-        SCREEN.blit(scaled_bg, bg_rect)
-        SCREEN.blit(scaled_box, box_rect)
-        pygame.display.flip()
-        pygame.time.delay(10)
-        start_alpha -= 1
-    if start_alpha == 0:
+        bgmusic.stop()
         dialogue18()
-    pygame.time.delay(2000)
+    pygame.time.delay(10000)
 
 def dialogue18():
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
@@ -1790,6 +1758,7 @@ def dialogue18():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    crisis.play(-1)
 
     run = True
 
@@ -1802,7 +1771,7 @@ def dialogue18():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/prisongym.jpeg')
+        bg = pygame.image.load('assets/driveway.jpg')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1813,7 +1782,8 @@ def dialogue18():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/mc.png',430,1)
+        char("assets/mcwithpistol.png",630,1)
+        char('assets/loverfightcandu.png',300,175)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1857,16 +1827,22 @@ def dialogue19():
                 'Roman : Okay.',
                 'Roman : ...',
                 'Roman : Are we-',
-                'Luna : FOR GODSAKE, ROMAN. NO WE\'RE FAR AWAY FROM THE HIDEOUT.',
+                'Luna : FOR GODSAKE, ROMAN.', 
+                'Luna : NO, WE\'RE FAR AWAY FROM THE HIDEOUT.',
                 'Roman : <laughs uncontrollably> I love teasing you...',
                 'Luna : <blushes> Ugh...',
                 'Luna : ...',
-                'Luna : ...you know, ever since we became best friend back in high school.',
-                'Luna : I always wanted to talk with you. And that feeling grew up.',
+                'Luna : ...you know- ',
+                'Luna : -ever since we became best friend back in high school.',
+                'Luna : I always wanted to talk with you.',
+                'Luna : And that feeling grew up.',
                 'Luna : Just when I wanted to talk about my feelings...',
-                'Luna : You got accused of killing your own mother, and imprisoned.',
-                'Luna : I gave up. For you to get imprisoned for that many years...',
-                'Luna : I thought you would forget me, and I would never see you again...',
+                'Luna : You got accused...',
+                'Luna : ...of killing your own mother, and imprisoned.',
+                'Luna : I gave up.',
+                'Luna : For you to get imprisoned for that many years...',
+                'Luna : I thought you would forget me...',
+                'Luna : and I would never see you again...',
                 'Luna : But... fate brought us here now.',
                 'Luna : So, I just wanted to tell you, that...',
                 'Luna : ...',
@@ -1922,7 +1898,7 @@ def dialogue19():
                         counter = 0
                     else:
                         counter = speed * len(message)
-                if active_message == 25:
+                if active_message == 31:
                     dialogue20()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -1959,7 +1935,7 @@ def dialogue20():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/cargotshot.jpg')
+        bg = pygame.image.load('assets/driving.jpg')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1970,8 +1946,6 @@ def dialogue20():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/surprisedmc.png',270,-50)
-        char('assets/casualwalter.png',630,20)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2036,7 +2010,6 @@ def dialogue21():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/silhoutte.png',400,1)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2093,9 +2066,9 @@ def dialogue22():
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
-        textbox = pygame.image.load('assets/textboxlover.png')
-        scaled_texbox = pygame.transform.scale(textbox, (850,450))
-        textbox_rect = scaled_texbox.get_rect(x=220,y=410)
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=0)
 
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
@@ -2125,7 +2098,7 @@ def dialogue22():
                     choice2()
 
         snip = font.render(message[0:counter//speed], True, 'white')
-        screen.blit(snip, (295, 600))
+        screen.blit(snip, (295, 85))
 
         pygame.display.flip()
 
@@ -2156,15 +2129,13 @@ def dialogue23():
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
-        textbox = pygame.image.load('assets/textboxlover.png')
-        scaled_texbox = pygame.transform.scale(textbox, (850,450))
-        textbox_rect = scaled_texbox.get_rect(x=220,y=410)
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=0)
 
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/casualmc.png',270,1)
-        char('assets/casualemir.png',670,50)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2190,7 +2161,7 @@ def dialogue23():
                     choice3()
 
         snip = font.render(message[0:counter//speed], True, 'white')
-        screen.blit(snip, (295, 600))
+        screen.blit(snip, (295, 85))
 
         pygame.display.flip()
 
@@ -2199,7 +2170,7 @@ def dialogue24():
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('Roman : Damn!',
+    messages = ('Roman : Damn! That was good!',
                 'Luna : Way to go, Roman!',
                 '...')
     snip = font.render('', True, 'white')
@@ -2224,14 +2195,13 @@ def dialogue24():
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
-        textbox = pygame.image.load('assets/textboxlover.png')
-        scaled_texbox = pygame.transform.scale(textbox, (850,450))
-        textbox_rect = scaled_texbox.get_rect(x=220,y=410)
+        textbox = pygame.image.load('assets/textbox.png')
+        scaled_texbox = pygame.transform.scale(textbox, (850,200))
+        textbox_rect = scaled_texbox.get_rect(x=220,y=0)
 
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/mc.png',430,1)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2257,7 +2227,7 @@ def dialogue24():
                     dialogue25()
 
         snip = font.render(message[0:counter//speed], True, 'white')
-        screen.blit(snip, (295, 600))
+        screen.blit(snip, (295, 85))
 
         pygame.display.flip()
 
@@ -2301,8 +2271,6 @@ def dialogue25():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/seriousmc.png',320,50)
-        char('assets/confusedwalter.png',600,20)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2325,6 +2293,8 @@ def dialogue25():
                     else:
                         counter = speed * len(message)
                 if active_message == 7:
+                    crisis.stop()
+                    rifleshoot.stop()
                     dialogue26()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -2369,7 +2339,6 @@ def dialogue26():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-        char('assets/mc.png',430,1)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2523,6 +2492,7 @@ def dialogue28():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    fight.play(-1)
 
     run = True
 
@@ -2546,6 +2516,8 @@ def dialogue28():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+        char("assets/Chapter2/lover4.png",270,-50)
+        char("assets/mc.png",630,1)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2615,7 +2587,7 @@ def dialogue29():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-        bg = pygame.image.load('assets/sneakwarden.jpg')
+        bg = pygame.image.load('assets/roadside.jpg')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -2626,6 +2598,8 @@ def dialogue29():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
+        char("assets/seriousmc.png",300,100)
+        char("assets/Chapter2/villainnormal.png",630,1)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2730,6 +2704,7 @@ def dialogue30():
                     else:
                         counter = speed * len(message)
                 if active_message == 18:
+                    fight.stop()
                     dialogue31()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -2775,7 +2750,7 @@ def dialogue31():
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
         char('assets/mc.png',270,1)
-        char('assets/Chapter2/loverOTW.png',670,1)
+        char('assets/loverotwcandu.png',630,170)
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -2809,7 +2784,7 @@ def dialogue32():
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
-    messages = ('At last, the dreaded battle has finally come to and end.',
+    messages = ('At last, the dreaded battle has finally come to an end.',
                 'The two embrace themselves in warm hug and kiss.',
                 'With the battle\'s echoes fading into the night.',
                 'Roman looked towards the horizon, the weight of his past lifting.',
@@ -3157,59 +3132,25 @@ def dialogue35():
         pygame.display.flip()
 
 def transition17():
-    start_alpha = 255
+    start_alpha = 0
 
     bg = pygame.image.load('assets/black.png')
     scaled_bg = pygame.transform.scale(bg, (1280,720))
     bg_rect = scaled_bg.get_rect(x=0,y=0)
     
-    while start_alpha > 0:
+    while start_alpha < 255:
         SCREEN.fill(BLACK)
         scaled_bg.set_alpha(start_alpha)
         SCREEN.blit(scaled_bg, bg_rect)
-        draw_text('Thanks for playing until the ending', prologuefont(100), WHITE, SCREEN, 640, 360, alpha=start_alpha)
-        draw_text('Hope you\'re touched by the story...', prologuefont(30), WHITE, SCREEN, 640, 450, alpha=start_alpha)
-        draw_text('Congratulations, you\'ve unlocked true ending!', prologuefont(100), WHITE, SCREEN, 640, 360, alpha=start_alpha)
+        draw_text('Thanks for playing until the ending', prologuefont(20), WHITE, SCREEN, 640, 400, alpha=start_alpha)
+        draw_text('Hope you\'re touched by the story...', prologuefont(20), WHITE, SCREEN, 640, 450, alpha=start_alpha)
+        draw_text('Congratulations, you\'ve unlocked true ending!', prologuefont(45), WHITE, SCREEN, 640, 330, alpha=start_alpha)
         pygame.display.flip()
-        pygame.time.delay(10)
-        start_alpha -= 1
-    if start_alpha == 0:
-        transition()
-    pygame.time.delay(100000)
-
-def transition18():
-    start_background_image = pygame.image.load('assets/black.png')
-    start_alpha = 0
-
-    while start_alpha < 255:
-        SCREEN.fill(BLACK)
-        start_background_image.set_alpha(start_alpha)
-        SCREEN.blit(start_background_image, (0, 0))
-        draw_text('CHAPTER II', prologuefont(100), WHITE, SCREEN, 640, 360, alpha=start_alpha)
-        draw_text('Amour, or Malevolence?', prologuefont(30), WHITE, SCREEN, 640, 450, alpha=start_alpha)
-        pygame.display.flip()
-        pygame.time.delay(10)
+        pygame.time.delay(5)
         start_alpha += 1
     if start_alpha == 255:
-        transition2()
-    pygame.time.delay(10000)
+        pygame.quit()
+        sys.exit()
+    pygame.time.delay(100000)
 
-
-
-def transition2():
-    start_background_image = pygame.image.load('assets/black.png')
-    start_alpha = 255
-    
-    while start_alpha > 0:
-        SCREEN.fill(BLACK)
-        start_background_image.set_alpha(start_alpha)
-        SCREEN.blit(start_background_image, (0, 0))
-        draw_text('CHAPTER II', prologuefont(100), WHITE, SCREEN, 640, 360, alpha=start_alpha)
-        draw_text('Amour, or Malevolence?', prologuefont(30), WHITE, SCREEN, 640, 450, alpha=start_alpha)
-        pygame.display.flip()
-        pygame.time.delay(10)
-        start_alpha -= 1
-    if start_alpha == 0:
-        chap2_bgm.stop()
-        dialogue7()
-    pygame.time.delay(1000)
+transition17()
