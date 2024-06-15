@@ -1,1 +1,1 @@
-itch.io link to be placed here
+https://arsyd.itch.io/yo1lo
