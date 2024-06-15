@@ -2043,4 +2043,4 @@ def main():
 
     pygame.quit()
 
-dialogue24()
+main()

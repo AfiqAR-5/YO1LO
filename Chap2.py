@@ -980,4 +980,7 @@ def choice4():
 
             pygame.display.flip()
             
-chap2_opening()
+
+
+
+dialogue1()

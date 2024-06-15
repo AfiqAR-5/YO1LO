@@ -1,7 +1,7 @@
 import pygame, sys
 from config import *
 from button import Button
-from righteous import chap2_opening
+
 pygame.init()
 
 bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
@@ -745,9 +745,6 @@ def choice11():
                         pausemenu()
 
             pygame.display.flip()
-
-
-
 
 def chap1_opening():
     timer = pygame.time.Clock()
@@ -6947,7 +6944,7 @@ def end_chap1():
                         if righteous >= 3:
                             endingbgm.stop()
                             print("righteous")
-                            chap2_opening()
+                            #call righteous path file
                         elif sinful >= 3:
                             print("sinful")
                             pygame.quit()
@@ -6959,4 +6956,4 @@ def end_chap1():
 
         pygame.display.flip()
 
-dialogue52v2()
+chap1_opening()

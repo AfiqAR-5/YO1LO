@@ -5,7 +5,6 @@ import random
 from config import *
 from button import Button
 from settingsshoot import *
-from Charge import dialogue1v1
 
 pygame.init()
 
@@ -2196,17 +2195,13 @@ def choice5():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if CHOICE1.checkForInput(MENU_MOUSE_POS):
                     print('ASSASSINATE STEALTHILY CHOOSED')
-                    dialogue1v1()
                 
                 if CHOICE2.checkForInput(MENU_MOUSE_POS):
                     print('CHARGE AT THEM CHOOSED')
-                    dialogue1v1()
 
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
 
             pygame.display.flip()
 
-
-if __name__ == "__main__":
-    dialogue1()
+shootgame()

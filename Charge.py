@@ -2614,4 +2614,4 @@ def dialogue28():
 
         pygame.display.flip()   
      
-dialogue25()
+dialogue1v1()

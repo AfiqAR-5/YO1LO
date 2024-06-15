@@ -1,7 +1,7 @@
 import pygame, sys
 from config import *
 from button import Button
-from Chap1 import chap1_opening
+
 pygame.init()
 
 bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
@@ -1438,6 +1438,8 @@ def prologue():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     introbgm.stop()
-                    chap1_opening()
-                    
+                    pass
+                    # call file chap1 here
         pygame.display.flip()
+
+dialogue1()
