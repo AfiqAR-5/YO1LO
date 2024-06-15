@@ -764,7 +764,7 @@ def chap1_opening():
         box_rect = scaled_box.get_rect(x=320,y=250)
         SCREEN.blit(scaled_box, box_rect)
 
-        end = prologuefont(40).render("Chapter 1 - Act 1", True, "White")
+        end = prologuefont(40).render("chapter I - act I", True, "White")
         end_rect = end.get_rect(x=340, y=265)
         SCREEN.blit(end,end_rect)
 
@@ -1506,7 +1506,7 @@ def chap1v2_opening():
         box_rect = scaled_box.get_rect(x=320,y=250)
         SCREEN.blit(scaled_box, box_rect)
 
-        end = prologuefont(40).render("Chapter 1 - Act 2", True, "White")
+        end = prologuefont(40).render("Chapter I - Act II", True, "White")
         end_rect = end.get_rect(x=340, y=320)
         SCREEN.blit(end,end_rect)
 
@@ -2674,7 +2674,7 @@ def chap1v3_opening():
         box_rect = scaled_box.get_rect(x=320,y=250)
         SCREEN.blit(scaled_box, box_rect)
 
-        end = prologuefont(40).render("Chapter 1 - Act 3", True, "White")
+        end = prologuefont(40).render("Chapter I - Act III", True, "White")
         end_rect = end.get_rect(x=340, y=320)
         SCREEN.blit(end,end_rect)
 
@@ -3034,7 +3034,7 @@ def chap1v4_opening():
         box_rect = scaled_box.get_rect(x=320,y=250)
         SCREEN.blit(scaled_box, box_rect)
 
-        end = prologuefont(40).render("Chapter 1 - Act 4", True, "White")
+        end = prologuefont(40).render("Chapter I - Act IV", True, "White")
         end_rect = end.get_rect(x=340, y=320)
         SCREEN.blit(end,end_rect)
 
@@ -3505,7 +3505,7 @@ def chap1v5_opening():
         box_rect = scaled_box.get_rect(x=320,y=250)
         SCREEN.blit(scaled_box, box_rect)
 
-        end = prologuefont(40).render("Chapter 1 - Act 5", True, "White")
+        end = prologuefont(40).render("Chapter I - Act V", True, "White")
         end_rect = end.get_rect(x=340, y=320)
         SCREEN.blit(end,end_rect)
 
@@ -6835,9 +6835,6 @@ def dialogue54v3():
 
         pygame.display.flip()
 
-def transition_beginning():
-    transition()
-
 def transition():
     global righteous,sinful
     start_background_image = pygame.image.load('assets/black.png')
@@ -6851,7 +6848,7 @@ def transition():
         draw_text('CHAPTER I', prologuefont(100), WHITE, SCREEN, 640, 360, alpha=start_alpha)
         draw_text('THE GREAT ESCAPE', prologuefont(30), WHITE, SCREEN, 640, 450, alpha=start_alpha)
         pygame.display.flip()
-        pygame.time.delay(10)
+        pygame.time.delay(50)
         start_alpha += 1
     if start_alpha == 255:
         transition2()
@@ -6883,7 +6880,7 @@ def transition1():
         pygame.time.delay(10)
         start_alpha -= 1
     if start_alpha == 0:
-        transition_beginning()
+        transition()
     pygame.time.delay(2000)
 
 def transition2():
@@ -6899,7 +6896,7 @@ def transition2():
         draw_text('CHAPTER I', prologuefont(100), WHITE, SCREEN, 640, 360, alpha=start_alpha)
         draw_text('THE GREAT ESCAPE', prologuefont(30), WHITE, SCREEN, 640, 450, alpha=start_alpha)
         pygame.display.flip()
-        pygame.time.delay(10)
+        pygame.time.delay(100)
         start_alpha -= 1
     if start_alpha == 0:
         end_chap1()
