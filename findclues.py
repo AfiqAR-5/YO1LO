@@ -5,13 +5,16 @@ import time
 pygame.init()
 pygame.mixer.init()
 
-# Background music
-bg_music = pygame.mixer.Sound('assets/Audio/qtebgm.mp3')
+pygame.display.set_caption("YO1LO")
 
 width, height = 1280, 720
 window = pygame.display.set_mode((width, height))
 pygame.display.set_caption('YO1LO')
 
+# Background music
+bg_music = pygame.mixer.Sound('assets/Audio/qtebgm.mp3')
+
+# Colours
 black = (0, 0, 0)
 white = (255, 255, 255)
 red = (255, 0, 0)
@@ -142,3 +145,5 @@ def start():
 
     bg_music.stop()
     pygame.quit()
+
+start()

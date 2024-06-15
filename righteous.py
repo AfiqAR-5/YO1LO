@@ -1,8 +1,9 @@
-import pygame, sys, random
+import pygame, sys, random,time
 from config import *
 from button import Button
-from findclues import *
+
 pygame.init()
+pygame.display.set_caption("YO1LO") 
 
 # BGM n sound effect
 keyboard = pygame.mixer.Sound("assets/Audio/keyboard.mp3")
@@ -16,6 +17,18 @@ siren = pygame.mixer.Sound("assets/Audio/policesiren.mp3")
 sadbgm = pygame.mixer.Sound("assets/Audio/sadbgm.mp3")
 crisis = pygame.mixer.Sound("assets/Audio/shootoutscene.mp3")
 fight = pygame.mixer.Sound("assets/Audio/fightscene.mp3")
+
+# clues background music
+bg_music = pygame.mixer.Sound('assets/Audio/qtebgm.mp3')
+
+# Colours
+black = (0, 0, 0)
+white = (255, 255, 255)
+red = (255, 0, 0)
+green = (0, 255, 0)
+
+width, height = 1280, 720
+window = pygame.display.set_mode((width, height))
 
 # background image + scaling
 background_images_original = ['assets/cluesbg/clock.png', 'assets/cluesbg/dadstudy.png', 'assets/cluesbg/backyard.png', 'assets/cluesbg/livingroom.png', 'assets/cluesbg/mcroom.png', 'assets/cluesbg/shattered.png', 'assets/cluesbg/neighbourbg.png']
@@ -64,7 +77,7 @@ def reset_qte():
 
 def win_screen():
     bg_music.stop()
-    win_background_image = pygame.image.load('assets/background.png')
+    win_background_image = pygame.image.load('assets/blackscreen.png')
     win_alpha = 0
     pygame.mixer.music.load('assets/Audio/yay.mp3')
     pygame.mixer.music.play()
@@ -82,7 +95,7 @@ def win_screen():
 
 def start_screen():
     bg_music.play(-1)
-    start_background_image = pygame.image.load('assets/background.png')
+    start_background_image = pygame.image.load('assets/blackscreen.png')
     start_alpha = 255
     while start_alpha > 0:
         SCREEN.fill(BLACK)
@@ -198,6 +211,75 @@ def pausemenu():
 
             pygame.display.flip()
 
+def transition_beginning():
+    transition()
+    timer = pygame.time.Clock()
+    global righteous,sinful
+
+    run = True
+    while run:
+
+        timer.tick(60)
+        SCREEN.fill('black')
+
+        end = textbutton_font(70).render("Continue?", True, "White")
+        end_rect = end.get_rect(x=500, y=260)
+        SCREEN.blit(end,end_rect)
+
+        troll = textbutton_font(25).render("Warning : If you choose to quit, then the progress resets.", True, "White")
+        troll_rect = troll.get_rect(x=310, y=320)
+        SCREEN.blit(troll,troll_rect)
+
+        MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
+
+        CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(640, 460), 
+                            text_input="CONTINUE", font=textbutton_font(23), base_color="white", hovering_color="#FF3131")
+         
+        CHOICE2 = Button(image=pygame.image.load("assets/transparent.png"), pos=(640, 550), 
+                            text_input="QUIT", font=textbutton_font(23), base_color="white", hovering_color="#FF3131")
+
+        for button in [CHOICE1,CHOICE2]:
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                    if CHOICE1.checkForInput(MENU_MOUSE_POS):
+                        if righteous >= 3:
+                            print("righteous")
+                            pygame.quit()
+                            sys.exit()
+                        # righteous_path()
+                        elif sinful >= 3:
+                            print("sinful")
+                            pygame.quit()
+                            sys.exit()
+                            # sinful_path()
+                    if CHOICE2.checkForInput(MENU_MOUSE_POS):
+                        pygame.quit()
+                        sys.exit()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if righteous >= 3:
+                        print("righteous")
+                        pygame.quit()
+                        sys.exit()
+                        # righteous_path()
+                    elif sinful >= 3:
+                        print("sinful")
+                        pygame.quit()
+                        sys.exit()
+                        # sinful_path()
+
+        pygame.display.flip()
 def choice1():
     while True:
 
@@ -1003,6 +1085,7 @@ def dialogue9():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
+        bg = pygame.image.load('assets/blackscreen.png')
         bg = pygame.image.load('assets/Chapter2/chap2.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
@@ -1357,6 +1440,7 @@ def dialogue14():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    
     siren.play(-1)
 
     run = True
@@ -3153,4 +3237,4 @@ def transition17():
         sys.exit()
     pygame.time.delay(100000)
 
-transition17()
+chap2_opening()
