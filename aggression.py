@@ -1,17 +1,17 @@
 import pygame, sys
 import math
 import random
-from settingshot1 import *
+from settingshoot import *
 from button import Button
 from config import *
-from main import main_menu
+from subprocess import call
 
 pygame.init()
 
 pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("YO!LO GAME")
+pygame.display.set_caption("YO1LO")
 clock = pygame.time.Clock()
 
 #loadsoundeffect
@@ -3181,10 +3181,13 @@ def credits():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if CHOICE1.checkForInput(MENU_MOUSE_POS):
                     print('MAIN MENU')
-                    main_menu()
+                    pygame.quit()
+                    call(["python", "main.py"])
                 if CHOICE1.checkForInput(MENU_MOUSE_POS):
                     print('QUIT')
                     pygame.quit()
                     sys.exit()
 
             pygame.display.flip()
+
+dialogue1v1()

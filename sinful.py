@@ -1,7 +1,7 @@
 import pygame, sys, random, time
 from config import *
 from button import Button
-from LOVERSCHAP2pt2 import shootgame
+from subprocess import call
 
 pygame.init()
 
@@ -12,10 +12,8 @@ window = pygame.display.set_mode((width, height))
 screen = pygame.display.set_mode((1280, 720))
 pygame.display.set_caption("YO1LO")
 
-pygame.mixer.music.load("assets/Chapter2/bgsoundchap2.wav")
-pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
-pygame.mixer.music.set_volume(0.999)
-
+chap2_bgm = pygame.mixer.Sound("assets/Audio/chap2_opening.mp3")
+bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
 bgsound = pygame.mixer.Sound("assets/Audio/gta.wav")
 boomsound = pygame.mixer.Sound("assets/Audio/shoot_sound.wav")
 window_sound = pygame.mixer.Sound("assets/Audio/Window.mp3")
@@ -373,6 +371,7 @@ def dialogue111():
     speed = 1
     active_message = 0
     message = messages[active_message]
+    bgmusic.play(-1)
 
     run = True
     while run:
@@ -556,7 +555,7 @@ def dialogue333():
                         counter = speed * len(message)
                 if active_message == 3:
                     # letak finding clues sini
-                    pygame.mixer.music.stop()
+                    bgmusic.stop()
                     findclues()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -565,9 +564,6 @@ def dialogue333():
         pygame.display.flip()
 
 def dialogue444():
-    pygame.mixer.music.load("assets/Chapter2/bgsoundchap2.wav")
-    pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
-    pygame.mixer.music.set_volume(0.1)
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
@@ -582,6 +578,8 @@ def dialogue444():
     speed = 1
     active_message = 0
     message = messages[active_message]
+
+    bgmusic.play(-1)
 
     run = True
     while run:
@@ -754,6 +752,7 @@ def dialogue666():
                     else:
                         counter = speed * len(message)
                 if active_message == 1:
+                    bgmusic.stop()
                     transition1()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -790,7 +789,7 @@ def dialogue777():
     speed = 1
     active_message = 0
     message = messages[active_message]
-
+    bgmusic.play(-1)
     run = True
     while run:
 
@@ -902,6 +901,7 @@ def dialogue888():
                     else:
                         counter = speed * len(message)
                 if active_message == 6:
+                    bgmusic.stop()
                     dialogue999()
 
         snip = font.render(message[0:counter//speed], True, 'white')
@@ -910,6 +910,9 @@ def dialogue888():
         pygame.display.flip()
 
 def dialogue999():
+    pygame.mixer.music.load("assets/Chapter2/bgsoundchap2.wav")
+    pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
+    pygame.mixer.music.set_volume(0.1)
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
@@ -2255,9 +2258,11 @@ def choice4():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if CHOICE1.checkForInput(MENU_MOUSE_POS):
-                    shootgame()
+                    pygame.quit()
+                    call(["python", "houseraid.py"])
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
 
             pygame.display.flip()
-        
+
+chap2_opening()

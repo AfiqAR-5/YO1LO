@@ -1,8 +1,11 @@
 import pygame, sys
 from config import *
 from button import Button
+from subprocess import call
 
 pygame.init()
+
+pygame.display.set_caption("YO1LO")
 
 bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
 sadbgm = pygame.mixer.Sound("assets/Audio/sadbgm.mp3")
@@ -6940,13 +6943,11 @@ def end_chap1():
                     if CHOICE1.checkForInput(MENU_MOUSE_POS):
                         if righteous >= 3:
                             endingbgm.stop()
-                            print("righteous")
-                            #call righteous path file
-                        elif sinful >= 3:
-                            print("sinful")
                             pygame.quit()
-                            sys.exit()
-                            # sinful_path()
+                            call(["python", "righteous.py"])
+                        elif sinful >= 3:
+                            pygame.quit()
+                            call(["python", "sinful.py"])
                     if CHOICE2.checkForInput(MENU_MOUSE_POS):
                         pygame.quit()
                         sys.exit()

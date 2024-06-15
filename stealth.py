@@ -6691,4 +6691,4 @@ def dialogue69():  # centered textbox
 
         pygame.display.flip()
 
-dialogue33()
+dialoguebf1()

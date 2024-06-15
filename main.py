@@ -1,5 +1,6 @@
-import pygame, sys
+import pygame, sys, os
 from button import Button
+from subprocess import call
 
 pygame.init()
 
@@ -81,6 +82,30 @@ def title_font(size):
 
 def charmenu_font(size):   
     return pygame.font.Font("assets/Font/ARCADECLASSIC.TTF", size)
+
+def fadein():
+    start_background_image = pygame.image.load('assets/contentwarn.png')
+    start_alpha = 0
+    while start_alpha < 255:
+        SCREEN.fill("black")
+        start_background_image.set_alpha(start_alpha)
+        SCREEN.blit(start_background_image, (0, 0))
+        pygame.display.flip()
+        pygame.time.delay(10)
+        start_alpha += 1
+    pygame.time.delay(2000)
+
+def fadeout():
+    start_background_image = pygame.image.load('assets/contentwarn.png')
+    start_alpha = 255
+    while start_alpha > 0:
+        SCREEN.fill("black")
+        start_background_image.set_alpha(start_alpha)
+        SCREEN.blit(start_background_image, (0, 0))
+        pygame.display.flip()
+        pygame.time.delay(10)
+        start_alpha -= 1
+    pygame.time.delay(2000)
 
 def credits():
     while True:
@@ -173,7 +198,10 @@ def main_menu():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BUTTON.checkForInput(MENU_MOUSE_POS):
-                    pass # call chap 1
+                    fadein()
+                    fadeout()
+                    pygame.quit()
+                    call(["python", "prologue.py"])
                 if CREDITS_BUTTON.checkForInput(MENU_MOUSE_POS):
                     credits()
                 if QUIT_BUTTON.checkForInput(MENU_MOUSE_POS): #if pressing the quit button

@@ -1,8 +1,9 @@
-import pygame, sys, random
+import pygame, sys, random,time
 from config import *
 from button import Button
-from findclues import *
+
 pygame.init()
+pygame.display.set_caption("YO1LO") 
 
 # BGM n sound effect
 keyboard = pygame.mixer.Sound("assets/Audio/keyboard.mp3")
@@ -16,6 +17,18 @@ siren = pygame.mixer.Sound("assets/Audio/policesiren.mp3")
 sadbgm = pygame.mixer.Sound("assets/Audio/sadbgm.mp3")
 crisis = pygame.mixer.Sound("assets/Audio/shootoutscene.mp3")
 fight = pygame.mixer.Sound("assets/Audio/fightscene.mp3")
+
+# clues background music
+bg_music = pygame.mixer.Sound('assets/Audio/qtebgm.mp3')
+
+# Colours
+black = (0, 0, 0)
+white = (255, 255, 255)
+red = (255, 0, 0)
+green = (0, 255, 0)
+
+width, height = 1280, 720
+window = pygame.display.set_mode((width, height))
 
 # background image + scaling
 background_images_original = ['assets/cluesbg/clock.png', 'assets/cluesbg/dadstudy.png', 'assets/cluesbg/backyard.png', 'assets/cluesbg/livingroom.png', 'assets/cluesbg/mcroom.png', 'assets/cluesbg/shattered.png', 'assets/cluesbg/neighbourbg.png']
@@ -64,7 +77,7 @@ def reset_qte():
 
 def win_screen():
     bg_music.stop()
-    win_background_image = pygame.image.load('assets/background.png')
+    win_background_image = pygame.image.load('assets/blackscreen.png')
     win_alpha = 0
     pygame.mixer.music.load('assets/Audio/yay.mp3')
     pygame.mixer.music.play()
@@ -82,7 +95,7 @@ def win_screen():
 
 def start_screen():
     bg_music.play(-1)
-    start_background_image = pygame.image.load('assets/background.png')
+    start_background_image = pygame.image.load('assets/blackscreen.png')
     start_alpha = 255
     while start_alpha > 0:
         SCREEN.fill(BLACK)
@@ -198,7 +211,6 @@ def pausemenu():
 
             pygame.display.flip()
 
-<<<<<<< HEAD
 def transition_beginning():
     transition()
     timer = pygame.time.Clock()
@@ -227,7 +239,47 @@ def transition_beginning():
                             text_input="QUIT", font=textbutton_font(23), base_color="white", hovering_color="#FF3131")
 
         for button in [CHOICE1,CHOICE2]:
-=======
+            button.changeColor(MENU_MOUSE_POS)
+            button.update(SCREEN)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                    if CHOICE1.checkForInput(MENU_MOUSE_POS):
+                        if righteous >= 3:
+                            print("righteous")
+                            pygame.quit()
+                            sys.exit()
+                        # righteous_path()
+                        elif sinful >= 3:
+                            print("sinful")
+                            pygame.quit()
+                            sys.exit()
+                            # sinful_path()
+                    if CHOICE2.checkForInput(MENU_MOUSE_POS):
+                        pygame.quit()
+                        sys.exit()
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    if righteous >= 3:
+                        print("righteous")
+                        pygame.quit()
+                        sys.exit()
+                        # righteous_path()
+                    elif sinful >= 3:
+                        print("sinful")
+                        pygame.quit()
+                        sys.exit()
+                        # sinful_path()
+
+        pygame.display.flip()
 def choice1():
     while True:
 
@@ -271,50 +323,10 @@ def choice1():
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
         for button in [PAUSE,CHOICE1,CHOICE2,CHOICE3]:
->>>>>>> 0770d5f31059d0f09c1502a54ada10b6ebca1501
             button.changeColor(MENU_MOUSE_POS)
             button.update(SCREEN)
 
         for event in pygame.event.get():
-<<<<<<< HEAD
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                    if CHOICE1.checkForInput(MENU_MOUSE_POS):
-                        if righteous >= 3:
-                            print("righteous")
-                            pygame.quit()
-                            sys.exit()
-                        # righteous_path()
-                        elif sinful >= 3:
-                            print("sinful")
-                            pygame.quit()
-                            sys.exit()
-                            # sinful_path()
-                    if CHOICE2.checkForInput(MENU_MOUSE_POS):
-                        pygame.quit()
-                        sys.exit()
-
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RETURN:
-                    if righteous >= 3:
-                        print("righteous")
-                        pygame.quit()
-                        sys.exit()
-                        # righteous_path()
-                    elif sinful >= 3:
-                        print("sinful")
-                        pygame.quit()
-                        sys.exit()
-                        # sinful_path()
-
-        pygame.display.flip()
-=======
 
             if event.type == pygame.QUIT: #if pressing x button on window screen
                 pygame.quit()
@@ -429,7 +441,6 @@ def choice3():
                     pausemenu()
 
             pygame.display.flip()
->>>>>>> 0770d5f31059d0f09c1502a54ada10b6ebca1501
 
 def transition():
     start_background_image = pygame.image.load('assets/black.png')
@@ -1074,11 +1085,8 @@ def dialogue9():
         PAUSE = Button(image=pygame.image.load("assets/pause.png"), pos=(50, 50), 
                             text_input="           ", font=textbutton_font(21), base_color="black", hovering_color="#FF3131")
 
-<<<<<<< HEAD
         bg = pygame.image.load('assets/blackscreen.png')
-=======
         bg = pygame.image.load('assets/Chapter2/chap2.png')
->>>>>>> 0770d5f31059d0f09c1502a54ada10b6ebca1501
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
         
@@ -1432,11 +1440,8 @@ def dialogue14():
     speed = 1
     active_message = 0
     message = messages[active_message]
-<<<<<<< HEAD
     
-=======
     siren.play(-1)
->>>>>>> 0770d5f31059d0f09c1502a54ada10b6ebca1501
 
     run = True
     while run:
@@ -1529,12 +1534,8 @@ def dialogue15():
         SCREEN.blit(scaled_bg, bg_rect)
         PAUSE.update(SCREEN)
         PAUSE.changeColor(MENU_MOUSE_POS)
-<<<<<<< HEAD
-        char("assets/mc.png",450,1)
-=======
         char("assets/mc.png",630,1)
         char('assets/Chapter2/lover4.png',270,-70)
->>>>>>> 0770d5f31059d0f09c1502a54ada10b6ebca1501
         SCREEN.blit(scaled_texbox, textbox_rect)
 
         timer.tick(60)
@@ -1557,21 +1558,14 @@ def dialogue15():
                     else:
                         counter = speed * len(message)
                 if active_message == 8:
-<<<<<<< HEAD
-                    pass
-=======
                     sadbgm.stop()
                     transition3()
->>>>>>> 0770d5f31059d0f09c1502a54ada10b6ebca1501
 
         snip = font.render(message[0:counter//speed], True, 'white')
         screen.blit(snip, (295, 600))
 
         pygame.display.flip()
 
-<<<<<<< HEAD
-dialogue15()
-=======
 def transition3():
     start_alpha = 255
 
@@ -3243,5 +3237,4 @@ def transition17():
         sys.exit()
     pygame.time.delay(100000)
 
-transition17()
->>>>>>> 0770d5f31059d0f09c1502a54ada10b6ebca1501
+chap2_opening()

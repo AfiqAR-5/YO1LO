@@ -1,8 +1,11 @@
 import pygame, sys
 from config import *
 from button import Button
+from subprocess import call
 
 pygame.init()
+
+pygame.display.set_caption("YO1LO") 
 
 bgmusic = pygame.mixer.Sound("assets/Audio/bgmtwo.mp3")
 sadbgm = pygame.mixer.Sound("assets/Audio/sadbgm.mp3")
@@ -1438,7 +1441,8 @@ def prologue():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     introbgm.stop()
-                    pass
+                    pygame.quit()
+                    call(["python", "prisonbreak.py"])
                     # call file chap1 here
         pygame.display.flip()
 

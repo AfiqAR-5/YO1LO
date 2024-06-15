@@ -4,15 +4,15 @@ import math
 import random
 from config import *
 from button import Button
-from settingsshoot import *
-from AGGRESIVE import dialogue1v1
+from settingshoot import *
+from subprocess import call
 
 pygame.init()
 
 pygame.mixer.init()
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("YO!LO GAME")
+pygame.display.set_caption("YO1LO")
 clock = pygame.time.Clock()
 
 #loadsoundeffect
@@ -20,8 +20,6 @@ shoot_sound = pygame.mixer.Sound("assets/Audio/shoot_sound.wav")
 collision_sound = pygame.mixer.Sound("assets/Audio/oof.wav")
 dead_sound = pygame.mixer.Sound("assets/Audio/Death_sound.wav")
 gta_sound = pygame.mixer.Sound("assets/Audio/gta.wav")
-wth_sound = pygame.mixer.Sound("assets/Audio/wth.wav")
-cough_sound = pygame.mixer.Sound("assets/Audio/cough.mp3")
 
 #backgroundimage
 background = pygame.transform.scale(pygame.image.load("assets/warehouse.png").convert(), (WIDTH, HEIGHT))
@@ -179,6 +177,8 @@ class Player(pygame.sprite.Sprite):
         gta_sound.play()
         show_death_screen()
 
+
+
 class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y, angle):
         super().__init__()
@@ -285,8 +285,8 @@ def show_death_screen():
         info_rect = info.get_rect(x=500, y=600)
 
         screen.fill((0, 0, 0))  # Black background
-        font = pygame.font.Font("assets/Font/Cinzel.ttf", 100)
-        text = font.render("You Are DEAD", True, (255, 0, 0))
+        font = pygame.font.Font("assets/Font/getfont.ttf", 100)
+        text = font.render("You Are DEAD!", True, (255, 0, 0))
         text_rect = text.get_rect(center=(WIDTH // 2, HEIGHT // 2))
         screen.blit(text, text_rect)
         screen.blit(info,info_rect)
@@ -329,8 +329,8 @@ def check_stage_cleared():
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
-        font = pygame.font.Font("assets/Font/Cinzel.TTF", 50)
-        text = font.render("Mission Complete", True, (255, 255, 255))
+        font = pygame.font.Font("assets/Font/ARCADECLASSIC.TTF", 50)
+        text = font.render("Mission  Complete", True, (255, 255, 255))
         text_rect = text.get_rect(center=(640, 380))
 
         c1 = pygame.image.load('assets/cbutton.png')
@@ -417,7 +417,7 @@ def ending1():
                         retry()
     
         snip = font.render(message[0:counter//speed], True, 'white')
-        screen.blit(snip, (80, 360))
+        screen.blit(snip, (180, 360))
 
         pygame.display.flip()
 
@@ -427,7 +427,7 @@ def retry():
         timer = pygame.time.Clock()
 
         current  = pygame.font.Font('assets/Font/Cinzel.ttf', 50).render("YOU DESERVE A BETTER ENDING", True, "White")
-        current_rect = current.get_rect(x=230,y=330)
+        current_rect = current.get_rect(x=220,y=330)
 
         c1 = pygame.image.load('assets/cbutton.png')
         scaled_c1 = pygame.transform.scale(c1, (300,70))
@@ -443,7 +443,7 @@ def retry():
 
         timer.tick(60)
 
-        MENU_MOUSE_POS = pygame.mouse.get_pos()  
+        MENU_MOUSE_POS = pygame.mouse.get_pos()  #detecting mouse position
 
         CHOICE1 = Button(image=pygame.image.load("assets/transparent.png"), pos=(644,540), 
                             text_input="RETRY", font=textbutton_font(30), base_color="black", hovering_color="#FF3131")
@@ -474,10 +474,10 @@ def retry():
             pygame.display.flip()
 
 def shootgame():
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load("assets/Audio/shootscene.mp3")
+
+    pygame.mixer.music.load("assets/Audio/xiaolao.wav")
     pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
-    pygame.mixer.music.set_volume(0.075)
+    pygame.mixer.music.set_volume(0.5)
 
     waiting_for_key = False
 
@@ -597,11 +597,9 @@ def dialogue2():
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
     messages = ('Suddenly...',
+                '<UGH> <UGH>...',
                 'UHUK UHUK...',
-                'Survived Henchman : Ple.. please don\'t kill me.',
                 '...')
-    
-    cough_sound.play(1)
     snip = font.render('', True, 'black')
     counter = 0
     speed = 1
@@ -664,7 +662,7 @@ def dialogue2():
         pygame.display.flip()
 
 def dialogue3():
-    pygame.mixer.stop()
+    
     font = pygame.font.Font('assets/Font/ARCADE.TTF', 24)
     screen = pygame.display.set_mode ([1280, 720])
     timer = pygame.time.Clock()
@@ -900,8 +898,8 @@ def dialogue6():
                 'Survived Henchman : I\'ll tell you again, I don\'t know.',
                 'Luna : Oh, so you want to play games with me.',
                 '<Placing the gun to the henchman head>',
-                'Luna : Now you tell me where the hel* he is.',
-                'Luna : Before this gun blows your damn head.',
+                'Luna : Now you tell me where the fuc* he is.',
+                'Luna : Before this gun blows your fuc*ing head.',
                 'Survived Henchman : <Stay silent>',
                 'Luna : You really want to play with me.',
                 '<Grab a knife from the floor>',
@@ -909,13 +907,12 @@ def dialogue6():
                 'Survived Henchman : AAAAARGGGGHHHHHHHH (Screaming Loudly)',
                 'Survied Henchman : FUC*... Please, you don\'t have to this.',
                 'Luna : You chose to be like this.',
-                'Luna : I repeat once more, where the hel* he is?',
+                'Luna : I repeat once more, where the fuc* he is?',
                 'Luna : I will not repeat it again... or else...',
                 'Survived Henchman : I TOLD YOU THAT\'S ALL I KNOW!',
                 'Survived Henchman : DON\'T YOU FUC*ING UNDERSTAND!',
                 '<He continued to scream and curse at Luna>',
                 '...')
-    
     snip = font.render('', True, 'black')
     counter = 0
     speed = 1
@@ -1000,7 +997,7 @@ def dialogue7():
                 'Luna : I\'ll be waiting for you-',
                 'Luna : in front of the HELL to torture you again!',
                 'Survived Henchman : <Stay Silent>',
-                'Luna : DAMN IT!',
+                'Luna : Damn it!',
                 '...')
     snip = font.render('', True, 'black')
     counter = 0
@@ -1071,7 +1068,7 @@ def dialogue8():
     messages = ('<Luna took the knife on the floor>',
                 '<Then she cut off one finger of the henchman, one by one>',
                 'Survived Henchman : ARGHHHHHHHHHH (Scream In Pain)',
-                'Survived Henchman : WHAT THE FUC*!',
+                'Survived Henchman : WHAT THE FUC**!',
                 'Survived Henchman : My fuc*ing fingers!',
                 'Survived Henchman : HAVE YOU LOST YOUR DAMN MIND?',
                 'Survived Henchman : FUC*ING PSYCHOPATH!',
@@ -1733,8 +1730,7 @@ def choice3():
 
 def choice4():
     while True:
-        
-        pygame.mixer.music.stop()
+
         timer = pygame.time.Clock()
 
         bg = pygame.image.load('assets/Chapter2/jungleblur.png')
@@ -1742,14 +1738,15 @@ def choice4():
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
         lover = pygame.image.load('assets/Chapter2/lover3.png')
-        lover_rect = lover.get_rect(x=470,y=120)
+        scaled_lover = pygame.transform.scale(lover, (350,450))
+        lover_rect = scaled_lover.get_rect(x=515,y=180)
 
         c2 = pygame.image.load('assets/cbutton.png')
         scaled_c2 = pygame.transform.scale(c2, (300,70))
         c2_rect = scaled_c2.get_rect(x=515,y=600)
 
         SCREEN.blit(scaled_bg, bg_rect)
-        SCREEN.blit(lover, lover_rect)
+        SCREEN.blit(scaled_lover, lover_rect)
         SCREEN.blit(scaled_c2, c2_rect)
         
         timer.tick(60)
@@ -1781,9 +1778,6 @@ def choice4():
             pygame.display.flip()
 
 def chap2_act2():
-    pygame.mixer.music.load("assets/Chapter2/Chap2Act2.mp3")
-    pygame.mixer.music.play(-1)  # -1 means the music will loop indefinitely
-    pygame.mixer.music.set_volume(0.05)
 
     timer = pygame.time.Clock()
 
@@ -2005,7 +1999,6 @@ def dialogue15():
     messages = ('<A henchman suddenly approached the bushes>',
                 '...')
     
-    wth_sound.play(1)
     snip = font.render('', True, 'black')
     counter = 0
     speed = 1
@@ -2147,14 +2140,13 @@ def dialogue16():
 
 def choice5():
     while True:
-        pygame.mixer.stop()
 
         timer = pygame.time.Clock()
 
         current  = textbutton_font(24).render("CHOOSE THE BEST DECISION", True, "White")
         current_rect = current.get_rect(x=485,y=625)
 
-        bg = pygame.image.load('assets/Chapter2/Warehousecariblur.png')
+        bg = pygame.image.load('assets/Chapter2/houseloverblur.png')
         scaled_bg = pygame.transform.scale(bg, (1280,720))
         bg_rect = scaled_bg.get_rect(x=0,y=0)
 
@@ -2206,12 +2198,16 @@ def choice5():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if CHOICE1.checkForInput(MENU_MOUSE_POS):
-                    print('ASSASSINATE STEALTHILY CHOOSED')
+                    pygame.quit()
+                    call(["python", "stealth.py"])
+                    # call stealthy
                 if CHOICE2.checkForInput(MENU_MOUSE_POS):
-                    print('CHARGE AT THEM CHOOSED')
-                    dialogue1v1()
-
+                    pygame.quit()
+                    call(["python", "aggression.py"])
+                    # call aggression
                 if PAUSE.checkForInput(MENU_MOUSE_POS):
                     pausemenu()
 
             pygame.display.flip()
+
+shootgame()
